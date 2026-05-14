@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1a3a2a">
+<title>Assistiv: Infrastructure for Independent Living</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --green-deep: #1a3a2a;
+    --green-mid: #2d5c42;
+    --green-accent: #3d7a56;
+    --green-pale: #e8f0eb;
+    --cream: #f9f7f4;
+    --ink: #0f1a14;
+    --ink-mid: #3a4a3f;
+    --ink-soft: #6b7d72;
+    --white: #ffffff;
+    --border: #d8e0da;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--white);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    color: var(--green-deep);
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--ink-mid);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--green-deep); }
+
+  .nav-cta {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--green-deep);
+    text-decoration: none;
+    padding: 0.55rem 1.25rem;
+    border: 1.5px solid var(--green-deep);
+    border-radius: 2px;
+    transition: background 0.2s, color 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .nav-cta:hover {
+    background: var(--green-deep);
+    color: var(--white);
+  }
+
+  /* ---- HERO ---- */
+  .hero {
+    padding: 12rem 3rem 7rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green-accent);
+    margin-bottom: 1.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-eyebrow::after {
+    content: '';
+    display: block;
+    width: 2.5rem;
+    height: 1px;
+    background: var(--green-accent);
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 5.5vw, 4.75rem);
+    line-height: 1.08;
+    color: var(--green-deep);
+    letter-spacing: -0.02em;
+    max-width: 780px;
+    margin-bottom: 2.25rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--green-accent);
+  }
+
+  .hero-sub {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--ink-mid);
+    max-width: 560px;
+    line-height: 1.65;
+    margin-bottom: 3.5rem;
+  }
+
+  .hero-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ---- STAT STRIP ---- */
+  .stats {
+    background: var(--green-deep);
+    padding: 4rem 3rem;
+  }
+
+  .stats-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+
+  .stat {
+    border-left: 1px solid rgba(255,255,255,0.15);
+    padding-left: 2rem;
+  }
+
+  .stat:first-child { border-left: none; padding-left: 0; }
+
+  .stat-number {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3.5vw, 3.25rem);
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-size: 0.825rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.45;
+    letter-spacing: 0.01em;
+  }
+
+  /* ---- SECTION SHARED ---- */
+  .section {
+    padding: 6rem 3rem;
+  }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--green-accent);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.9rem, 3.5vw, 2.9rem);
+    line-height: 1.15;
+    color: var(--green-deep);
+    letter-spacing: -0.02em;
+    max-width: 640px;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-body {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--ink-mid);
+    max-width: 560px;
+    line-height: 1.7;
+  }
+
+  /* ---- PROBLEM ---- */
+  .problem { background: var(--cream); }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+    margin-top: 3.5rem;
+  }
+
+  .problem-left .section-body { max-width: 100%; }
+
+  .problem-points {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .problem-point {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .problem-point:first-child { border-top: none; padding-top: 0; }
+
+  .pp-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 0.5rem;
+  }
+
+  .pp-text {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--ink-mid);
+    line-height: 1.6;
+  }
+
+  /* ---- APPROACH ---- */
+  .approach-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-top: 4rem;
+    border: 1px solid var(--border);
+  }
+
+  .approach-card {
+    padding: 2.5rem;
+    border-right: 1px solid var(--border);
+  }
+
+  .approach-card:last-child { border-right: none; }
+
+  .ac-number {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    color: var(--green-pale);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .ac-title {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--green-deep);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  .ac-body {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.65;
+  }
+
+  /* ---- PRINCIPLES ---- */
+  .principles { background: var(--cream); }
+
+  .principles-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    margin-bottom: 4rem;
+  }
+
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .principle {
+    background: var(--cream);
+    padding: 2.25rem;
+  }
+
+  .principle-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--green-deep);
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.01em;
+  }
+
+  .principle-body {
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  /* ---- OUTCOMES ---- */
+  .outcomes-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    margin-bottom: 4rem;
+    align-items: end;
+  }
+
+  .outcomes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .outcome-card {
+    padding: 2rem;
+    background: var(--cream);
+  }
+
+  .oc-group {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green-accent);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .oc-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .oc-items li {
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: var(--ink-mid);
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.45;
+  }
+
+  .oc-items li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ---- WHO WE WORK WITH ---- */
+  .partners { background: var(--green-deep); }
+
+  .partners .section-label { color: rgba(255,255,255,0.4); }
+  .partners .section-title { color: var(--white); }
+  .partners .section-body { color: rgba(255,255,255,0.55); }
+
+  .partners-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+    margin-top: 4rem;
+  }
+
+  .partner-card {
+    background: var(--green-deep);
+    padding: 2.25rem 2rem;
+  }
+
+  .partner-icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 1.25rem;
+    opacity: 0.5;
+  }
+
+  .partner-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .partner-body {
+    font-size: 0.825rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.55;
+  }
+
+  /* ---- ADVISORY ---- */
+  .advisory-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 4rem;
+  }
+
+  .advisor-card {
+    padding: 2rem;
+    border: 1px solid var(--border);
+  }
+
+  .advisor-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--green-deep);
+    margin-bottom: 0.25rem;
+  }
+
+  .advisor-role {
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .advisor-note {
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: var(--ink-mid);
+    line-height: 1.6;
+  }
+
+  /* ---- CONTACT ---- */
+  .contact {
+    background: var(--cream);
+    padding: 6rem 3rem;
+    text-align: center;
+  }
+
+  .contact-inner {
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  .contact .section-label {
+    display: block;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .contact-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    color: var(--green-deep);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-body {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--ink-mid);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-email {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--green-deep);
+    text-decoration: none;
+    padding: 0.85rem 2.25rem;
+    border: 1.5px solid var(--green-deep);
+    border-radius: 2px;
+    transition: background 0.2s, color 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .contact-email:hover {
+    background: var(--green-deep);
+    color: var(--white);
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    padding: 2rem 3rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--green-deep);
+  }
+
+  .footer-note {
+    font-size: 0.775rem;
+    color: var(--ink-soft);
+  }
+
+  .footer-url {
+    font-size: 0.775rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+  }
+
+  /* ---- FADE IN ---- */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 1024px) {
+    nav { padding: 1.1rem 2rem; }
+    .hero { padding: 10rem 2rem 5rem; }
+    .section { padding: 5rem 2rem; }
+    .stats { padding: 3.5rem 2rem; }
+    .contact { padding: 5rem 2rem; }
+    footer { padding: 1.75rem 2rem; }
+  }
+
+  @media (max-width: 860px) {
+    /* Nav */
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+
+    /* Hero */
+    .hero { padding: 8rem 1.5rem 4.5rem; }
+    .hero-sub { font-size: 1.05rem; }
+
+    /* Stats */
+    .stats { padding: 3rem 1.5rem; }
+    .stats-inner {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem 1.5rem;
+    }
+    .stat:nth-child(3) { border-left: none; padding-left: 0; }
+    .stat-number { font-size: 2.25rem; }
+
+    /* Sections */
+    .section { padding: 4rem 1.5rem; }
+    .section-title { font-size: clamp(1.65rem, 4.5vw, 2.4rem); }
+
+    /* Problem */
+    .problem-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    /* Approach */
+    .approach-grid { grid-template-columns: 1fr; }
+    .approach-card {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+    .approach-card:last-child { border-bottom: none; }
+
+    /* Principles */
+    .principles-header {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .principles-grid { grid-template-columns: 1fr; }
+
+    /* Outcomes */
+    .outcomes-header {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .outcomes-grid { grid-template-columns: 1fr; }
+
+    /* Partners */
+    .partners-grid { grid-template-columns: 1fr; }
+    .partner-card {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .partner-card:last-child { border-bottom: none; }
+
+    /* Advisory */
+    .advisory-grid { grid-template-columns: 1fr; }
+
+    /* Contact */
+    .contact { padding: 4rem 1.5rem; }
+
+    /* Footer */
+    footer {
+      flex-direction: column;
+      gap: 0.6rem;
+      text-align: center;
+      padding: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    /* Nav */
+    nav { padding: 0.9rem 1.25rem; }
+    .nav-logo { font-size: 1.2rem; }
+    .nav-cta { padding: 0.45rem 1rem; font-size: 0.8rem; }
+
+    /* Hero */
+    .hero { padding: 7.5rem 1.25rem 4rem; }
+    .hero-eyebrow { font-size: 0.65rem; }
+    .hero-sub { font-size: 1rem; margin-bottom: 2.5rem; }
+
+    /* Stats: single column on very small screens */
+    .stats-inner { grid-template-columns: 1fr; gap: 1.75rem; }
+    .stat {
+      border-left: none;
+      padding-left: 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 1.5rem;
+    }
+    .stat:first-child { border-top: none; padding-top: 0; }
+
+    /* Sections */
+    .section { padding: 3.5rem 1.25rem; }
+    .section-body { font-size: 0.95rem; }
+
+    /* Approach cards get slightly less padding */
+    .approach-card { padding: 2rem 1.5rem; }
+    .ac-number { font-size: 2rem; }
+
+    /* Principles and outcomes tighter */
+    .principle { padding: 1.75rem; }
+    .outcome-card { padding: 1.5rem; }
+
+    /* Partner cards */
+    .partner-card { padding: 1.75rem 1.5rem; }
+
+    /* Advisory cards */
+    .advisor-card { padding: 1.5rem; }
+
+    /* Contact */
+    .contact { padding: 3.5rem 1.25rem; }
+    .contact-title { font-size: clamp(1.75rem, 6vw, 2.5rem); }
+    .contact-email {
+      width: 100%;
+      text-align: center;
+      padding: 0.85rem 1rem;
+    }
+
+    /* Footer */
+    footer { padding: 1.25rem; }
+    .footer-note { font-size: 0.7rem; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Assistiv</a>
+  <ul class="nav-links">
+    <li><a href="#challenge">The Challenge</a></li>
+    <li><a href="#approach">Our Approach</a></li>
+    <li><a href="#outcomes">Outcomes</a></li>
+    <li><a href="#advisors">Advisory</a></li>
+  </ul>
+  <a class="nav-cta" href="mailto:simon@assistiv.co">Get in touch</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow fade-in">Infrastructure for independent living</p>
+  <h1 class="hero-title fade-in">
+    Supporting people to live well at home.<br>
+    <em>Before crisis. On their terms.</em>
+  </h1>
+  <p class="hero-sub fade-in">
+    Assistiv is a platform designed for the people who fall between existing services. Independent enough to manage, vulnerable enough to be at risk. We build infrastructure for this population that existing care systems were never designed to reach.
+  </p>
+  <div class="hero-divider fade-in"></div>
+</section>
+
+<!-- STAT STRIP -->
+<section class="stats">
+  <div class="stats-inner">
+    <div class="stat fade-in">
+      <div class="stat-number">3.5m</div>
+      <div class="stat-label">People in the UK's Missing Middle. Managing, but one event from crisis</div>
+    </div>
+    <div class="stat fade-in">
+      <div class="stat-number">£2.3bn</div>
+      <div class="stat-label">NHS annual cost of falls in England. 79% of which happen at home</div>
+    </div>
+    <div class="stat fade-in">
+      <div class="stat-number">40%</div>
+      <div class="stat-label">Of dementia cases could be prevented or delayed with earlier intervention</div>
+    </div>
+    <div class="stat fade-in">
+      <div class="stat-number">14:1</div>
+      <div class="stat-label">Estimated return on investment for commissioning bodies at pilot scale</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="section problem" id="challenge">
+  <div class="section-inner">
+    <p class="section-label fade-in">The challenge</p>
+    <div class="problem-grid">
+      <div class="problem-left fade-in">
+        <h2 class="section-title">The system was not designed for the people who need it most.</h2>
+        <p class="section-body">
+          Three and a half million older adults in the UK live independently but sit outside the reach of formal health and social care. They are not ill enough to qualify. Not yet dependent enough to be flagged. Invisible to existing systems until something goes wrong.
+        </p>
+        <p class="section-body" style="margin-top: 1.25rem;">
+          When people in this group try to access support, they encounter a fragmented landscape that demands navigation skills many no longer have. By the time they reach anyone who can help, the opportunity for early intervention has often passed.
+        </p>
+      </div>
+      <div class="problem-points fade-in">
+        <div class="problem-point">
+          <p class="pp-label">For the individual</p>
+          <p class="pp-text">Living with uncertainty. Managing risk alone. One fall, one health event, one confused night and independence is gone. Not gradually, but suddenly.</p>
+        </div>
+        <div class="problem-point">
+          <p class="pp-label">For families and carers</p>
+          <p class="pp-text">Caught between constant worry and helplessness. Unable to monitor from a distance, uncertain when to act, carrying an invisible burden the system does not acknowledge.</p>
+        </div>
+        <div class="problem-point">
+          <p class="pp-label">For services</p>
+          <p class="pp-text">Avoidable crisis admissions. Delayed discharge. Residential placements that could have been prevented months earlier. The longer the system waits, the more expensive and complex the intervention becomes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section class="section" id="approach">
+  <div class="section-inner">
+    <p class="section-label fade-in">Our approach</p>
+    <h2 class="section-title fade-in">Built around the person. Not the system's convenience.</h2>
+    <p class="section-body fade-in">Assistiv brings novel approaches and technologies to a population that conventional platforms have not been designed to reach. Every design decision is grounded in one principle: the person is always the author of what happens next.</p>
+
+    <div class="approach-grid fade-in">
+      <div class="approach-card">
+        <div class="ac-number">01</div>
+        <h3 class="ac-title">A conversation, not an assessment</h3>
+        <p class="ac-body">Assistiv begins with listening. A warm, unhurried conversation that surfaces what matters to the person, on their terms, in their language, without clinical framing. The technology is introduced only in direct response to what the person says they want.</p>
+      </div>
+      <div class="approach-card">
+        <div class="ac-number">02</div>
+        <h3 class="ac-title">Three independent perspectives</h3>
+        <p class="ac-body">Assistiv synthesises what the person reports, what those close to them observe, and what the home environment signals. It brings these together monthly across multiple quality-of-life domains. Where the three perspectives diverge is where the signal that matters lives.</p>
+      </div>
+      <div class="approach-card">
+        <div class="ac-number">03</div>
+        <h3 class="ac-title">Connected to the care system</h3>
+        <p class="ac-body">The platform is designed from the ground up to integrate with the NHS infrastructure that is coming, including the Single Patient Record and the shift toward neighbourhood-based, preventive care. The person holds the keys to what is shared and with whom.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRINCIPLES -->
+<section class="section principles">
+  <div class="section-inner">
+    <div class="principles-header">
+      <div class="fade-in">
+        <p class="section-label">Design principles</p>
+        <h2 class="section-title">Privacy and dignity are not features. They are the architecture.</h2>
+      </div>
+      <div class="fade-in">
+        <p class="section-body">Every technology choice we make is filtered through a single question: does this serve the person's independence, or does it quietly undermine it? Assistiv is not surveillance. It is infrastructure that people choose, on their own terms, for their own reasons.</p>
+        <p class="section-body" style="margin-top: 1.25rem;">The platform is designed to be graduated. A person can begin with a conversation and nothing else. Technology, if any, is introduced incrementally, chosen by them, for reasons they have named, always reversible.</p>
+      </div>
+    </div>
+
+    <div class="principles-grid fade-in">
+      <div class="principle">
+        <h3 class="principle-title">The person is always the author</h3>
+        <p class="principle-body">Nothing is activated without explicit agreement. Nothing is shared without consent. The person controls what is monitored and who can see it. Assistiv follows where they lead.</p>
+      </div>
+      <div class="principle">
+        <h3 class="principle-title">No cameras. No wearables. No burden.</h3>
+        <p class="principle-body">Assistiv is designed to be invisible in operation. Nothing to remember. Nothing to charge. Nothing that says "you are being watched." Passive by default, intrusive never.</p>
+      </div>
+      <div class="principle">
+        <h3 class="principle-title">Saying no is a valid outcome</h3>
+        <p class="principle-body">A person who declines is not a failed engagement. They are a person exercising agency. The platform is designed to honour this at every step, without pressure or re-framing.</p>
+      </div>
+      <div class="principle">
+        <h3 class="principle-title">Data owned by the person</h3>
+        <p class="principle-body">All processing happens within the home. Derived insights, not raw data, are the only thing that travels. The person holds the keys. Assistiv provides the infrastructure.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section class="section" id="outcomes">
+  <div class="section-inner">
+    <div class="outcomes-header">
+      <div class="fade-in">
+        <p class="section-label">Outcomes</p>
+        <h2 class="section-title">Earlier support. Measurable impact. Across the whole system.</h2>
+      </div>
+      <div class="fade-in">
+        <p class="section-body">Assistiv produces measurable outcomes at the level of the individual, their family, and the commissioning system. The Kent ICB pilot projection models £1.2m in system savings against £88k commissioning cost in the first quarter alone.</p>
+      </div>
+    </div>
+
+    <div class="outcomes-grid fade-in">
+      <div class="outcome-card">
+        <p class="oc-group">For the person</p>
+        <ul class="oc-items">
+          <li>Lives longer at home, on their own terms</li>
+          <li>Earlier cognitive and physical support</li>
+          <li>Dignity and autonomy maintained</li>
+          <li>Meaningful activity sustained</li>
+          <li>Freedom from fear of falling undetected</li>
+          <li>Connection to family and community</li>
+        </ul>
+      </div>
+      <div class="outcome-card">
+        <p class="oc-group">For carers and families</p>
+        <ul class="oc-items">
+          <li>Real-time awareness replaces constant worry</li>
+          <li>Family visits restored. No longer arriving as crisis managers</li>
+          <li>Carer wellbeing monitored and protected</li>
+          <li>Objective data for difficult family conversations</li>
+          <li>Reduced time spent on care coordination</li>
+        </ul>
+      </div>
+      <div class="outcome-card">
+        <p class="oc-group">For health and social care</p>
+        <ul class="oc-items">
+          <li>Avoidable crisis admissions prevented</li>
+          <li>Safe rapid home discharge enabled</li>
+          <li>Residential transition deferred months or years</li>
+          <li>Evidence for Care Act and GP reviews</li>
+          <li>Population-level longitudinal data at scale</li>
+          <li>14:1 return on investment at pilot scale</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE WORK WITH -->
+<section class="section partners">
+  <div class="section-inner">
+    <p class="section-label fade-in">Who we work with</p>
+    <h2 class="section-title fade-in">Designed for the NHS that is coming.</h2>
+    <p class="section-body fade-in">Assistiv is not being retrofitted to the NHS agenda. It is designed for it. Every major shift in care delivery, including neighbourhood health, integrated teams, virtual wards, and prevention at scale, requires a passive home intelligence layer. Assistiv is that layer.</p>
+
+    <div class="partners-grid fade-in">
+      <div class="partner-card">
+        <svg class="partner-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="8" width="28" height="20" rx="1" stroke="white" stroke-width="1.5"/>
+          <path d="M4 14h28" stroke="white" stroke-width="1.5"/>
+          <path d="M12 8V6M24 8V6" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <h3 class="partner-title">Integrated Care Boards</h3>
+        <p class="partner-body">A commissioned prevention platform that fills the gap the eFI cannot reach. Continuous frailty intelligence between clinical contacts.</p>
+      </div>
+      <div class="partner-card">
+        <svg class="partner-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="12" r="5" stroke="white" stroke-width="1.5"/>
+          <path d="M8 28c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <h3 class="partner-title">Local Authorities</h3>
+        <p class="partner-body">Evidence-based care planning, Care Act support, and adult safeguarding infrastructure that generates the longitudinal data statutory assessment demands.</p>
+      </div>
+      <div class="partner-card">
+        <svg class="partner-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 10h24M6 18h16M6 26h20" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <h3 class="partner-title">Charities and VCS</h3>
+        <p class="partner-body">A platform that reaches the people charities care about before crisis, with the longitudinal quality-of-life data to evidence impact and commission services.</p>
+      </div>
+      <div class="partner-card">
+        <svg class="partner-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 4L32 12v8c0 7.18-5.82 12.36-14 14C9.82 32.36 4 27.18 4 20v-8L18 4z" stroke="white" stroke-width="1.5"/>
+        </svg>
+        <h3 class="partner-title">Technology Partners</h3>
+        <p class="partner-body">Strategic hardware and monitoring partnerships that extend the platform's capability at the edge, without compromising the privacy principles at the core.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADVISORY -->
+<section class="section" id="advisors">
+  <div class="section-inner">
+    <p class="section-label fade-in">Advisory board</p>
+    <h2 class="section-title fade-in">The clinical and academic foundation.</h2>
+    <p class="section-body fade-in">Assistiv is grounded in validated frameworks and built with the guidance of leading academic and clinical voices in ageing, social care outcomes, data science, and public policy.</p>
+
+    <div class="advisory-grid fade-in">
+      <div class="advisor-card">
+        <h3 class="advisor-name">Prof. Ann Netten</h3>
+        <p class="advisor-role">Emeritus Professor, University of Kent · Creator of ASCOT · Former Director, PSSRU</p>
+        <p class="advisor-note">Creator of the Adult Social Care Outcomes Toolkit, now embedded in national policy and used across the UK and internationally. Her framework directly underpins the quality-of-life measurement architecture at the heart of Assistiv.</p>
+      </div>
+      <div class="advisor-card">
+        <h3 class="advisor-name">Mark Greenfield</h3>
+        <p class="advisor-role">Emeritus · Newcastle and University of Sunderland · Ageing and Nursing</p>
+        <p class="advisor-note">Nursing and ageing expertise spanning academic and community dimensions of later life care. Validated Assistiv's three-state model of independence and introduced the concept of Positive Interdependence that sits at the heart of the platform's philosophy.</p>
+      </div>
+      <div class="advisor-card">
+        <h3 class="advisor-name">Prof. John Jerrim</h3>
+        <p class="advisor-role">Professor of Education and Social Statistics, UCL · Director, Quantitative Social Science Research Centre</p>
+        <p class="advisor-note">Winner of the inaugural ESRC Early Career Outstanding Impact Award. Brings rigorous large-scale data methodology and population-level research expertise to Assistiv's evidence base and future academic funding applications.</p>
+      </div>
+      <div class="advisor-card">
+        <h3 class="advisor-name">Prof. Tim Legrand</h3>
+        <p class="advisor-role">Professor of Politics, University of Adelaide · ARC Future Fellowship 2025–2029</p>
+        <p class="advisor-note">Expert in government policy, public administration, and policy transfer. Brings deep expertise in navigating NHS and local authority commissioning landscapes and in understanding how innovation enters public sector systems.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <span class="section-label fade-in">Get in touch</span>
+    <h2 class="contact-title fade-in">Conversations we welcome.</h2>
+    <p class="contact-body fade-in">
+      We are currently in conversation with ICBs, local authorities, and strategic technology partners interested in the early-intervention and ageing-in-place space. If you are working on commissioning, piloting, or funding in this area, we would be glad to speak.
+    </p>
+    <a class="contact-email fade-in" href="mailto:simon@assistiv.co">simon@assistiv.co</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Assistiv</span>
+  <span class="footer-note">Assistiv Systems Ltd · Confidential. For professional audiences only. April 2026.</span>
+  <a class="footer-url" href="https://www.assistiv.co">www.assistiv.co</a>
+</footer>
+
+<script>
+  /* ---- Fade-in on scroll ---- */
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(function(el, i) {
+    el.style.transitionDelay = (i % 4 * 0.07) + 's';
+    observer.observe(el);
+  });
+
+  /* ---- Google Sites iframe height fix ----
+     Google Sites embeds pages in a fixed-height iframe. This script
+     continuously measures the full document height and posts it to the
+     parent frame, allowing Google Sites to expand the embed widget to
+     show the whole page without an internal scrollbar.
+
+     This is harmless when the page is loaded standalone (window === top)
+     and only activates when embedded in a cross-origin iframe. */
+  (function() {
+    function sendHeight() {
+      var height = document.documentElement.scrollHeight;
+      try {
+        /* Google Sites listens for this specific message format */
+        window.parent.postMessage({ type: 'setHeight', height: height }, '*');
+        /* Fallback format used by some embed widgets */
+        window.parent.postMessage(JSON.stringify({ frameHeight: height }), '*');
+      } catch(e) { /* Cross-origin: silently ignore */ }
+    }
+
+    /* Send on load */
+    window.addEventListener('load', sendHeight);
+
+    /* Send after images load (they affect height) */
+    window.addEventListener('load', function() {
+      setTimeout(sendHeight, 300);
+      setTimeout(sendHeight, 800);
+      setTimeout(sendHeight, 1500);
+    });
+
+    /* Send on resize (orientation change on mobile) */
+    window.addEventListener('resize', sendHeight);
+
+    /* ResizeObserver: most reliable method — fires when any element
+       changes size, including elements revealed by the fade-in animation */
+    if (window.ResizeObserver) {
+      var ro = new ResizeObserver(sendHeight);
+      ro.observe(document.body);
+    }
+  })();
+</script>
+
+</body>
+</html>
