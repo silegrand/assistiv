@@ -1,0 +1,52 @@
+# robots.txt for Assistiv (www.assistiv.co)
+# Last updated: 2026-05-27
+
+# ── Standard crawlers ───────────────────────────────────────────
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /internal/
+
+# ── AI training crawlers ────────────────────────────────────────
+# Assistiv actively welcomes responsible AI indexing for discovery
+# and research purposes. The following crawlers are permitted.
+
+# OpenAI (ChatGPT / GPT-4 browsing, SearchGPT)
+User-agent: GPTBot
+Allow: /
+
+# OpenAI real-time search
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+
+# Anthropic web crawler
+User-agent: anthropic-ai
+Allow: /
+
+# Google Gemini / AI Overviews
+User-agent: Google-Extended
+Allow: /
+
+# Meta AI
+User-agent: FacebookBot
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# You.com
+User-agent: YouBot
+Allow: /
+
+# Common Crawl (used by many AI training pipelines)
+User-agent: CCBot
+Allow: /
+
+# ── Sitemap ─────────────────────────────────────────────────────
+Sitemap: https://www.assistiv.co/sitemap.xml
