@@ -963,10 +963,20 @@ function drawFunnelSplit() {
 
 // ── RESIZE ──────────────────────────────────────────────────────────
 function resize() {
-  const r = canvas.parentElement.getBoundingClientRect();
-  W = canvas.width  = Math.floor(r.width) || 900;
-  H = canvas.height = Math.max(380, Math.floor(W * 0.52));
-  canvas.style.height = H + 'px';
+  const DPR = window.devicePixelRatio || 1;
+  const r   = canvas.parentElement.getBoundingClientRect();
+  const cssW = Math.floor(r.width) || 900;
+  const cssH = Math.max(380, Math.floor(cssW * 0.52));
+  /* Physical backing store at full DPR resolution */
+  canvas.width  = Math.round(cssW * DPR);
+  canvas.height = Math.round(cssH * DPR);
+  /* CSS display size unchanged */
+  canvas.style.width  = cssW + 'px';
+  canvas.style.height = cssH + 'px';
+  /* Scale all draw calls so we still use CSS-pixel coordinates */
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  W = cssW;
+  H = cssH;
 }
 
 // ── MAIN LOOP ────────────────────────────────────────────────────────
