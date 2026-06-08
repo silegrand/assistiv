@@ -204,7 +204,7 @@ nav {
   .stage-steps { flex-wrap: wrap; }
   .sstep { min-width: 50%; }
   .caption-bar { flex-direction: column; align-items: flex-start; }
-  #ecosystem-canvas { height: 420px !important; }
+  #ecosystem-canvas { height: 340px !important; }
 }
 </style>
 </head>
@@ -235,7 +235,7 @@ nav {
   </div>
 
   <div class="anim-outer">
-    <canvas id="ecosystem-canvas" height="580" aria-label="Assistiv ecosystem funnel animation"></canvas>
+    <canvas id="ecosystem-canvas" height="440" aria-label="Assistiv ecosystem funnel animation"></canvas>
 
     <!-- Step nav -->
     <div class="stage-bar">
@@ -372,8 +372,8 @@ function funnelX(frac, width) {
 
 function funnelY(frac) {
   // frac 0..1 maps to y range top..split
-  const top    = H * 0.05;
-  const split  = H * 0.54;
+  const top    = H * 0.04;
+  const split  = H * 0.50;
   return top + (split - top) * frac;
 }
 
@@ -473,8 +473,8 @@ function curvePath(pts, col, alpha = 0.4, dash = false, dashT = 0) {
 // ── FUNNEL STRUCTURE DRAWING ────────────────────────────────────────
 function drawFunnelSkeleton(highlight = -1) {
   // Draw the main funnel outline
-  const top    = H * 0.04;
-  const split  = H * 0.54;
+  const top    = H * 0.03;
+  const split  = H * 0.50;
   const cx     = W / 2;
 
   // funnel walls
@@ -520,7 +520,7 @@ function drawLayerLabel(y, label, col, alpha = 0.5) {
 
 /* S0 — NHS Data Exhaust: wide field of floating signal pills */
 function drawS0() {
-  const top = H * 0.04, split = H * 0.54;
+  const top = H * 0.04, split = H * 0.49;
   const cx  = W / 2;
 
   drawFunnelSkeleton();
@@ -575,7 +575,7 @@ function drawS0() {
 
 /* S1 — Intelligence Layer: signals converge on FEP engine */
 function drawS1() {
-  const cx = W / 2, cy = H * 0.28;
+  const cx = W / 2, cy = H * 0.24;
   drawFunnelSkeleton();
   drawLayerLabel(H*0.04 + 14, 'NHS DATA EXHAUST → INTELLIGENCE', C.sage, 0.4);
 
@@ -641,9 +641,9 @@ function drawS2() {
   }
 
   const cols = Math.min(5, Math.ceil(DISTRICTS.length / 2));
-  const gW   = Math.min(W * 0.78, 560), gH = Math.min(H * 0.42, 200);
+  const gW   = Math.min(W * 0.78, 560), gH = Math.min(H * 0.52, 175);
   const cw   = gW / cols, ch = gH / 2;
-  const x0   = (W - gW) / 2, y0 = H * 0.1;
+  const x0   = (W - gW) / 2, y0 = H * 0.06;
 
   ctx.save();
   DISTRICTS.forEach((d, i) => {
@@ -676,7 +676,7 @@ function drawS2() {
   ctx.restore();
 
   // Arrow from grid down toward funnel split
-  const splitY = H * 0.54;
+  const splitY = H * 0.49;
   const arrowAlpha = Math.min(1, (t / 60) * 0.6);
   flowArrow(cx, H*0.52, cx, splitY - 10, C.sage, arrowAlpha, true, t);
 }
@@ -689,7 +689,7 @@ function drawS3() {
   const cx = W / 2;
 
   // RESILIENCE badge at narrow point
-  const ry = H * 0.34;
+  const ry = H * 0.28;
   const pulse = 0.5 + 0.5 * Math.sin(t * 0.04);
   ctx.save();
   for (const [r, a] of [[48,0.05+0.04*pulse],[32,0.1+0.05*pulse]]) {
@@ -704,7 +704,7 @@ function drawS3() {
   for (let i = 0; i < N; i++) {
     const seed  = i * 83.7;
     const xBase = cx + Math.cos(seed) * (W * 0.32);
-    const yBase = H * 0.08 + (seed % 1) * H * 0.12;
+    const yBase = H * 0.04 + (seed % 1) * H * 0.08;
     const prog  = ((t * 0.007 + i / N) % 1);
     const px    = xBase + (cx - xBase) * prog;
     const py    = yBase + (ry - yBase) * prog;
@@ -729,7 +729,7 @@ function drawS3() {
   });
 
   // Score output flowing down
-  const scoreY = H * 0.5;
+  const scoreY = H * 0.46;
   const scoreAlpha = Math.min(0.9, t / 80);
   badge(cx, scoreY, 110, 36, C.sage, 'PRISMA-7 SCORED', null, scoreAlpha);
 }
@@ -738,7 +738,7 @@ function drawS3() {
 function drawS4() {
   drawFunnelSplit();
   // Highlight left branch (PCN)
-  const [lx, ly] = [W * 0.28, H * 0.73];
+  const [lx, ly] = [W * 0.28, H * 0.68];
   const pulse = 0.5 + 0.5 * Math.sin(t * 0.05);
   ctx.save();
   ctx.globalAlpha = 0.12 + 0.06 * pulse;
@@ -749,7 +749,7 @@ function drawS4() {
 
   // People flowing left
   const N = 6;
-  const splitX = W / 2, splitY = H * 0.56;
+  const splitX = W / 2, splitY = H * 0.52;
   for (let i = 0; i < N; i++) {
     const prog = ((t * 0.008 + i / N) % 1);
     const px = splitX + (lx - splitX) * prog;
@@ -764,18 +764,18 @@ function drawS4() {
   }
 
   // Right branch greyed
-  const [rx, ry2] = [W * 0.72, H * 0.73];
+  const [rx, ry2] = [W * 0.72, H * 0.68];
   badge(rx, ry2, 120, 46, C.inkSoft, 'ASSISTIV', 'Preventative platform', 0.3);
 
   // Label at split
-  pill(W/2, H*0.56, 110, 22, C.amber, 'PRISMA-7 triage', 0.7, 9);
+  pill(W/2, H*0.52, 110, 22, C.amber, 'PRISMA-7 triage', 0.7, 9);
 }
 
 /* S5 — Split: Assistiv Platform */
 function drawS5() {
   drawFunnelSplit();
-  const [lx, ly]  = [W * 0.28, H * 0.73];
-  const [rx, ry2] = [W * 0.72, H * 0.73];
+  const [lx, ly]  = [W * 0.28, H * 0.68];
+  const [rx, ry2] = [W * 0.72, H * 0.68];
   const pulse = 0.5 + 0.5 * Math.sin(t * 0.05);
 
   // Right highlight
@@ -803,7 +803,7 @@ function drawS5() {
 
   // People flowing right
   const N = 8;
-  const splitX = W / 2, splitY = H * 0.56;
+  const splitX = W / 2, splitY = H * 0.52;
   for (let i = 0; i < N; i++) {
     const prog = ((t * 0.007 + i / N) % 1);
     const px = splitX + (rx - splitX) * prog;
@@ -817,7 +817,7 @@ function drawS5() {
     ctx.restore();
   }
 
-  pill(W/2, H*0.56, 110, 22, C.amber, 'PRISMA-7 triage', 0.7, 9);
+  pill(W/2, H*0.52, 110, 22, C.amber, 'PRISMA-7 triage', 0.7, 9);
 }
 
 /* S6 — Full ecosystem + feedback loop */
@@ -825,10 +825,10 @@ function drawS6() {
   drawFunnelSkeleton();
 
   const cx = W / 2;
-  const splitY = H * 0.54;
-  const [lx, ly]  = [W * 0.28, H * 0.73];
-  const [rx, ry2] = [W * 0.72, H * 0.73];
-  const intelY    = H * 0.24;
+  const splitY = H * 0.50;
+  const [lx, ly]  = [W * 0.28, H * 0.68];
+  const [rx, ry2] = [W * 0.72, H * 0.68];
+  const intelY    = H * 0.12;
 
   // Intelligence hub
   badge(cx, intelY, 120, 40, C.forest, 'ASSISTIV.HEALTH', 'Intelligence layer', 0.9);
@@ -846,7 +846,7 @@ function drawS6() {
   badge(rx, ry2, 114, 42, C.forest, 'ASSISTIV', 'Prevention', 0.9);
 
   // Outcome boxes bottom
-  const outY = H * 0.9;
+  const outY = H * 0.88;
   pill(lx, outY, 120, 22, C.red,    '↓ Hospital admission', 0.65, 7.5);
   pill(rx, outY, 120, 22, C.sageL,  '↑ Independence', 0.65, 7.5);
 
@@ -857,9 +857,9 @@ function drawS6() {
   // Left feedback curve
   const leftFBpts = [
     { x: lx - 50, y: ly + 20 },
-    { x: lx - 90, y: H * 0.62 },
-    { x: cx - 120, y: H * 0.45 },
-    { x: cx - 80,  y: H * 0.3 },
+    { x: lx - 85, y: H * 0.57 },
+    { x: cx - 110, y: H * 0.40 },
+    { x: cx - 75,  y: H * 0.24 },
     { x: cx - 50,  y: intelY + 20 },
   ];
   curvePath(leftFBpts, C.rose, 0.4, true, t);
@@ -867,9 +867,9 @@ function drawS6() {
   // Right feedback curve
   const rightFBpts = [
     { x: rx + 50, y: ry2 + 20 },
-    { x: rx + 90, y: H * 0.62 },
-    { x: cx + 120, y: H * 0.45 },
-    { x: cx + 80,  y: H * 0.3 },
+    { x: rx + 85, y: H * 0.57 },
+    { x: cx + 110, y: H * 0.40 },
+    { x: cx + 75,  y: H * 0.24 },
     { x: cx + 50,  y: intelY + 20 },
   ];
   curvePath(rightFBpts, C.rose, 0.4, true, t);
@@ -899,8 +899,8 @@ function drawS6() {
   ctx.fillStyle = C.rose;
   ctx.font = '400 8px DM Mono, monospace';
   ctx.textAlign = 'center';
-  ctx.fillText('Outcomes feed back', cx - 85, H * 0.42);
-  ctx.fillText('to enhance the FEP', cx + 85, H * 0.42);
+  ctx.fillText('Outcomes feed back', cx - 85, H * 0.38);
+  ctx.fillText('to enhance the FEP', cx + 85, H * 0.38);
   ctx.restore();
 
   // People flowing down both sides
@@ -932,9 +932,9 @@ function drawS6() {
 
 /* Shared funnel-split geometry for S4 + S5 */
 function drawFunnelSplit() {
-  const cx = W/2, splitY = H * 0.54;
-  const [lx, ly]  = [W * 0.28, H * 0.73];
-  const [rx, ry2] = [W * 0.72, H * 0.73];
+  const cx = W/2, splitY = H * 0.50;
+  const [lx, ly]  = [W * 0.28, H * 0.68];
+  const [rx, ry2] = [W * 0.72, H * 0.68];
 
   // Funnel top (narrowed)
   drawFunnelSkeleton();
@@ -958,14 +958,14 @@ function drawFunnelSplit() {
 
   // RESILIENCE badge at top of split
   badge(cx, H*0.38, 100, 32, '#2d5c42', 'RESILIENCE', null, 0.75);
-  pill(cx, H * 0.51, 100, 20, C.amber, 'PRISMA-7 triage', 0.6, 8);
+  pill(cx, H * 0.48, 100, 20, C.amber, 'PRISMA-7 triage', 0.6, 8);
 }
 
 // ── RESIZE ──────────────────────────────────────────────────────────
 function resize() {
   const r = canvas.parentElement.getBoundingClientRect();
   W = canvas.width  = Math.floor(r.width) || 900;
-  H = canvas.height = Math.max(480, Math.floor(W * 0.62));
+  H = canvas.height = Math.max(380, Math.floor(W * 0.52));
   canvas.style.height = H + 'px';
 }
 
