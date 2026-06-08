@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assistiv Ecosystem — How It Works</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green-deep:   #1a3a2a;
+  --green-mid:    #2d5c42;
+  --green-accent: #3d7a56;
+  --green-light:  #7aab90;
+  --green-pale:   #e8f0eb;
+  --cream:        #f9f7f4;
+  --amber:        #b07d2a;
+  --amber-pale:   #fdf3dc;
+  --blue:         #2a5880;
+  --blue-pale:    #ddeaf5;
+  --rose:         #8a3a4a;
+  --ink:          #0f1a14;
+  --ink-mid:      #3a4a3f;
+  --ink-soft:     #6b7d72;
+  --white:        #ffffff;
+  --border:       #d8e0da;
+  --serif:        'DM Serif Display', Georgia, serif;
+  --sans:         'DM Sans', system-ui, sans-serif;
+  --mono:         'DM Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+  font-family: var(--sans);
+  background: var(--cream);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ───────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 58px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem;
+  background: rgba(249,247,244,0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+.nav-logo-mark { position: relative; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; }
+.nav-logo-dot { border-radius: 50%; position: absolute; }
+.nav-logo-core { width: 7px; height: 7px; background: #1a3a2a; z-index: 2; }
+.nav-logo-r1   { width: 15px; height: 15px; border: 1.5px solid #1a3a2a; opacity: 0.5; background: none; }
+.nav-logo-r2   { width: 24px; height: 24px; border: 1.5px solid #1a3a2a; opacity: 0.22; background: none; }
+.nav-wordmark { display: flex; flex-direction: column; gap: 1px; }
+.nav-wordmark-name { font-family: var(--sans); font-size: 1rem; font-weight: 700; letter-spacing: -0.03em; color: #0f2318; }
+.nav-wordmark-sub  { font-family: var(--mono); font-size: 0.48rem; letter-spacing: 0.18em; text-transform: uppercase; color: #2d6b47; opacity: 0.75; }
+.nav-back { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; }
+.nav-back:hover { color: var(--green-deep); }
+
+/* ── PAGE WRAPPER ─────────────────────────────────────── */
+.page {
+  padding: 80px 2rem 4rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.page-header {
+  text-align: center;
+  padding: 3rem 0 2.5rem;
+}
+.page-eyebrow {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--green-accent);
+  margin-bottom: 1rem;
+  display: inline-flex; align-items: center; gap: 0.6rem;
+}
+.page-eyebrow::before, .page-eyebrow::after {
+  content: ''; display: block; width: 20px; height: 1px; background: var(--green-accent);
+}
+.page-title {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: var(--green-deep);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+.page-sub {
+  font-size: 1rem; font-weight: 300; color: var(--ink-soft);
+  max-width: 560px; margin: 0 auto; line-height: 1.65;
+}
+
+/* ── ANIMATION CONTAINER ──────────────────────────────── */
+.anim-outer {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 32px rgba(15,35,24,0.08);
+  margin-bottom: 3rem;
+}
+
+#ecosystem-canvas {
+  display: block;
+  width: 100%;
+}
+
+/* ── STAGE INFO BAR ───────────────────────────────────── */
+.stage-bar {
+  display: flex;
+  align-items: stretch;
+  border-top: 1px solid var(--border);
+  background: var(--white);
+}
+.stage-steps {
+  display: flex;
+  flex: 1;
+  overflow-x: auto;
+}
+.sstep {
+  flex: 1;
+  min-width: 0;
+  padding: 0.85rem 0.75rem 0.75rem;
+  border-right: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.2s;
+  position: relative;
+}
+.sstep:last-child { border-right: none; }
+.sstep:hover { background: var(--green-pale); }
+.sstep.active { background: var(--green-pale); }
+.sstep.active::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--green-accent);
+}
+.sstep-num {
+  font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-soft); margin-bottom: 0.2rem;
+}
+.sstep-label {
+  font-family: var(--mono); font-size: 0.68rem; font-weight: 500;
+  color: var(--green-deep); line-height: 1.3;
+}
+.sstep.active .sstep-num { color: var(--green-accent); }
+
+/* ── CAPTION BAR ──────────────────────────────────────── */
+.caption-bar {
+  padding: 1.1rem 1.5rem;
+  border-top: 1px solid var(--border);
+  background: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.caption-text {
+  font-size: 0.875rem;
+  color: var(--ink-mid);
+  line-height: 1.5;
+  flex: 1;
+}
+.caption-text strong { color: var(--green-deep); font-weight: 500; }
+.caption-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+.btn-ctrl {
+  font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.06em;
+  text-transform: uppercase; padding: 0.45rem 0.9rem;
+  border: 1px solid var(--border); border-radius: 4px;
+  background: var(--white); color: var(--ink-mid);
+  cursor: pointer; transition: all 0.15s;
+}
+.btn-ctrl:hover { border-color: var(--green-accent); color: var(--green-deep); }
+.btn-ctrl.primary { background: var(--green-deep); color: var(--white); border-color: var(--green-deep); }
+.btn-ctrl.primary:hover { background: var(--green-mid); }
+
+/* ── LEGEND ───────────────────────────────────────────── */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  padding: 1.5rem 2rem 2.5rem;
+}
+.legend-item {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-family: var(--mono); font-size: 0.65rem;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft);
+}
+.legend-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+}
+
+@media (max-width: 640px) {
+  .stage-steps { flex-wrap: wrap; }
+  .sstep { min-width: 50%; }
+  .caption-bar { flex-direction: column; align-items: flex-start; }
+  #ecosystem-canvas { height: 420px !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="https://www.assistiv.co">
+    <div class="nav-logo-mark">
+      <div class="nav-logo-dot nav-logo-core"></div>
+      <div class="nav-logo-dot nav-logo-r1"></div>
+      <div class="nav-logo-dot nav-logo-r2"></div>
+    </div>
+    <div class="nav-wordmark">
+      <span class="nav-wordmark-name">Assistiv</span>
+      <span class="nav-wordmark-sub">Systems</span>
+    </div>
+  </a>
+  <a class="nav-back" href="https://www.assistiv.co">← Back to assistiv.co</a>
+</nav>
+
+<div class="page">
+
+  <div class="page-header">
+    <div class="page-eyebrow">How the ecosystem works</div>
+    <h1 class="page-title">From NHS data exhaust<br><em style="font-style:italic;color:var(--green-accent)">to preventative action</em></h1>
+    <p class="page-sub">A closed-loop intelligence system — identifying people at risk before crisis, deploying the right intervention, and learning from every outcome.</p>
+  </div>
+
+  <div class="anim-outer">
+    <canvas id="ecosystem-canvas" height="580" aria-label="Assistiv ecosystem funnel animation"></canvas>
+
+    <!-- Step nav -->
+    <div class="stage-bar">
+      <div class="stage-steps">
+        <div class="sstep active" data-s="0">
+          <div class="sstep-num">01</div>
+          <div class="sstep-label">NHS Data<br>Exhaust</div>
+        </div>
+        <div class="sstep" data-s="1">
+          <div class="sstep-num">02</div>
+          <div class="sstep-label">Intelligence<br>Layer</div>
+        </div>
+        <div class="sstep" data-s="2">
+          <div class="sstep-num">03</div>
+          <div class="sstep-label">Target<br>Populations</div>
+        </div>
+        <div class="sstep" data-s="3">
+          <div class="sstep-num">04</div>
+          <div class="sstep-label">Community<br>Screening</div>
+        </div>
+        <div class="sstep" data-s="4">
+          <div class="sstep-num">05</div>
+          <div class="sstep-label">PCN Hub<br>Pathway</div>
+        </div>
+        <div class="sstep" data-s="5">
+          <div class="sstep-num">06</div>
+          <div class="sstep-label">Assistiv<br>Platform</div>
+        </div>
+        <div class="sstep" data-s="6">
+          <div class="sstep-num">07</div>
+          <div class="sstep-label">Feedback<br>Loop</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Caption -->
+    <div class="caption-bar">
+      <div class="caption-text" id="caption-text">
+        <strong>NHS Data Exhaust</strong> — Millions of data points across prescribing records, falls admissions, deprivation indices, 111 demand, and census signals. Individually noise. Together, a signal.
+      </div>
+      <div class="caption-controls">
+        <button class="btn-ctrl" id="btn-play">Pause</button>
+        <button class="btn-ctrl primary" id="btn-next">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#3d7a56"></div>NHS / Open Data</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#2a5880"></div>Intelligence signals</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#b07d2a"></div>At-risk population</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#7aab90"></div>RESILIENCE screening</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#c04040"></div>PCN Hub — acute pathway</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#1a3a2a"></div>Assistiv Platform</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#8a3a4a"></div>Feedback to intelligence</div>
+  </div>
+
+</div>
+
+<script>
+const canvas  = document.getElementById('ecosystem-canvas');
+const ctx     = canvas.getContext('2d');
+
+const CAPTIONS = [
+  '<strong>NHS Data Exhaust</strong> — Millions of data points across prescribing records, falls admissions, deprivation indices, 111 demand, and census signals. Individually noise. Together, a signal.',
+  '<strong>Intelligence Layer</strong> — The Assistiv.Health FEP engine weighs 21 signals to produce a Frailty Emergence Probability score for every district in Kent & Medway. Updated daily from open NHS data.',
+  '<strong>Target Populations & Locations</strong> — High-FEP districts are ranked and mapped. The intelligence layer pinpoints which communities — and which people within them — carry the highest unmet need.',
+  '<strong>Community Screening via RESILIENCE</strong> — Deployed into priority zones: 12 conversational questions, PRISMA-7 scored in real time. No clinical training required. Identifies the Missing Middle at scale.',
+  '<strong>PCN Hub — Primary & Acute Pathway</strong> — People on the verge of acute care are immediately referred to Primary Care Network Hubs for urgent clinical review, preventing avoidable hospital admission.',
+  '<strong>Assistiv Platform</strong> — For everyone else: preventative care, digital support, community connections, and coordinated services delivered through the Assistiv platform. Prevention at scale.',
+  '<strong>Feedback Loop</strong> — Every outcome — who was referred, what happened, what worked — feeds back into the intelligence layer. The FEP model recalibrates. The system learns and gets sharper over time.',
+];
+
+let W, H, t = 0, stage = 0, raf, running = true;
+let autoTimer = null;
+
+// ── COLOUR PALETTE ──────────────────────────────────────────────────
+const C = {
+  sage:    '#3d7a56',
+  sageL:   '#7aab90',
+  sagePale:'#e8f0eb',
+  blue:    '#2a5880',
+  blueL:   '#6a9ab8',
+  amber:   '#b07d2a',
+  amberL:  '#d4a84b',
+  red:     '#c04040',
+  redL:    '#e07070',
+  forest:  '#1a3a2a',
+  forestL: '#2d5c42',
+  rose:    '#8a3a4a',
+  roseL:   '#c07080',
+  ink:     '#0f1a14',
+  inkMid:  '#3a4a3f',
+  inkSoft: '#6b7d72',
+  cream:   '#f9f7f4',
+  white:   '#ffffff',
+  border:  '#d8e0da',
+};
+
+// ── PARTICLE SYSTEM ─────────────────────────────────────────────────
+let particles = [];
+
+function makeParticle(opts = {}) {
+  return {
+    x:     opts.x     ?? Math.random() * W,
+    y:     opts.y     ?? Math.random() * H,
+    vx:    opts.vx    ?? (Math.random() - 0.5) * 0.6,
+    vy:    opts.vy    ?? (Math.random() - 0.5) * 0.4,
+    col:   opts.col   ?? C.sage,
+    r:     opts.r     ?? 2.5,
+    alpha: opts.alpha ?? 0.6 + Math.random() * 0.4,
+    life:  opts.life  ?? 1,
+    decay: opts.decay ?? 0,
+    phase: opts.phase ?? Math.random() * Math.PI * 2,
+    label: opts.label ?? null,
+    target:opts.target?? null,
+    progress: opts.progress ?? 0,
+    speed: opts.speed ?? 0.008 + Math.random() * 0.006,
+  };
+}
+
+// ── LAYOUT HELPERS ───────────────────────────────────────────────────
+// Funnel geometry: top-wide, narrows through middle, splits at bottom
+function funnelX(frac, width) {
+  // frac 0..1 = top..split point
+  // width shrinks from 0.85W to 0.25W
+  const maxW = W * 0.82;
+  const minW = W * 0.22;
+  const w = maxW - (maxW - minW) * frac;
+  const cx = W / 2;
+  return { left: cx - w/2, right: cx + w/2, width: w, cx };
+}
+
+function funnelY(frac) {
+  // frac 0..1 maps to y range top..split
+  const top    = H * 0.05;
+  const split  = H * 0.54;
+  return top + (split - top) * frac;
+}
+
+// ── DRAW UTILITIES ──────────────────────────────────────────────────
+function pill(x, y, w, h, col, label, alpha = 1, fontSize = 9) {
+  const r = h / 2;
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.fillStyle = col + '22';
+  ctx.strokeStyle = col;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.roundRect(x - w/2, y - h/2, w, h, r);
+  ctx.fill(); ctx.stroke();
+  if (label) {
+    ctx.fillStyle = col;
+    ctx.font = `500 ${fontSize}px DM Mono, monospace`;
+    ctx.textAlign = 'center';
+    ctx.fillText(label, x, y + fontSize * 0.35);
+  }
+  ctx.restore();
+}
+
+function badge(x, y, w, h, col, label, sublabel = null, alpha = 1) {
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  const r = 8;
+  ctx.fillStyle = col;
+  ctx.shadowColor = col + '44';
+  ctx.shadowBlur = 16;
+  ctx.beginPath();
+  ctx.roundRect(x - w/2, y - h/2, w, h, r);
+  ctx.fill();
+  ctx.shadowBlur = 0;
+  ctx.fillStyle = '#fff';
+  ctx.font = `500 11px DM Mono, monospace`;
+  ctx.textAlign = 'center';
+  ctx.fillText(label, x, sublabel ? y - 3 : y + 4);
+  if (sublabel) {
+    ctx.font = `400 8.5px DM Mono, monospace`;
+    ctx.fillStyle = 'rgba(255,255,255,0.7)';
+    ctx.fillText(sublabel, x, y + 12);
+  }
+  ctx.restore();
+}
+
+function flowArrow(x1, y1, x2, y2, col, alpha = 0.5, animated = false, t = 0) {
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.strokeStyle = col;
+  ctx.lineWidth = 1.5;
+  if (animated) {
+    ctx.setLineDash([6, 8]);
+    ctx.lineDashOffset = -(t * 1.5) % 14;
+  }
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  // arrowhead
+  const angle = Math.atan2(y2 - y1, x2 - x1);
+  const aLen = 7;
+  ctx.fillStyle = col;
+  ctx.beginPath();
+  ctx.moveTo(x2, y2);
+  ctx.lineTo(x2 - aLen * Math.cos(angle - 0.4), y2 - aLen * Math.sin(angle - 0.4));
+  ctx.lineTo(x2 - aLen * Math.cos(angle + 0.4), y2 - aLen * Math.sin(angle + 0.4));
+  ctx.closePath();
+  ctx.fill();
+  ctx.restore();
+}
+
+function curvePath(pts, col, alpha = 0.4, dash = false, dashT = 0) {
+  if (pts.length < 2) return;
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.strokeStyle = col;
+  ctx.lineWidth = 1.5;
+  if (dash) {
+    ctx.setLineDash([5, 7]);
+    ctx.lineDashOffset = -(dashT * 1.2) % 12;
+  }
+  ctx.beginPath();
+  ctx.moveTo(pts[0].x, pts[0].y);
+  for (let i = 1; i < pts.length - 1; i++) {
+    const mx = (pts[i].x + pts[i+1].x) / 2;
+    const my = (pts[i].y + pts[i+1].y) / 2;
+    ctx.quadraticCurveTo(pts[i].x, pts[i].y, mx, my);
+  }
+  ctx.lineTo(pts[pts.length - 1].x, pts[pts.length - 1].y);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.restore();
+}
+
+// ── FUNNEL STRUCTURE DRAWING ────────────────────────────────────────
+function drawFunnelSkeleton(highlight = -1) {
+  // Draw the main funnel outline
+  const top    = H * 0.04;
+  const split  = H * 0.54;
+  const cx     = W / 2;
+
+  // funnel walls
+  const topL = cx - W * 0.41, topR = cx + W * 0.41;
+  const splL = cx - W * 0.11, splR = cx + W * 0.11;
+
+  ctx.save();
+  ctx.globalAlpha = 0.07;
+  ctx.fillStyle = C.sage;
+  ctx.beginPath();
+  ctx.moveTo(topL, top);
+  ctx.lineTo(topR, top);
+  ctx.lineTo(splR, split);
+  ctx.lineTo(splL, split);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.globalAlpha = 0.15;
+  ctx.strokeStyle = C.sage;
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4, 6]);
+  ctx.beginPath();
+  ctx.moveTo(topL, top); ctx.lineTo(splL, split);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(topR, top); ctx.lineTo(splR, split);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.restore();
+}
+
+function drawLayerLabel(y, label, col, alpha = 0.5) {
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.fillStyle = col;
+  ctx.font = '400 9px DM Mono, monospace';
+  ctx.textAlign = 'left';
+  ctx.fillText(label, 12, y);
+  ctx.restore();
+}
+
+// ── STAGE RENDERERS ─────────────────────────────────────────────────
+
+/* S0 — NHS Data Exhaust: wide field of floating signal pills */
+function drawS0() {
+  const top = H * 0.04, split = H * 0.54;
+  const cx  = W / 2;
+
+  drawFunnelSkeleton();
+  drawLayerLabel(top + 14, 'NHS DATA EXHAUST', C.sage, 0.4);
+
+  const SIGNALS = [
+    ['Falls 65+', C.sage],    ['Prescribing EPD', C.blue],
+    ['Deprivation', C.amber], ['Alone 75+', C.sage],
+    ['111 Demand', C.blue],   ['Hip fractures', C.rose],
+    ['Winter deaths', C.amber],['Dementia Dx', C.blue],
+    ['CQC gap', C.rose],      ['Loneliness', C.sage],
+    ['RAVI rural', C.amber],  ['Hypnotics ↑', C.blue],
+    ['Bisphosphonates', C.sage],['Antidepressants', C.amber],
+    ['Census 2021', C.rose],  ['A&E demand', C.blue],
+    ['OAB treatment', C.sage],['Nutrition ONS', C.amber],
+  ];
+
+  const pulse = 0.5 + 0.5 * Math.sin(t * 0.025);
+
+  SIGNALS.forEach(([ label, col ], i) => {
+    const seed = i * 137.5;
+    const xBase = (((seed * 1.618) % 1)) * W * 0.78 + W * 0.11;
+    const yBase = (((seed * 0.618) % 1)) * (split - top - 40) + top + 20;
+    const x = xBase + Math.sin(t * 0.018 + i * 0.7) * 6;
+    const y = yBase + Math.cos(t * 0.014 + i * 0.9) * 5;
+    const w = label.length * 5.8 + 16;
+    const a = 0.45 + 0.2 * Math.sin(t * 0.022 + i) + 0.08 * pulse;
+    pill(x, y, w, 20, col, label, a, 9);
+  });
+
+  // connector lines between nearby pills
+  ctx.save();
+  SIGNALS.forEach(([ , c1 ], i) => {
+    SIGNALS.forEach(([ , c2 ], j) => {
+      if (j <= i) return;
+      const s1 = i * 137.5, s2 = j * 137.5;
+      const x1 = (((s1*1.618)%1))*W*0.78+W*0.11 + Math.sin(t*0.018+i*0.7)*6;
+      const y1 = (((s1*0.618)%1))*(split-top-40)+top+20 + Math.cos(t*0.014+i*0.9)*5;
+      const x2 = (((s2*1.618)%1))*W*0.78+W*0.11 + Math.sin(t*0.018+j*0.7)*6;
+      const y2 = (((s2*0.618)%1))*(split-top-40)+top+20 + Math.cos(t*0.014+j*0.9)*5;
+      const d  = Math.hypot(x2-x1, y2-y1);
+      if (d < 100) {
+        ctx.globalAlpha = (0.12 - 0.0008*d);
+        ctx.strokeStyle = c1;
+        ctx.lineWidth = 0.5;
+        ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+      }
+    });
+  });
+  ctx.restore();
+}
+
+/* S1 — Intelligence Layer: signals converge on FEP engine */
+function drawS1() {
+  const cx = W / 2, cy = H * 0.28;
+  drawFunnelSkeleton();
+  drawLayerLabel(H*0.04 + 14, 'NHS DATA EXHAUST → INTELLIGENCE', C.sage, 0.4);
+
+  const pulse = 0.5 + 0.5 * Math.sin(t * 0.035);
+
+  // FEP engine badge centre
+  ctx.save();
+  for (const [r, a] of [[55, 0.06+0.04*pulse],[38,0.1+0.06*pulse],[24,0.18+0.08*pulse]]) {
+    ctx.globalAlpha = a;
+    ctx.strokeStyle = C.sage;
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.stroke();
+  }
+  ctx.restore();
+
+  badge(cx, cy, 88, 42, C.forest, 'ASSISTIV.HEALTH', 'FEP Engine', 0.92);
+
+  // 8 signals converging in
+  const RING_SIGS = [
+    ['Falls','#3d7a56'], ['Prescribing','#2a5880'], ['Deprivation','#b07d2a'],
+    ['Alone 75+','#3d7a56'], ['111 calls','#2a5880'], ['Hip fracture','#8a3a4a'],
+    ['Winter Dx','#b07d2a'], ['Dementia','#2a5880'],
+  ];
+  RING_SIGS.forEach(([label, col], i) => {
+    const a = (i / RING_SIGS.length) * Math.PI * 2 - Math.PI/2;
+    const dist = Math.min(W, H) * 0.27;
+    const sx = cx + Math.cos(a) * dist;
+    const sy = cy + Math.sin(a) * dist;
+    const prog = Math.min(1, (t % 120) / 80);
+    const px = sx + (cx - sx) * (0.6 + 0.4 * prog);
+    const py = sy + (cy - sy) * (0.6 + 0.4 * prog);
+    const fade = 1 - prog * 0.7;
+
+    // trail
+    ctx.save();
+    ctx.globalAlpha = 0.12 + 0.3 * prog;
+    ctx.strokeStyle = col; ctx.lineWidth = 0.8;
+    ctx.setLineDash([4,6]);
+    ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(cx, cy); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.restore();
+
+    const w = label.length * 5.5 + 14;
+    pill(px, py, w, 18, col, label, fade * 0.9, 8.5);
+  });
+}
+
+/* S2 — Geographic targeting: district grid */
+function drawS2() {
+  drawFunnelSkeleton();
+  drawLayerLabel(H*0.04+14, 'INTELLIGENCE → TARGET ZONES', C.sage, 0.4);
+
+  const cx = W / 2;
+  const DISTRICTS = [
+    {n:'Thanet',s:82,r:'critical'}, {n:'Folkestone',s:76,r:'high'},
+    {n:'Dover',s:73,r:'high'},      {n:'Swale',s:68,r:'high'},
+    {n:'Medway',s:65,r:'high'},     {n:'Gravesham',s:62,r:'high'},
+    {n:'Ashford',s:57,r:'moderate'},{n:'Shepway',s:54,r:'moderate'},
+    {n:'Canterbury',s:48,r:'moderate'},{n:'Maidstone',s:46,r:'moderate'},
+  ];
+  function rCol(r) {
+    return r==='critical'?C.red:r==='high'?C.amber:C.sage;
+  }
+
+  const cols = Math.min(5, Math.ceil(DISTRICTS.length / 2));
+  const gW   = Math.min(W * 0.78, 560), gH = Math.min(H * 0.42, 200);
+  const cw   = gW / cols, ch = gH / 2;
+  const x0   = (W - gW) / 2, y0 = H * 0.1;
+
+  ctx.save();
+  DISTRICTS.forEach((d, i) => {
+    const col = i % cols, row = Math.floor(i / cols);
+    const dcx = x0 + col * cw + cw/2;
+    const dcy = y0 + row * ch + ch/2;
+    const w = cw - 12, h = ch - 10;
+    const rc = rCol(d.r);
+    const delay = i * 5;
+    const prog = Math.min(1, Math.max(0, (t - delay) / 30));
+    if (prog <= 0) return;
+    const pulse = d.r === 'critical' ? 0.5 + 0.5 * Math.sin(t * 0.06 + i) : 1;
+
+    ctx.globalAlpha = (d.r==='critical'?0.9:d.r==='high'?0.75:0.55) * prog * pulse;
+    ctx.fillStyle = rc + '1a';
+    ctx.strokeStyle = rc;
+    ctx.lineWidth = d.r === 'critical' ? 1.5 : 1;
+    ctx.beginPath(); ctx.roundRect(dcx-w/2, dcy-h/2, w, h, 5); ctx.fill(); ctx.stroke();
+
+    ctx.globalAlpha = prog;
+    ctx.fillStyle = rc;
+    ctx.font = '500 8.5px DM Mono, monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(d.n, dcx, dcy - 7);
+    ctx.fillStyle = '#0f1a14'; ctx.font = '500 16px DM Sans, sans-serif';
+    ctx.fillText(d.s, dcx, dcy + 5);
+    ctx.fillStyle = rc; ctx.font = '400 7px DM Mono, monospace';
+    ctx.fillText(d.r.toUpperCase(), dcx, dcy + 18);
+  });
+  ctx.restore();
+
+  // Arrow from grid down toward funnel split
+  const splitY = H * 0.54;
+  const arrowAlpha = Math.min(1, (t / 60) * 0.6);
+  flowArrow(cx, H*0.52, cx, splitY - 10, C.sage, arrowAlpha, true, t);
+}
+
+/* S3 — RESILIENCE screening deployment */
+function drawS3() {
+  drawFunnelSkeleton();
+  drawLayerLabel(H*0.04+14, 'TARGET ZONES → COMMUNITY SCREENING', C.sageL, 0.5);
+
+  const cx = W / 2;
+
+  // RESILIENCE badge at narrow point
+  const ry = H * 0.34;
+  const pulse = 0.5 + 0.5 * Math.sin(t * 0.04);
+  ctx.save();
+  for (const [r, a] of [[48,0.05+0.04*pulse],[32,0.1+0.05*pulse]]) {
+    ctx.globalAlpha = a; ctx.strokeStyle = C.sageL; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.arc(cx, ry, r, 0, Math.PI*2); ctx.stroke();
+  }
+  ctx.restore();
+  badge(cx, ry, 130, 42, C.green_mid ?? '#2d5c42', 'RESILIENCE', 'Community screen', 0.95);
+
+  // Animated people dots flowing down into screen
+  const N = 15;
+  for (let i = 0; i < N; i++) {
+    const seed  = i * 83.7;
+    const xBase = cx + Math.cos(seed) * (W * 0.32);
+    const yBase = H * 0.08 + (seed % 1) * H * 0.12;
+    const prog  = ((t * 0.007 + i / N) % 1);
+    const px    = xBase + (cx - xBase) * prog;
+    const py    = yBase + (ry - yBase) * prog;
+    const a     = Math.sin(prog * Math.PI) * 0.8;
+
+    ctx.save();
+    ctx.globalAlpha = a;
+    ctx.fillStyle = C.amber;
+    ctx.beginPath(); ctx.arc(px, py - 3, 4, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(px, py + 6, 6, Math.PI, Math.PI * 2); ctx.fill();
+    ctx.restore();
+  }
+
+  // Questions flowing out from badge
+  const QUESTIONS = ['Mobility?', 'Falls risk?', 'Social contact?', 'Medication?', 'Nutrition?'];
+  QUESTIONS.forEach((q, i) => {
+    const a = (i / QUESTIONS.length) * Math.PI + Math.PI/6;
+    const dist = 90 + Math.sin(t * 0.03 + i) * 8;
+    const qx = cx + Math.cos(a) * dist;
+    const qy = ry + Math.sin(a) * dist;
+    pill(qx, qy, q.length * 6 + 14, 18, C.sageL, q, 0.6 + 0.2 * Math.sin(t*0.04+i), 8);
+  });
+
+  // Score output flowing down
+  const scoreY = H * 0.5;
+  const scoreAlpha = Math.min(0.9, t / 80);
+  badge(cx, scoreY, 110, 36, C.sage, 'PRISMA-7 SCORED', null, scoreAlpha);
+}
+
+/* S4 — Split: PCN Hub */
+function drawS4() {
+  drawFunnelSplit();
+  // Highlight left branch (PCN)
+  const [lx, ly] = [W * 0.28, H * 0.73];
+  const pulse = 0.5 + 0.5 * Math.sin(t * 0.05);
+  ctx.save();
+  ctx.globalAlpha = 0.12 + 0.06 * pulse;
+  ctx.fillStyle = C.red;
+  ctx.beginPath(); ctx.arc(lx, ly, 70, 0, Math.PI*2); ctx.fill();
+  ctx.restore();
+  badge(lx, ly, 120, 46, C.red, 'PCN HUB', 'Primary / Acute care', 0.95);
+
+  // People flowing left
+  const N = 6;
+  const splitX = W / 2, splitY = H * 0.56;
+  for (let i = 0; i < N; i++) {
+    const prog = ((t * 0.008 + i / N) % 1);
+    const px = splitX + (lx - splitX) * prog;
+    const py = splitY + (ly - splitY) * prog;
+    const a  = Math.sin(prog * Math.PI) * 0.85;
+    ctx.save();
+    ctx.globalAlpha = a;
+    ctx.fillStyle = C.red;
+    ctx.beginPath(); ctx.arc(px, py-3, 4, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(px, py+6, 6, Math.PI, Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
+
+  // Right branch greyed
+  const [rx, ry2] = [W * 0.72, H * 0.73];
+  badge(rx, ry2, 120, 46, C.inkSoft, 'ASSISTIV', 'Preventative platform', 0.3);
+
+  // Label at split
+  pill(W/2, H*0.56, 110, 22, C.amber, 'PRISMA-7 triage', 0.7, 9);
+}
+
+/* S5 — Split: Assistiv Platform */
+function drawS5() {
+  drawFunnelSplit();
+  const [lx, ly]  = [W * 0.28, H * 0.73];
+  const [rx, ry2] = [W * 0.72, H * 0.73];
+  const pulse = 0.5 + 0.5 * Math.sin(t * 0.05);
+
+  // Right highlight
+  ctx.save();
+  ctx.globalAlpha = 0.1 + 0.05 * pulse;
+  ctx.fillStyle = C.forest;
+  ctx.beginPath(); ctx.arc(rx, ry2, 70, 0, Math.PI*2); ctx.fill();
+  ctx.restore();
+
+  // Left greyed
+  badge(lx, ly, 120, 46, C.red, 'PCN HUB', 'Primary / Acute care', 0.3);
+
+  // Right active
+  badge(rx, ry2, 120, 46, C.forest, 'ASSISTIV', 'Preventative platform', 0.95);
+
+  // Services flowing from platform
+  const SERVICES = ['Digital support','Care coordination','Community links','Preventative plan','Carer support'];
+  SERVICES.forEach((s, i) => {
+    const a = (i / SERVICES.length - 0.1) * Math.PI * 0.9 - Math.PI * 0.05;
+    const dist = 95 + Math.sin(t*0.03+i)*6;
+    const sx2 = rx + Math.cos(a) * dist;
+    const sy2 = ry2 + Math.sin(a) * dist * 0.7;
+    pill(sx2, sy2, s.length * 5.5 + 12, 18, C.forestL, s, 0.55+0.2*Math.sin(t*0.04+i), 7.5);
+  });
+
+  // People flowing right
+  const N = 8;
+  const splitX = W / 2, splitY = H * 0.56;
+  for (let i = 0; i < N; i++) {
+    const prog = ((t * 0.007 + i / N) % 1);
+    const px = splitX + (rx - splitX) * prog;
+    const py = splitY + (ry2 - splitY) * prog;
+    const a  = Math.sin(prog * Math.PI) * 0.85;
+    ctx.save();
+    ctx.globalAlpha = a;
+    ctx.fillStyle = C.sageL;
+    ctx.beginPath(); ctx.arc(px, py-3, 4, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(px, py+6, 6, Math.PI, Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
+
+  pill(W/2, H*0.56, 110, 22, C.amber, 'PRISMA-7 triage', 0.7, 9);
+}
+
+/* S6 — Full ecosystem + feedback loop */
+function drawS6() {
+  drawFunnelSkeleton();
+
+  const cx = W / 2;
+  const splitY = H * 0.54;
+  const [lx, ly]  = [W * 0.28, H * 0.73];
+  const [rx, ry2] = [W * 0.72, H * 0.73];
+  const intelY    = H * 0.24;
+
+  // Intelligence hub
+  badge(cx, intelY, 120, 40, C.forest, 'ASSISTIV.HEALTH', 'Intelligence layer', 0.9);
+
+  // RESILIENCE
+  badge(cx, H*0.44, 110, 36, '#2d5c42', 'RESILIENCE', 'Screening', 0.85);
+
+  // Split triage
+  pill(cx, H*0.55, 100, 20, C.amber, 'PRISMA-7 triage', 0.7, 8);
+
+  // PCN
+  badge(lx, ly, 114, 42, C.red, 'PCN HUB', 'Acute pathway', 0.9);
+
+  // Assistiv Platform
+  badge(rx, ry2, 114, 42, C.forest, 'ASSISTIV', 'Prevention', 0.9);
+
+  // Outcome boxes bottom
+  const outY = H * 0.9;
+  pill(lx, outY, 120, 22, C.red,    '↓ Hospital admission', 0.65, 7.5);
+  pill(rx, outY, 120, 22, C.sageL,  '↑ Independence', 0.65, 7.5);
+
+  // Feedback arrows: both branches arc back up to intelligence
+  const fbProgress = (t % 160) / 160;
+  const fbAlpha = Math.sin(fbProgress * Math.PI) * 0.7;
+
+  // Left feedback curve
+  const leftFBpts = [
+    { x: lx - 50, y: ly + 20 },
+    { x: lx - 90, y: H * 0.62 },
+    { x: cx - 120, y: H * 0.45 },
+    { x: cx - 80,  y: H * 0.3 },
+    { x: cx - 50,  y: intelY + 20 },
+  ];
+  curvePath(leftFBpts, C.rose, 0.4, true, t);
+
+  // Right feedback curve
+  const rightFBpts = [
+    { x: rx + 50, y: ry2 + 20 },
+    { x: rx + 90, y: H * 0.62 },
+    { x: cx + 120, y: H * 0.45 },
+    { x: cx + 80,  y: H * 0.3 },
+    { x: cx + 50,  y: intelY + 20 },
+  ];
+  curvePath(rightFBpts, C.rose, 0.4, true, t);
+
+  // Animated feedback particle
+  function drawParticleOnPath(pts, col) {
+    const frac = fbProgress;
+    const totalLen = pts.length - 1;
+    const segIdx = Math.floor(frac * totalLen);
+    const segFrac = (frac * totalLen) - segIdx;
+    if (segIdx >= totalLen) return;
+    const a = pts[segIdx], b = pts[segIdx + 1];
+    const px = a.x + (b.x - a.x) * segFrac;
+    const py = a.y + (b.y - a.y) * segFrac;
+    ctx.save();
+    ctx.globalAlpha = fbAlpha;
+    ctx.fillStyle = col;
+    ctx.beginPath(); ctx.arc(px, py, 5, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+  }
+  drawParticleOnPath(leftFBpts, C.rose);
+  drawParticleOnPath(rightFBpts, C.rose);
+
+  // Labels
+  ctx.save();
+  ctx.globalAlpha = 0.55;
+  ctx.fillStyle = C.rose;
+  ctx.font = '400 8px DM Mono, monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('Outcomes feed back', cx - 85, H * 0.42);
+  ctx.fillText('to enhance the FEP', cx + 85, H * 0.42);
+  ctx.restore();
+
+  // People flowing down both sides
+  for (let i = 0; i < 5; i++) {
+    const prog = ((t * 0.006 + i / 5) % 1);
+    const px = cx + (lx - cx) * prog;
+    const py = splitY + (ly - splitY) * prog;
+    const a = Math.sin(prog * Math.PI) * 0.7;
+    ctx.save();
+    ctx.globalAlpha = a;
+    ctx.fillStyle = C.red;
+    ctx.beginPath(); ctx.arc(px, py-2, 3, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(px, py+5, 5, Math.PI, Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
+  for (let i = 0; i < 7; i++) {
+    const prog = ((t * 0.007 + i / 7) % 1);
+    const px = cx + (rx - cx) * prog;
+    const py = splitY + (ry2 - splitY) * prog;
+    const a = Math.sin(prog * Math.PI) * 0.7;
+    ctx.save();
+    ctx.globalAlpha = a;
+    ctx.fillStyle = C.sageL;
+    ctx.beginPath(); ctx.arc(px, py-2, 3, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(px, py+5, 5, Math.PI, Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
+}
+
+/* Shared funnel-split geometry for S4 + S5 */
+function drawFunnelSplit() {
+  const cx = W/2, splitY = H * 0.54;
+  const [lx, ly]  = [W * 0.28, H * 0.73];
+  const [rx, ry2] = [W * 0.72, H * 0.73];
+
+  // Funnel top (narrowed)
+  drawFunnelSkeleton();
+  drawLayerLabel(H*0.04+14, 'SCREENING → TRIAGE SPLIT', C.amber, 0.4);
+
+  // Split lines
+  ctx.save();
+  ctx.globalAlpha = 0.2; ctx.strokeStyle = C.amber; ctx.lineWidth = 1.5;
+  ctx.setLineDash([5, 6]);
+  ctx.beginPath(); ctx.moveTo(cx, splitY); ctx.lineTo(lx, ly - 25); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(cx, splitY); ctx.lineTo(rx, ry2 - 25); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Branch labels
+  ctx.globalAlpha = 0.5;
+  ctx.font = '400 8px DM Mono, monospace'; ctx.fillStyle = C.red;
+  ctx.textAlign = 'center'; ctx.fillText('VERGE OF ACUTE CARE', lx, ly - 50);
+  ctx.fillStyle = C.sage;
+  ctx.fillText('PREVENTION PATHWAY', rx, ry2 - 50);
+  ctx.restore();
+
+  // RESILIENCE badge at top of split
+  badge(cx, H*0.38, 100, 32, '#2d5c42', 'RESILIENCE', null, 0.75);
+  pill(cx, H * 0.51, 100, 20, C.amber, 'PRISMA-7 triage', 0.6, 8);
+}
+
+// ── RESIZE ──────────────────────────────────────────────────────────
+function resize() {
+  const r = canvas.parentElement.getBoundingClientRect();
+  W = canvas.width  = Math.floor(r.width) || 900;
+  H = canvas.height = Math.max(480, Math.floor(W * 0.62));
+  canvas.style.height = H + 'px';
+}
+
+// ── MAIN LOOP ────────────────────────────────────────────────────────
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = C.white; ctx.fillRect(0, 0, W, H);
+
+  switch(stage) {
+    case 0: drawS0(); break;
+    case 1: drawS1(); break;
+    case 2: drawS2(); break;
+    case 3: drawS3(); break;
+    case 4: drawS4(); break;
+    case 5: drawS5(); break;
+    case 6: drawS6(); break;
+  }
+  t++;
+  if (running) raf = requestAnimationFrame(draw);
+}
+
+// ── STAGE MANAGEMENT ─────────────────────────────────────────────────
+function setStage(s) {
+  stage = s; t = 0;
+  document.querySelectorAll('.sstep').forEach((el, i) => {
+    el.classList.toggle('active', i === s);
+  });
+  document.getElementById('caption-text').innerHTML = CAPTIONS[s];
+  if (!running) { running = true; raf = requestAnimationFrame(draw); }
+  resetAuto();
+}
+
+function resetAuto() {
+  clearInterval(autoTimer);
+  autoTimer = setInterval(() => {
+    if (running) setStage((stage + 1) % 7);
+  }, 10000);
+}
+
+// ── CONTROLS ─────────────────────────────────────────────────────────
+document.querySelectorAll('.sstep').forEach(el =>
+  el.addEventListener('click', () => setStage(+el.dataset.s))
+);
+
+document.getElementById('btn-next').addEventListener('click', () =>
+  setStage((stage + 1) % 7)
+);
+
+document.getElementById('btn-play').addEventListener('click', function() {
+  running = !running;
+  this.textContent = running ? 'Pause' : 'Play';
+  if (running) { raf = requestAnimationFrame(draw); resetAuto(); }
+  else { cancelAnimationFrame(raf); clearInterval(autoTimer); }
+});
+
+window.addEventListener('resize', () => {
+  cancelAnimationFrame(raf);
+  resize();
+  if (running) raf = requestAnimationFrame(draw);
+});
+
+// ── INIT ─────────────────────────────────────────────────────────────
+requestAnimationFrame(() => {
+  resize();
+  draw();
+  resetAuto();
+});
+</script>
+</body>
+</html>
