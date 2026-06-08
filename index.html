@@ -128,6 +128,15 @@
     max-width: 1100px;
     margin: 0 auto;
   }
+  /* Two-column hero split */
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .hero-text { display: flex; flex-direction: column; }
+  .hero-anim-col { display: flex; align-items: center; justify-content: center; }
 
   .hero-eyebrow {
     font-family: var(--sans);
@@ -152,12 +161,11 @@
 
   .hero-title {
     font-family: var(--serif);
-    font-size: clamp(2.8rem, 5.5vw, 4.75rem);
-    line-height: 1.08;
+    font-size: clamp(2rem, 3.6vw, 3.8rem);
+    line-height: 1.1;
     color: var(--green-deep);
     letter-spacing: -0.02em;
-    max-width: 780px;
-    margin-bottom: 2.25rem;
+    margin-bottom: 2rem;
   }
 
   .hero-title em {
@@ -166,12 +174,11 @@
   }
 
   .hero-sub {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 300;
     color: var(--ink-mid);
-    max-width: 560px;
     line-height: 1.65;
-    margin-bottom: 3.5rem;
+    margin-bottom: 2rem;
   }
 
   .hero-divider {
@@ -781,6 +788,7 @@
   @media (max-width: 1024px) {
     nav { padding: 1.1rem 2rem; }
     .hero { padding: 10rem 2rem 5rem; }
+    .hero-inner { gap: 2.5rem; }
     .section { padding: 5rem 2rem; }
     .stats { padding: 3.5rem 2rem; }
     .contact { padding: 5rem 2rem; }
@@ -794,7 +802,10 @@
 
     /* Hero */
     .hero { padding: 8rem 1.5rem 4.5rem; }
-    .hero-sub { font-size: 1.05rem; }
+    .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-anim-col { order: -1; }
+    #mini-eco-canvas { height: 170px; }
+    .hero-sub { font-size: 1rem; }
 
     /* Stats */
     .stats { padding: 3rem 1.5rem; }
@@ -912,6 +923,60 @@
     footer { padding: 1.25rem; }
     .footer-note { font-size: 0.7rem; }
   }
+
+  /* ---- MINI ECOSYSTEM ANIMATION ---- */
+  .mini-eco-wrap {
+    width: 100%;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 28px rgba(26,58,42,0.10);
+  }
+  .mini-eco-label {
+    font-family: var(--mono, 'DM Mono', monospace);
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding: 0.45rem 0.9rem 0;
+  }
+  #mini-eco-canvas {
+    display: block;
+    width: 100%;
+    height: 220px;
+  }
+  .mini-eco-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.35rem 0.9rem 0.45rem;
+    border-top: 1px solid var(--border);
+  }
+  .mini-eco-stage {
+    font-family: var(--mono, 'DM Mono', monospace);
+    font-size: 0.62rem;
+    color: var(--green-accent);
+    font-weight: 500;
+    flex: 1;
+  }
+  .mini-eco-dots { display: flex; gap: 4px; }
+  .meco-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--border);
+    cursor: pointer; transition: background 0.2s;
+  }
+  .meco-dot.active { background: var(--green-accent); }
+  .mini-eco-link {
+    font-family: var(--mono, 'DM Mono', monospace);
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    color: var(--green-accent);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .mini-eco-link:hover { text-decoration: underline; }
+
 </style>
   <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@500;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
@@ -943,15 +1008,43 @@
 
 <!-- HERO -->
 <section class="hero">
-  <p class="hero-eyebrow fade-in">Infrastructure for independent living</p>
-  <h1 class="hero-title fade-in">
-    Supporting people to live well at home.<br>
-    <em>Before crisis. On their terms.</em>
-  </h1>
-  <p class="hero-sub fade-in">
-    Assistiv is a platform designed for the people who fall between existing services. Independent enough to manage, vulnerable enough to be at risk. We build infrastructure for this population that existing care systems were never designed to reach.
-  </p>
-  <div class="hero-divider fade-in"></div>
+  <div class="hero-inner">
+
+    <!-- LEFT: text -->
+    <div class="hero-text">
+      <p class="hero-eyebrow fade-in">Infrastructure for independent living</p>
+      <h1 class="hero-title fade-in">
+        Supporting people to live well at home.<br>
+        <em>Before crisis. On their terms.</em>
+      </h1>
+      <p class="hero-sub fade-in">
+        Assistiv is a platform designed for the people who fall between existing services. Independent enough to manage, vulnerable enough to be at risk. We build infrastructure for this population that existing care systems were never designed to reach.
+      </p>
+    </div>
+
+    <!-- RIGHT: mini ecosystem animation -->
+    <div class="hero-anim-col fade-in">
+      <div class="mini-eco-wrap">
+        <div class="mini-eco-label">How the ecosystem works</div>
+        <canvas id="mini-eco-canvas" aria-label="Assistiv ecosystem overview"></canvas>
+        <div class="mini-eco-footer">
+          <span class="mini-eco-stage" id="meco-label">NHS data exhaust</span>
+          <div class="mini-eco-dots">
+            <span class="meco-dot active" data-s="0"></span>
+            <span class="meco-dot" data-s="1"></span>
+            <span class="meco-dot" data-s="2"></span>
+            <span class="meco-dot" data-s="3"></span>
+            <span class="meco-dot" data-s="4"></span>
+            <span class="meco-dot" data-s="5"></span>
+            <span class="meco-dot" data-s="6"></span>
+          </div>
+          <a href="ecosystem-animation.html" class="mini-eco-link">Full walkthrough →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="hero-divider fade-in" style="margin-top:3rem"></div>
 </section>
 
 <!-- STAT STRIP -->
@@ -1340,6 +1433,354 @@
       ro.observe(document.body);
     }
   })();
+</script>
+
+
+<!-- MINI ECOSYSTEM ANIMATION -->
+<script>
+(function () {
+  const canvas = document.getElementById('mini-eco-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, t = 0, stage = 0, raf, running = true, autoTimer;
+
+  const LABELS = [
+    'NHS data exhaust',
+    'FEP intelligence layer',
+    'Target populations',
+    'RESILIENCE screening',
+    'PCN Hub — acute pathway',
+    'Assistiv Platform',
+    'Feedback loop'
+  ];
+
+  const C = {
+    sage:'#3d7a56', sageL:'#7aab90', sagePale:'#e8f0eb',
+    blue:'#2a5880', amber:'#b07d2a', red:'#c04040',
+    forest:'#1a3a2a', forestL:'#2d5c42', rose:'#8a3a4a',
+    ink:'#0f1a14', inkSoft:'#6b7d72', border:'#d8e0da', white:'#ffffff',
+  };
+
+  const SIGS = [
+    ['Falls 65+',C.sage],['Prescribing',C.blue],['Deprivation',C.amber],
+    ['Alone 75+',C.sage],['111 calls',C.blue],['Hip fractures',C.rose],
+    ['Winter Dx',C.amber],['Dementia',C.blue],['CQC gap',C.sage],
+  ];
+
+  const DISTRICTS = [
+    {n:'Thanet',s:82,r:'critical'},{n:'Folkestone',s:76,r:'high'},
+    {n:'Dover',s:73,r:'high'},{n:'Swale',s:68,r:'high'},
+    {n:'Medway',s:65,r:'high'},{n:'Gravesham',s:62,r:'high'},
+    {n:'Ashford',s:57,r:'moderate'},{n:'Canterbury',s:48,r:'moderate'},
+    {n:'Maidstone',s:46,r:'moderate'},{n:'Dartford',s:54,r:'moderate'},
+  ];
+
+  if (!CanvasRenderingContext2D.prototype.roundRect) {
+    CanvasRenderingContext2D.prototype.roundRect = function(x,y,w,h,r){
+      this.beginPath();
+      this.moveTo(x+r,y);this.lineTo(x+w-r,y);this.arcTo(x+w,y,x+w,y+r,r);
+      this.lineTo(x+w,y+h-r);this.arcTo(x+w,y+h,x+w-r,y+h,r);
+      this.lineTo(x+r,y+h);this.arcTo(x,y+h,x,y+h-r,r);
+      this.lineTo(x,y+r);this.arcTo(x,y,x+r,y,r);this.closePath();
+    };
+  }
+
+  function resize() {
+    const r = canvas.parentElement.getBoundingClientRect();
+    W = canvas.width  = Math.floor(r.width) || 500;
+    H = canvas.height = canvas.offsetHeight || 220;
+  }
+
+  function eio(x){ return x<.5?2*x*x:-1+(4-2*x)*x; }
+
+  function pill(x,y,w,h,col,lbl,a=1,fs=8) {
+    ctx.save(); ctx.globalAlpha=a;
+    ctx.fillStyle=col+'20'; ctx.strokeStyle=col; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.roundRect(x-w/2,y-h/2,w,h,h/2); ctx.fill(); ctx.stroke();
+    if(lbl){
+      ctx.fillStyle=col; ctx.font=`500 ${fs}px DM Mono,monospace`;
+      ctx.textAlign='center'; ctx.fillText(lbl,x,y+fs*.35);
+    }
+    ctx.restore();
+  }
+
+  function badge(x,y,w,h,col,lbl,sub=null,a=1) {
+    ctx.save(); ctx.globalAlpha=a;
+    ctx.fillStyle=col; ctx.shadowColor=col+'44'; ctx.shadowBlur=12;
+    ctx.beginPath(); ctx.roundRect(x-w/2,y-h/2,w,h,7); ctx.fill();
+    ctx.shadowBlur=0;
+    ctx.fillStyle='#fff'; ctx.textAlign='center';
+    ctx.font=`500 9px DM Mono,monospace`;
+    ctx.fillText(lbl,x,sub?y-2:y+3);
+    if(sub){ ctx.font=`400 7.5px DM Mono,monospace`; ctx.fillStyle='rgba(255,255,255,0.65)'; ctx.fillText(sub,x,y+10); }
+    ctx.restore();
+  }
+
+  function funnel(a=0.06) {
+    const cx=W/2, top=H*.03, bot=H*.50;
+    const tw=W*.82, bw=W*.2;
+    ctx.save(); ctx.globalAlpha=a;
+    ctx.fillStyle=C.sage;
+    ctx.beginPath();
+    ctx.moveTo(cx-tw/2,top); ctx.lineTo(cx+tw/2,top);
+    ctx.lineTo(cx+bw/2,bot); ctx.lineTo(cx-bw/2,bot);
+    ctx.closePath(); ctx.fill();
+    ctx.globalAlpha=a*2; ctx.strokeStyle=C.sage; ctx.lineWidth=1;
+    ctx.setLineDash([3,5]);
+    ctx.beginPath(); ctx.moveTo(cx-tw/2,top); ctx.lineTo(cx-bw/2,bot); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx+tw/2,top); ctx.lineTo(cx+bw/2,bot); ctx.stroke();
+    ctx.setLineDash([]); ctx.restore();
+  }
+
+  function person(x,y,col,a=0.8) {
+    ctx.save(); ctx.globalAlpha=a; ctx.fillStyle=col;
+    ctx.beginPath(); ctx.arc(x,y-3,3.5,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(x,y+5,5,Math.PI,Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
+
+  function curveTo(pts,col,a=0.4,dash=false) {
+    if(pts.length<2)return;
+    ctx.save(); ctx.globalAlpha=a; ctx.strokeStyle=col; ctx.lineWidth=1.5;
+    if(dash){ctx.setLineDash([4,6]); ctx.lineDashOffset=-(t*1.2)%10;}
+    ctx.beginPath(); ctx.moveTo(pts[0].x,pts[0].y);
+    for(let i=1;i<pts.length-1;i++){
+      const mx=(pts[i].x+pts[i+1].x)/2, my=(pts[i].y+pts[i+1].y)/2;
+      ctx.quadraticCurveTo(pts[i].x,pts[i].y,mx,my);
+    }
+    ctx.lineTo(pts[pts.length-1].x,pts[pts.length-1].y);
+    ctx.stroke(); ctx.setLineDash([]); ctx.restore();
+  }
+
+  /* Stage renderers */
+  function s0() { // Data exhaust
+    funnel();
+    const top=H*.04, bot=H*.48, cx=W/2;
+    SIGS.forEach(([lbl,col],i) => {
+      const seed=i*137.5;
+      const x = ((seed*1.618)%1)*W*.78+W*.11 + Math.sin(t*.018+i*.7)*5;
+      const y = top+20+((seed*.618)%1)*(bot-top-40) + Math.cos(t*.014+i*.9)*4;
+      const w = lbl.length*5+14;
+      const a = .4+.2*Math.sin(t*.022+i);
+      pill(x,y,w,18,col,lbl,a);
+    });
+    // connector lines
+    ctx.save();
+    SIGS.forEach(([,c1],i)=>{SIGS.forEach(([,c2],j)=>{
+      if(j<=i)return;
+      const s1=i*137.5,s2=j*137.5;
+      const x1=((s1*1.618)%1)*W*.78+W*.11+Math.sin(t*.018+i*.7)*5;
+      const y1=top+20+((s1*.618)%1)*(bot-top-40)+Math.cos(t*.014+i*.9)*4;
+      const x2=((s2*1.618)%1)*W*.78+W*.11+Math.sin(t*.018+j*.7)*5;
+      const y2=top+20+((s2*.618)%1)*(bot-top-40)+Math.cos(t*.014+j*.9)*4;
+      const d=Math.hypot(x2-x1,y2-y1);
+      if(d<80){
+        ctx.globalAlpha=(.12-.001*d); ctx.strokeStyle=c1; ctx.lineWidth=.5;
+        ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
+      }
+    });});
+    ctx.restore();
+  }
+
+  function s1() { // Intelligence
+    funnel();
+    const cx=W/2, cy=H*.26;
+    const pulse=.5+.5*Math.sin(t*.04);
+    ctx.save();
+    for(const[r,a]of[[44,.05+.03*pulse],[28,.1+.05*pulse],[16,.18+.07*pulse]]){
+      ctx.globalAlpha=a;ctx.strokeStyle=C.sage;ctx.lineWidth=1;
+      ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.stroke();
+    }
+    ctx.restore();
+    badge(cx,cy,90,36,C.forest,'ASSISTIV.HEALTH','FEP Engine',0.92);
+    SIGS.forEach(([lbl,col],i)=>{
+      const a=(i/SIGS.length)*Math.PI*2-Math.PI/2;
+      const dist=Math.min(W,H)*.3;
+      const sx=cx+Math.cos(a)*dist, sy=cy+Math.sin(a)*dist;
+      const prog=Math.min(1,(t%100)/65);
+      const px=sx+(cx-sx)*(.55+.45*prog), py=sy+(cy-sy)*(.55+.45*prog);
+      const fade=Math.max(0,1-prog*1.2+.2);
+      ctx.save();
+      ctx.globalAlpha=.1+.25*prog; ctx.strokeStyle=col; ctx.lineWidth=.7;
+      ctx.setLineDash([3,5]);
+      ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(cx,cy);ctx.stroke();
+      ctx.setLineDash([]); ctx.restore();
+      const w=lbl.length*5+12;
+      pill(px,py,w,16,col,lbl,fade*.9,8);
+    });
+  }
+
+  function s2() { // Districts
+    funnel();
+    const cx=W/2;
+    const cols=5, gW=Math.min(W*.82,480), gH=Math.min(H*.52,160);
+    const cw=gW/cols, ch=gH/2, x0=(W-gW)/2, y0=H*.05;
+    ctx.save();
+    DISTRICTS.forEach((d,i)=>{
+      const col=i%cols, row=Math.floor(i/cols);
+      const dcx=x0+col*cw+cw/2, dcy=y0+row*ch+ch/2;
+      const w=cw-10, h=ch-8;
+      const rc=d.r==='critical'?C.red:d.r==='high'?C.amber:C.sage;
+      const delay=i*5, prog=Math.min(1,Math.max(0,(t-delay)/28));
+      if(!prog)return;
+      const pulse=d.r==='critical'?.5+.5*Math.sin(t*.06+i):1;
+      ctx.globalAlpha=(d.r==='critical'?.9:d.r==='high'?.7:.55)*prog*pulse;
+      ctx.fillStyle=rc+'18'; ctx.strokeStyle=rc; ctx.lineWidth=d.r==='critical'?1.5:1;
+      ctx.beginPath(); ctx.roundRect(dcx-w/2,dcy-h/2,w,h,4); ctx.fill(); ctx.stroke();
+      ctx.globalAlpha=prog;
+      ctx.fillStyle=rc; ctx.font='500 7.5px DM Mono,monospace'; ctx.textAlign='center';
+      ctx.fillText(d.n,dcx,dcy-5);
+      ctx.fillStyle='#0f1a14'; ctx.font='500 13px DM Sans,sans-serif';
+      ctx.fillText(d.s,dcx,dcy+5);
+      ctx.fillStyle=rc; ctx.font='400 6.5px DM Mono,monospace';
+      ctx.fillText(d.r.toUpperCase(),dcx,dcy+16);
+    });
+    ctx.restore();
+  }
+
+  function s3() { // RESILIENCE
+    funnel();
+    const cx=W/2, ry=H*.30;
+    const pulse=.5+.5*Math.sin(t*.04);
+    ctx.save();
+    for(const[r,a]of[[38,.05+.03*pulse],[24,.1+.05*pulse]]){
+      ctx.globalAlpha=a;ctx.strokeStyle=C.sageL;ctx.lineWidth=1;
+      ctx.beginPath();ctx.arc(cx,ry,r,0,Math.PI*2);ctx.stroke();
+    }
+    ctx.restore();
+    badge(cx,ry,110,36,C.forestL,'RESILIENCE','Community screen',0.92);
+    // people flowing in
+    for(let i=0;i<10;i++){
+      const seed=i*83.7;
+      const xB=cx+Math.cos(seed)*(W*.32), yB=H*.04+(seed%1)*H*.08;
+      const prog=((t*.007+i/10)%1);
+      const px=xB+(cx-xB)*prog, py=yB+(ry-yB)*prog;
+      person(px,py,C.amber,Math.sin(prog*Math.PI)*.8);
+    }
+    badge(cx,H*.48,94,28,C.sage,'PRISMA-7 SCORED',null,Math.min(.9,t/80));
+  }
+
+  function s4s5(which) { // Split
+    funnel();
+    const cx=W/2, splitY=H*.50;
+    const lx=W*.26, ly=H*.72, rx=W*.74, ry2=H*.72;
+    // split lines
+    ctx.save();
+    ctx.globalAlpha=.18; ctx.strokeStyle=C.amber; ctx.lineWidth=1.5;
+    ctx.setLineDash([4,5]);
+    ctx.beginPath();ctx.moveTo(cx,splitY);ctx.lineTo(lx,ly-22);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(cx,splitY);ctx.lineTo(rx,ry2-22);ctx.stroke();
+    ctx.setLineDash([]); ctx.restore();
+    // triage pill
+    pill(cx,splitY-2,96,18,C.amber,'PRISMA-7 triage',.7,8);
+    const pulse=.5+.5*Math.sin(t*.05);
+    // PCN
+    const lActive=which===4;
+    ctx.save();
+    if(lActive){ctx.globalAlpha=.09+.05*pulse;ctx.fillStyle=C.red;ctx.beginPath();ctx.arc(lx,ly,55,0,Math.PI*2);ctx.fill();}
+    ctx.restore();
+    badge(lx,ly,108,38,C.red,'PCN HUB','Acute pathway',lActive?.92:.25);
+    // Assistiv
+    const rActive=which===5;
+    ctx.save();
+    if(rActive){ctx.globalAlpha=.09+.05*pulse;ctx.fillStyle=C.forest;ctx.beginPath();ctx.arc(rx,ry2,55,0,Math.PI*2);ctx.fill();}
+    ctx.restore();
+    badge(rx,ry2,108,38,C.forest,'ASSISTIV','Prevention',rActive?.92:.25);
+    // flowing people
+    const flowCol=lActive?C.red:C.sageL;
+    const fx=lActive?lx:rx;
+    for(let i=0;i<5;i++){
+      const prog=((t*.008+i/5)%1);
+      const px=cx+(fx-cx)*prog, py=splitY+(ly-splitY)*prog;
+      person(px,py,flowCol,Math.sin(prog*Math.PI)*.8);
+    }
+    // branch labels
+    ctx.save(); ctx.globalAlpha=.45; ctx.font='400 7px DM Mono,monospace'; ctx.textAlign='center';
+    ctx.fillStyle=C.red; ctx.fillText('ACUTE RISK',lx,ly-42);
+    ctx.fillStyle=C.sage; ctx.fillText('PREVENTION',rx,ry2-42);
+    ctx.restore();
+  }
+
+  function s6() { // Full loop
+    funnel(.05);
+    const cx=W/2;
+    const intelY=H*.1, resY=H*.3, splitY=H*.48;
+    const lx=W*.26, ly=H*.67, rx=W*.74, ry2=H*.67;
+    badge(cx,intelY,100,34,C.forest,'ASSISTIV.HEALTH','Intelligence',0.88);
+    badge(cx,resY,96,30,C.forestL,'RESILIENCE','Screening',0.82);
+    pill(cx,splitY,90,18,C.amber,'PRISMA-7 triage',.65,7.5);
+    badge(lx,ly,100,34,C.red,'PCN HUB','Acute',0.88);
+    badge(rx,ry2,100,34,C.forest,'ASSISTIV','Prevention',0.88);
+    // feedback curves
+    const fbL=[{x:lx-38,y:ly+14},{x:lx-70,y:H*.54},{x:cx-75,y:H*.32},{x:cx-45,y:intelY+16}];
+    const fbR=[{x:rx+38,y:ry2+14},{x:rx+70,y:H*.54},{x:cx+75,y:H*.32},{x:cx+45,y:intelY+16}];
+    curveTo(fbL,C.rose,.45,true);
+    curveTo(fbR,C.rose,.45,true);
+    // animated particle on feedback
+    const frac=(t%140)/140;
+    [fbL,fbR].forEach(pts=>{
+      const si=Math.floor(frac*(pts.length-1));
+      const sf=(frac*(pts.length-1))-si;
+      if(si>=pts.length-1)return;
+      const px=pts[si].x+(pts[si+1].x-pts[si].x)*sf;
+      const py=pts[si].y+(pts[si+1].y-pts[si].y)*sf;
+      ctx.save();
+      ctx.globalAlpha=Math.sin(frac*Math.PI)*.85;
+      ctx.fillStyle=C.rose;
+      ctx.beginPath();ctx.arc(px,py,4,0,Math.PI*2);ctx.fill();
+      ctx.restore();
+    });
+    // flowing people both sides
+    [[lx,C.red],[rx,C.sageL]].forEach(([fx,col])=>{
+      for(let i=0;i<4;i++){
+        const prog=((t*.007+i/4)%1);
+        const px=cx+(fx-cx)*prog, py=splitY+(ly-splitY)*prog;
+        person(px,py,col,Math.sin(prog*Math.PI)*.7);
+      }
+    });
+    // label
+    ctx.save(); ctx.globalAlpha=.4; ctx.fillStyle=C.rose;
+    ctx.font='400 7px DM Mono,monospace'; ctx.textAlign='center';
+    ctx.fillText('outcomes recalibrate the model',cx,H*.94);
+    ctx.restore();
+  }
+
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle=C.white; ctx.fillRect(0,0,W,H);
+    if(stage===0) s0();
+    else if(stage===1) s1();
+    else if(stage===2) s2();
+    else if(stage===3) s3();
+    else if(stage===4||stage===5) s4s5(stage);
+    else if(stage===6) s6();
+    t++;
+    if(running) raf=requestAnimationFrame(draw);
+  }
+
+  function setStage(s) {
+    stage=s; t=0;
+    document.getElementById('meco-label').textContent=LABELS[s];
+    document.querySelectorAll('.meco-dot').forEach((d,i)=>d.classList.toggle('active',i===s));
+    if(!running){running=true;raf=requestAnimationFrame(draw);}
+    clearInterval(autoTimer);
+    autoTimer=setInterval(()=>{setStage((stage+1)%7);},9000);
+  }
+
+  document.querySelectorAll('.meco-dot').forEach(d=>
+    d.addEventListener('click',()=>setStage(+d.dataset.s))
+  );
+
+  window.addEventListener('resize',()=>{
+    cancelAnimationFrame(raf); resize();
+    if(running) raf=requestAnimationFrame(draw);
+  });
+
+  requestAnimationFrame(()=>{
+    resize(); draw();
+    autoTimer=setInterval(()=>setStage((stage+1)%7),9000);
+  });
+})();
 </script>
 
 </body>
