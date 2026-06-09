@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0A5F44">
+<link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAzElEQVR4nGOUstL6z0ABYKJE8xAwgJmJmWFCTRv5BtiZWTJ42rswyEhIkWeAtbE5w6wVCxkifIJIN4CHi5vh169fDGu2b2QI8wpgYGLCrhSnAV4Orgy7jh5gePjsCcOL1y8Z7M2ssKpjwWWAi5U9g5iwCIONsTnD2w/vGSJ9Qxj2nzhCnAFSYhIMdx7eY5iyeA4DAwMDgwAfP8OpdXsYBPj4GT58+ojfC6ysrAzdFU0MIkIicDEFGTkGRkZGhqrMIgZGRkYU9YyjeYEBAIjXLoTONa96AAAAAElFTkSuQmCC">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABzUlEQVR4nO3W30uTURjA8a/vGeSdWbQoESsaDHchhoPe8EUWuglOx96VzohaF6E34V3/QF10k+RF0C6CpmKrxDEGxWiMaEQX/QmCmC6zlVtapGOzuhvEDN9NfUV4n8vznB8fznPO4dScvND8h30MaT8XNwAGwADsGBC8M4pil3cEMFU7sL7uME7FgRCC1If3VQOq3gGfqxeTMOFUHJwwH9cf4O9RuRd8gJAEV/v69QW0WG3k1r7zaOoJnzNfuNLnwySEfoDBXh+hSJjN35tMRJ9jPnqM7o5OfQC1h2pR2mTiqSQAT2PTFItFAuqgPgC3w0k8laRQKACQWfnGq7cJ5FY7llNn9h4w0ONlKjb9T1toJgzANa+/YkBNJR+SpoZGXodm+PhpsSx3tuk0+Xyecx4HvzbWNQMqeoj8bpW7D+8zHgmX5UYCw9y+eQvV5WYy+kLznJpLICTB5W4PiXdvtsxHEy+BysugGXBRVsiu5ljKLG+Zn08vMDs/h81ixWax7i5AkiRGAkOlq/e/yK7mAJBb7ZoB2x7CI3X1TI4GabHaSC8vsfbzB13X1bJ+z8Ye0952vgT5ml3BdeNS6bpWDdjrONgfEgNgAAzAbsRfoIyDAHc7CM8AAAAASUVORK5CYII=">
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,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">
+<title>Assistiv: Infrastructure for Independent Living</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/brand.css">
+
+<style>
+  :root {
+    --green-deep:   #0A5F44;
+    --green-mid:    #0f7a57;
+    --green-accent: #12966a;
+    --green-pale: #e8f0eb;
+    --cream: #f9f7f4;
+    --ink: #0f1a14;
+    --ink-mid: #3a4a3f;
+    --ink-soft: #6b7d72;
+    --white: #ffffff;
+    --border: #d8e0da;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--white);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---- NAV ---- */
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(249,247,244,0.95);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 72px;
+  }
+  /* ── Logo ── */
+  .nav-brand {
+    display: flex; align-items: center; gap: 0.75rem; text-decoration: none;
+  }
+  .nav-logo-mark {
+    position: relative; width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .nav-logo-dot { border-radius: 50%; position: absolute; }
+  .nav-logo-core { width: 9px;  height: 9px;  background: #0A5F44; z-index: 2; }
+  .nav-logo-r1   { width: 20px; height: 20px; border: 1.5px solid #0A5F44; opacity: 0.5;  background: none; }
+  .nav-logo-r2   { width: 33px; height: 33px; border: 1.5px solid #0A5F44; opacity: 0.22; background: none; }
+  .nav-wordmark  { display: flex; flex-direction: column; gap: 2px; }
+  .nav-wordmark-name {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    letter-spacing: -0.03em; line-height: 1.1; color: #0A5F44;
+  }
+  .nav-wordmark-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.5rem; letter-spacing: 0.18em;
+    text-transform: uppercase; line-height: 1; color: #0A5F44; opacity: 0.75;
+  }
+  /* ── Links ── */
+  .nav-links {
+    display: flex; align-items: center; gap: 1.8rem; list-style: none;
+  }
+  .nav-links a {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.82rem; font-weight: 500;
+    color: var(--ink-mid); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--green-deep); }
+  /* ── CTA button ── */
+  .nav-cta {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.82rem; font-weight: 600;
+    color: var(--white) !important;
+    background: var(--green-deep);
+    text-decoration: none;
+    padding: 0.55rem 1.3rem;
+    border-radius: 6px;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: #07422f; }
+  /* ── Hamburger ── */
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: var(--ink); border-radius: 2px; transition: all 0.3s;
+  }
+  .mobile-nav {
+    display: none; position: fixed; inset: 0;
+    background: var(--cream); z-index: 998;
+    flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.8rem; font-weight: 300; color: var(--ink); transition: color 0.2s;
+  }
+  .mobile-nav a:hover { color: var(--green-deep); }
+  .m-close {
+    position: absolute; top: 1.4rem; right: 1.75rem;
+    font-size: 1.5rem; background: none; border: none; cursor: pointer; color: var(--ink);
+  }
+  @media (max-width: 820px) {
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .nav-inner { padding: 1rem 1.5rem; }
+  }
+
+  /* ---- HERO ---- */
+  .hero {
+    padding: 12rem 3rem 7rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-bottom: 3.5rem;
+  }
+  .hero-text { display: flex; flex-direction: column; }
+  .hero-anim-col { display: flex; align-items: center; justify-content: center; }
+
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green-accent);
+    margin-bottom: 1.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-eyebrow::after {
+    content: '';
+    display: block;
+    width: 2.5rem;
+    height: 1px;
+    background: var(--green-accent);
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3.6vw, 3.8rem);
+    line-height: 1.1;
+    color: var(--green-deep);
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--green-accent);
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--ink-mid);
+    line-height: 1.65;
+    margin-bottom: 2rem;
+  }
+
+  .hero-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ---- STAT STRIP ---- */
+  .stats {
+    background: var(--green-deep);
+    padding: 4rem 3rem;
+  }
+
+  .stats-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+
+  .stat {
+    border-left: 1px solid rgba(255,255,255,0.15);
+    padding-left: 2rem;
+  }
+
+  .stat:first-child { border-left: none; padding-left: 0; }
+
+  .stat-number {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3.5vw, 3.25rem);
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-size: 0.825rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.45;
+    letter-spacing: 0.01em;
+  }
+
+  /* ---- SECTION SHARED ---- */
+  .section {
+    padding: 6rem 3rem;
+  }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--green-accent);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.9rem, 3.5vw, 2.9rem);
+    line-height: 1.15;
+    color: var(--green-deep);
+    letter-spacing: -0.02em;
+    max-width: 640px;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-body {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--ink-mid);
+    max-width: 560px;
+    line-height: 1.7;
+  }
+
+  /* ---- PROBLEM ---- */
+  .problem { background: var(--cream); }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+    margin-top: 3.5rem;
+  }
+
+  .problem-left .section-body { max-width: 100%; }
+
+  .problem-points {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .problem-point {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .problem-point:first-child { border-top: none; padding-top: 0; }
+
+  .pp-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 0.5rem;
+  }
+
+  .pp-text {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--ink-mid);
+    line-height: 1.6;
+  }
+
+  /* ---- APPROACH ---- */
+  .approach-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-top: 4rem;
+    border: 1px solid var(--border);
+  }
+
+  .approach-card {
+    padding: 2.5rem;
+    border-right: 1px solid var(--border);
+  }
+
+  .approach-card:last-child { border-right: none; }
+
+  .ac-number {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    color: var(--green-pale);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .ac-title {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--green-deep);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  .ac-body {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.65;
+  }
+
+  /* ---- PRINCIPLES ---- */
+  .principles { background: var(--cream); }
+
+  .principles-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    margin-bottom: 4rem;
+  }
+
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .principle {
+    background: var(--cream);
+    padding: 2.25rem;
+  }
+
+  .principle-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--green-deep);
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.01em;
+  }
+
+  .principle-body {
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  /* ---- OUTCOMES ---- */
+  .outcomes-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    margin-bottom: 4rem;
+    align-items: end;
+  }
+
+  .outcomes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .outcome-card {
+    padding: 2rem;
+    background: var(--cream);
+  }
+
+  .oc-group {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green-accent);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .oc-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .oc-items li {
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: var(--ink-mid);
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.45;
+  }
+
+  .oc-items li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ---- WHO WE WORK WITH ---- */
+  .partners { background: var(--green-deep); }
+
+  .partners .section-label { color: rgba(255,255,255,0.4); }
+  .partners .section-title { color: var(--white); }
+  .partners .section-body { color: rgba(255,255,255,0.55); }
+
+  .partners-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+    margin-top: 4rem;
+  }
+
+  .partner-card {
+    background: var(--green-deep);
+    padding: 2.25rem 2rem;
+  }
+
+  .partner-icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 1.25rem;
+    opacity: 0.5;
+  }
+
+  .partner-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .partner-body {
+    font-size: 0.825rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.55;
+  }
+
+  /* ---- ADVISORY ---- */
+  .advisory-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 4rem;
+  }
+
+  .advisor-card {
+    padding: 2rem;
+    border: 1px solid var(--border);
+  }
+
+  .advisor-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--green-deep);
+    margin-bottom: 0.25rem;
+  }
+
+  .advisor-role {
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .advisor-note {
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: var(--ink-mid);
+    line-height: 1.6;
+  }
+
+  /* ---- CONTACT ---- */
+  .contact {
+    background: var(--cream);
+    padding: 6rem 3rem;
+    text-align: center;
+  }
+
+  .contact-inner {
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  .contact .section-label {
+    display: block;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .contact-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    color: var(--green-deep);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-body {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--ink-mid);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-email {
+    display: inline-block;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--green-deep);
+    padding: 0.85rem 2.25rem;
+    border: 1.5px solid var(--border);
+    border-radius: 2px;
+    letter-spacing: 0.02em;
+    background: var(--white);
+    user-select: all;
+    cursor: text;
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    padding: 2rem 3rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--green-deep);
+  }
+
+  .footer-note {
+    font-size: 0.775rem;
+    color: var(--ink-soft);
+  }
+
+  .footer-url {
+    font-size: 0.775rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+  }
+
+  /* ---- PLATFORM ECOSYSTEM ---- */
+  .ecosystem {
+    background: var(--cream);
+    padding: 5rem 3rem;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ecosystem-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .ecosystem-pathway {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 0;
+    align-items: stretch;
+    margin-top: 3.5rem;
+  }
+
+  .eco-platform {
+    border: 1px solid var(--border);
+    padding: 2rem 1.75rem;
+    background: var(--white);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .eco-platform:hover {
+    border-color: var(--green-accent);
+    box-shadow: 0 4px 24px rgba(26,58,42,0.07);
+  }
+
+  .eco-platform-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--green-accent);
+    margin-bottom: 0.6rem;
+  }
+
+  .eco-platform-name {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    color: var(--green-deep);
+    letter-spacing: -0.01em;
+    margin-bottom: 0.4rem;
+  }
+
+  .eco-platform-url {
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .eco-platform-desc {
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: var(--ink-mid);
+    line-height: 1.55;
+  }
+
+  .eco-platform-role {
+    display: inline-block;
+    margin-top: auto;
+    padding-top: 1.25rem;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green-accent);
+    padding: 0.3rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 1px;
+    background: var(--cream);
+  }
+
+  .eco-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0 1.5rem;
+  }
+
+  .eco-arrow-line {
+    width: 48px;
+    height: 1px;
+    background: var(--border);
+    position: relative;
+  }
+
+  .eco-arrow-line::after {
+    content: '';
+    position: absolute;
+    right: -1px;
+    top: -3px;
+    width: 7px;
+    height: 7px;
+    border-right: 1px solid var(--ink-soft);
+    border-bottom: 1px solid var(--ink-soft);
+    transform: rotate(-45deg);
+  }
+
+  .eco-arrow-label {
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .eco-outcomes {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .eco-outcome {
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    background: var(--white);
+  }
+
+  .eco-outcome-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 0.5rem;
+  }
+
+  .eco-outcome-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--green-deep);
+    margin-bottom: 0.4rem;
+  }
+
+  .eco-outcome-body {
+    font-size: 0.825rem;
+    font-weight: 300;
+    color: var(--ink-mid);
+    line-height: 1.55;
+  }
+
+  .eco-outcome-highlight {
+    border-color: var(--green-deep);
+  }
+
+  .eco-outcome-highlight .eco-outcome-label {
+    color: var(--green-accent);
+  }
+
+  .eco-outcome-highlight .eco-outcome-title {
+    color: var(--green-deep);
+  }
+
+  @media (max-width: 860px) {
+    .ecosystem-pathway {
+      grid-template-columns: 1fr;
+    }
+    .eco-arrow {
+      padding: 1rem 0;
+      flex-direction: row;
+      justify-content: center;
+    }
+    .eco-arrow-line {
+      width: 32px;
+    }
+    .eco-outcomes {
+      grid-template-columns: 1fr;
+    }
+  }
+  .fade-in {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 1024px) {
+    nav { padding: 1.1rem 2rem; }
+    .hero { padding: 10rem 2rem 5rem; }
+    .hero-inner { gap: 2.5rem; }
+    .section { padding: 5rem 2rem; }
+    .stats { padding: 3.5rem 2rem; }
+    .contact { padding: 5rem 2rem; }
+    footer { padding: 1.75rem 2rem; }
+  }
+
+  @media (max-width: 860px) {
+    /* Nav */
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+
+    /* Hero */
+    .hero { padding: 8rem 1.5rem 4.5rem; }
+    .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-anim-col { order: -1; }
+    #mini-eco-canvas { height: 180px; }
+    .hero-sub { font-size: 1rem; }
+
+    /* Stats */
+    .stats { padding: 3rem 1.5rem; }
+    .stats-inner {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem 1.5rem;
+    }
+    .stat:nth-child(3) { border-left: none; padding-left: 0; }
+    .stat-number { font-size: 2.25rem; }
+
+    /* Sections */
+    .section { padding: 4rem 1.5rem; }
+    .section-title { font-size: clamp(1.65rem, 4.5vw, 2.4rem); }
+
+    /* Problem */
+    .problem-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    /* Approach */
+    .approach-grid { grid-template-columns: 1fr; }
+    .approach-card {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+    .approach-card:last-child { border-bottom: none; }
+
+    /* Principles */
+    .principles-header {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .principles-grid { grid-template-columns: 1fr; }
+
+    /* Outcomes */
+    .outcomes-header {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .outcomes-grid { grid-template-columns: 1fr; }
+
+    /* Partners */
+    .partners-grid { grid-template-columns: 1fr; }
+    .partner-card {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .partner-card:last-child { border-bottom: none; }
+
+    /* Advisory */
+    .advisory-grid { grid-template-columns: 1fr; }
+
+    /* Contact */
+    .contact { padding: 4rem 1.5rem; }
+
+    /* Footer */
+    footer {
+      flex-direction: column;
+      gap: 0.6rem;
+      text-align: center;
+      padding: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    /* Nav */
+    nav { padding: 0.9rem 1.25rem; }
+    .nav-wordmark-name { font-size: 1rem; }
+    .nav-cta { padding: 0.45rem 1rem; font-size: 0.8rem; }
+
+    /* Hero */
+    .hero { padding: 7.5rem 1.25rem 4rem; }
+    .hero-eyebrow { font-size: 0.65rem; }
+    .hero-sub { font-size: 1rem; margin-bottom: 2.5rem; }
+
+    /* Stats: single column on very small screens */
+    .stats-inner { grid-template-columns: 1fr; gap: 1.75rem; }
+    .stat {
+      border-left: none;
+      padding-left: 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 1.5rem;
+    }
+    .stat:first-child { border-top: none; padding-top: 0; }
+
+    /* Sections */
+    .section { padding: 3.5rem 1.25rem; }
+    .section-body { font-size: 0.95rem; }
+
+    /* Approach cards get slightly less padding */
+    .approach-card { padding: 2rem 1.5rem; }
+    .ac-number { font-size: 2rem; }
+
+    /* Principles and outcomes tighter */
+    .principle { padding: 1.75rem; }
+    .outcome-card { padding: 1.5rem; }
+
+    /* Partner cards */
+    .partner-card { padding: 1.75rem 1.5rem; }
+
+    /* Advisory cards */
+    .advisor-card { padding: 1.5rem; }
+
+    /* Contact */
+    .contact { padding: 3.5rem 1.25rem; }
+    .contact-title { font-size: clamp(1.75rem, 6vw, 2.5rem); }
+    .contact-email {
+      padding: 0.85rem 1.25rem;
+      font-size: 0.95rem;
+    }
+
+    /* Footer */
+    footer { padding: 1.25rem; }
+    .footer-note { font-size: 0.7rem; }
+  }
+
+  /* ---- MINI ECOSYSTEM ANIMATION ---- */
+  .mini-eco-wrap {
+    width: 100%;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 28px rgba(26,58,42,0.10);
+  }
+  .mini-eco-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding: 0.45rem 0.9rem 0;
+  }
+  #mini-eco-canvas {
+    display: block;
+    width: 100%;
+    height: 220px;
+  }
+  .mini-eco-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.35rem 0.9rem 0.45rem;
+    border-top: 1px solid var(--border);
+  }
+  .mini-eco-stage {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--green-accent);
+    font-weight: 500;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mini-eco-dots { display: flex; gap: 4px; flex-shrink: 0; }
+  .meco-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--border);
+    cursor: pointer; transition: background 0.2s;
+  }
+  .meco-dot.active { background: var(--green-accent); }
+  .mini-eco-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    color: var(--green-accent);
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .mini-eco-link:hover { text-decoration: underline; }
+
+</style>
+  <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@500;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav id="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#">
+      <div class="nav-logo-mark">
+        <div class="nav-logo-dot nav-logo-core"></div>
+        <div class="nav-logo-dot nav-logo-r1"></div>
+        <div class="nav-logo-dot nav-logo-r2"></div>
+      </div>
+      <div class="nav-wordmark">
+        <span class="nav-wordmark-name">Assistiv</span>
+        <span class="nav-wordmark-sub">Systems</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#challenge">The Challenge</a></li>
+      <li><a href="#approach">Our Approach</a></li>
+      <li><a href="#outcomes">Outcomes</a></li>
+      <li><a href="#ecosystem">Our Platform</a></li>
+      <li><a href="#advisors">Advisory</a></li>
+    </ul>
+    <a class="nav-cta" href="#contact">Get in touch</a>
+    <button class="hamburger" id="hbg" aria-label="Open navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mob-nav">
+  <button class="m-close" id="mob-close">✕</button>
+  <a href="#challenge" onclick="document.getElementById('mob-nav').classList.remove('open')">The Challenge</a>
+  <a href="#approach"  onclick="document.getElementById('mob-nav').classList.remove('open')">Our Approach</a>
+  <a href="#outcomes"  onclick="document.getElementById('mob-nav').classList.remove('open')">Outcomes</a>
+  <a href="#ecosystem" onclick="document.getElementById('mob-nav').classList.remove('open')">Our Platform</a>
+  <a href="#advisors"  onclick="document.getElementById('mob-nav').classList.remove('open')">Advisory</a>
+  <a href="#contact"   onclick="document.getElementById('mob-nav').classList.remove('open')">Get in touch</a>
+</div>
+
+<script>
+  document.getElementById('hbg').addEventListener('click',()=>document.getElementById('mob-nav').classList.add('open'));
+  document.getElementById('mob-close').addEventListener('click',()=>document.getElementById('mob-nav').classList.remove('open'));
+</script>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+
+    <!-- LEFT: text -->
+    <div class="hero-text">
+      <p class="hero-eyebrow fade-in">Infrastructure for independent living</p>
+      <h1 class="hero-title fade-in">
+        Supporting people to live well at home.<br>
+        <em>Before crisis. On their terms.</em>
+      </h1>
+      <p class="hero-sub fade-in">
+        Assistiv is a platform designed for the people who fall between existing services. Independent enough to manage, vulnerable enough to be at risk. We build infrastructure for this population that existing care systems were never designed to reach.
+      </p>
+    </div>
+
+    <!-- RIGHT: mini ecosystem animation -->
+    <div class="hero-anim-col fade-in">
+      <div class="mini-eco-wrap">
+        <div class="mini-eco-label">How the ecosystem works</div>
+        <canvas id="mini-eco-canvas" aria-label="Assistiv ecosystem overview"></canvas>
+        <div class="mini-eco-footer">
+          <span class="mini-eco-stage" id="meco-label">NHS data exhaust</span>
+          <div class="mini-eco-dots">
+            <span class="meco-dot active" data-s="0"></span>
+            <span class="meco-dot" data-s="1"></span>
+            <span class="meco-dot" data-s="2"></span>
+            <span class="meco-dot" data-s="3"></span>
+            <span class="meco-dot" data-s="4"></span>
+            <span class="meco-dot" data-s="5"></span>
+            <span class="meco-dot" data-s="6"></span>
+          </div>
+          <a href="ecosystem-animation.html" class="mini-eco-link">Full walkthrough →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="hero-divider fade-in"></div>
+</section>
+
+<!-- STAT STRIP -->
+<section class="stats">
+  <div class="stats-inner">
+    <div class="stat fade-in">
+      <div class="stat-number">3.5m</div>
+      <div class="stat-label">People in the UK's Missing Middle. Managing, but one event from crisis</div>
+    </div>
+    <div class="stat fade-in">
+      <div class="stat-number">£2.3bn</div>
+      <div class="stat-label">NHS annual cost of falls in England. 79% of which happen at home</div>
+    </div>
+    <div class="stat fade-in">
+      <div class="stat-number">40%</div>
+      <div class="stat-label">Of dementia cases could be prevented or delayed with earlier intervention</div>
+    </div>
+    <div class="stat fade-in">
+      <div class="stat-number">14:1</div>
+      <div class="stat-label">Estimated return on investment for commissioning bodies at pilot scale</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="section problem" id="challenge">
+  <div class="section-inner">
+    <p class="section-label fade-in">The challenge</p>
+    <div class="problem-grid">
+      <div class="problem-left fade-in">
+        <h2 class="section-title">The system was not designed for the people who need it most.</h2>
+        <p class="section-body">
+          Three and a half million older adults in the UK live independently but sit outside the reach of formal health and social care. They are not ill enough to qualify. Not yet dependent enough to be flagged. Invisible to existing systems until something goes wrong.
+        </p>
+        <p class="section-body" style="margin-top: 1.25rem;">
+          When people in this group try to access support, they encounter a fragmented landscape that demands navigation skills many no longer have. By the time they reach anyone who can help, the opportunity for early intervention has often passed.
+        </p>
+      </div>
+      <div class="problem-points fade-in">
+        <div class="problem-point">
+          <p class="pp-label">For the individual</p>
+          <p class="pp-text">Living with uncertainty. Managing risk alone. One fall, one health event, one confused night and independence is gone. Not gradually, but suddenly.</p>
+        </div>
+        <div class="problem-point">
+          <p class="pp-label">For families and carers</p>
+          <p class="pp-text">Caught between constant worry and helplessness. Unable to monitor from a distance, uncertain when to act, carrying an invisible burden the system does not acknowledge.</p>
+        </div>
+        <div class="problem-point">
+          <p class="pp-label">For services</p>
+          <p class="pp-text">Avoidable crisis admissions. Delayed discharge. Residential placements that could have been prevented months earlier. The longer the system waits, the more expensive and complex the intervention becomes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section class="section" id="approach">
+  <div class="section-inner">
+    <p class="section-label fade-in">Our approach</p>
+    <h2 class="section-title fade-in">Built around the person. Not the system's convenience.</h2>
+    <p class="section-body fade-in">Assistiv brings novel approaches and technologies to a population that conventional platforms have not been designed to reach. Every design decision is grounded in one principle: the person is always the author of what happens next.</p>
+
+    <div class="approach-grid fade-in">
+      <div class="approach-card">
+        <div class="ac-number">01</div>
+        <h3 class="ac-title">A conversation, not an assessment</h3>
+        <p class="ac-body">Assistiv begins with listening. A warm, unhurried conversation that surfaces what matters to the person, on their terms, in their language, without clinical framing. The technology is introduced only in direct response to what the person says they want.</p>
+      </div>
+      <div class="approach-card">
+        <div class="ac-number">02</div>
+        <h3 class="ac-title">Three independent perspectives</h3>
+        <p class="ac-body">Assistiv synthesises what the person reports, what those close to them observe, and what the home environment signals. It brings these together monthly across multiple quality-of-life domains. Where the three perspectives diverge is where the signal that matters lives.</p>
+      </div>
+      <div class="approach-card">
+        <div class="ac-number">03</div>
+        <h3 class="ac-title">Connected to the care system</h3>
+        <p class="ac-body">The platform is designed from the ground up to integrate with the NHS infrastructure that is coming, including the Single Patient Record and the shift toward neighbourhood-based, preventive care. The person holds the keys to what is shared and with whom.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRINCIPLES -->
+<section class="section principles">
+  <div class="section-inner">
+    <div class="principles-header">
+      <div class="fade-in">
+        <p class="section-label">Design principles</p>
+        <h2 class="section-title">Privacy and dignity are not features. They are the architecture.</h2>
+      </div>
+      <div class="fade-in">
+        <p class="section-body">Every technology choice we make is filtered through a single question: does this serve the person's independence, or does it quietly undermine it? Assistiv is not surveillance. It is infrastructure that people choose, on their own terms, for their own reasons.</p>
+        <p class="section-body" style="margin-top: 1.25rem;">The platform is designed to be graduated. A person can begin with a conversation and nothing else. Technology, if any, is introduced incrementally, chosen by them, for reasons they have named, always reversible.</p>
+      </div>
+    </div>
+
+    <div class="principles-grid fade-in">
+      <div class="principle">
+        <h3 class="principle-title">The person is always the author</h3>
+        <p class="principle-body">Nothing is activated without explicit agreement. Nothing is shared without consent. The person controls what is monitored and who can see it. Assistiv follows where they lead.</p>
+      </div>
+      <div class="principle">
+        <h3 class="principle-title">No cameras. No wearables. No burden.</h3>
+        <p class="principle-body">Assistiv is designed to be invisible in operation. Nothing to remember. Nothing to charge. Nothing that says "you are being watched." Passive by default, intrusive never.</p>
+      </div>
+      <div class="principle">
+        <h3 class="principle-title">Saying no is a valid outcome</h3>
+        <p class="principle-body">A person who declines is not a failed engagement. They are a person exercising agency. The platform is designed to honour this at every step, without pressure or re-framing.</p>
+      </div>
+      <div class="principle">
+        <h3 class="principle-title">Data owned by the person</h3>
+        <p class="principle-body">All processing happens within the home. Derived insights, not raw data, are the only thing that travels. The person holds the keys. Assistiv provides the infrastructure.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section class="section" id="outcomes">
+  <div class="section-inner">
+    <div class="outcomes-header">
+      <div class="fade-in">
+        <p class="section-label">Outcomes</p>
+        <h2 class="section-title">Earlier support. Measurable impact. Across the whole system.</h2>
+      </div>
+      <div class="fade-in">
+        <p class="section-body">Assistiv produces measurable outcomes at the level of the individual, their family, and the commissioning system. The Kent ICB pilot projection models £1.2m in system savings against £88k commissioning cost in the first quarter alone.</p>
+      </div>
+    </div>
+
+    <div class="outcomes-grid fade-in">
+      <div class="outcome-card">
+        <p class="oc-group">For the person</p>
+        <ul class="oc-items">
+          <li>Lives longer at home, on their own terms</li>
+          <li>Earlier cognitive and physical support</li>
+          <li>Dignity and autonomy maintained</li>
+          <li>Meaningful activity sustained</li>
+          <li>Freedom from fear of falling undetected</li>
+          <li>Connection to family and community</li>
+        </ul>
+      </div>
+      <div class="outcome-card">
+        <p class="oc-group">For carers and families</p>
+        <ul class="oc-items">
+          <li>Real-time awareness replaces constant worry</li>
+          <li>Family visits restored. No longer arriving as crisis managers</li>
+          <li>Carer wellbeing monitored and protected</li>
+          <li>Objective data for difficult family conversations</li>
+          <li>Reduced time spent on care coordination</li>
+        </ul>
+      </div>
+      <div class="outcome-card">
+        <p class="oc-group">For health and social care</p>
+        <ul class="oc-items">
+          <li>Avoidable crisis admissions prevented</li>
+          <li>Safe rapid home discharge enabled</li>
+          <li>Residential transition deferred months or years</li>
+          <li>Evidence for Care Act and GP reviews</li>
+          <li>Population-level longitudinal data at scale</li>
+          <li>14:1 return on investment at pilot scale</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE WORK WITH -->
+<section class="section partners">
+  <div class="section-inner">
+    <p class="section-label fade-in">Who we work with</p>
+    <h2 class="section-title fade-in">Designed for the NHS that is coming.</h2>
+    <p class="section-body fade-in">Assistiv is not being retrofitted to the NHS agenda. It is designed for it. Every major shift in care delivery, including neighbourhood health, integrated teams, virtual wards, and prevention at scale, requires a passive home intelligence layer. Assistiv is that layer.</p>
+
+    <div class="partners-grid fade-in">
+      <div class="partner-card">
+        <svg class="partner-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="8" width="28" height="20" rx="1" stroke="white" stroke-width="1.5"/>
+          <path d="M4 14h28" stroke="white" stroke-width="1.5"/>
+          <path d="M12 8V6M24 8V6" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <h3 class="partner-title">Integrated Care Boards</h3>
+        <p class="partner-body">A commissioned prevention platform that fills the gap the eFI cannot reach. Continuous frailty intelligence between clinical contacts.</p>
+      </div>
+      <div class="partner-card">
+        <svg class="partner-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="12" r="5" stroke="white" stroke-width="1.5"/>
+          <path d="M8 28c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <h3 class="partner-title">Local Authorities</h3>
+        <p class="partner-body">Evidence-based care planning, Care Act support, and adult safeguarding infrastructure that generates the longitudinal data statutory assessment demands.</p>
+      </div>
+      <div class="partner-card">
+        <svg class="partner-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 10h24M6 18h16M6 26h20" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <h3 class="partner-title">Charities and VCS</h3>
+        <p class="partner-body">A platform that reaches the people charities care about before crisis, with the longitudinal quality-of-life data to evidence impact and commission services.</p>
+      </div>
+      <div class="partner-card">
+        <svg class="partner-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 4L32 12v8c0 7.18-5.82 12.36-14 14C9.82 32.36 4 27.18 4 20v-8L18 4z" stroke="white" stroke-width="1.5"/>
+        </svg>
+        <h3 class="partner-title">Technology Partners</h3>
+        <p class="partner-body">Strategic hardware and monitoring partnerships that extend the platform's capability at the edge, without compromising the privacy principles at the core.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM ECOSYSTEM -->
+<section class="ecosystem" id="ecosystem">
+  <div class="ecosystem-inner">
+    <p class="section-label fade-in">Our platform</p>
+    <h2 class="section-title fade-in">Three connected tools. One system of care.</h2>
+    <p class="section-body fade-in">Assistiv operates across three integrated platforms. Each addresses a distinct stage of the journey from invisibility to appropriate support — finding people, understanding their needs, and delivering the right response.</p>
+
+    <div class="ecosystem-pathway fade-in">
+
+      <a class="eco-platform" href="https://www.assistiv.health" target="_blank" rel="noopener">
+        <p class="eco-platform-label">01</p>
+        <p class="eco-platform-name">Identify</p>
+        <span class="eco-platform-url">assistiv.health</span>
+        <p class="eco-platform-desc">Population-level frailty intelligence. Finds older adults in the Missing Middle before they reach crisis — using open NHS data, geographic signals, and longitudinal risk modelling.</p>
+        <span class="eco-platform-role">Intelligence layer</span>
+      </a>
+
+      <div class="eco-arrow">
+        <div class="eco-arrow-line"></div>
+        <p class="eco-arrow-label">Refer</p>
+      </div>
+
+      <a class="eco-platform" href="https://www.resiliencetools.xyz" target="_blank" rel="noopener">
+        <p class="eco-platform-label">02</p>
+        <p class="eco-platform-name">Screen</p>
+        <span class="eco-platform-url">resiliencetools.xyz</span>
+        <p class="eco-platform-desc">Community screening for identified populations. Determines the level and urgency of need through structured, validated assessment — sorting those who need acute pathways from those suited to early intervention.</p>
+        <span class="eco-platform-role">Screening layer</span>
+      </a>
+
+      <div class="eco-arrow">
+        <div class="eco-arrow-line"></div>
+        <p class="eco-arrow-label">Route</p>
+      </div>
+
+      <a class="eco-platform eco-platform-highlight" href="#" style="border-color: var(--green-deep);">
+        <p class="eco-platform-label" style="color: var(--green-deep);">03</p>
+        <p class="eco-platform-name" style="color: var(--green-deep);">Intervene</p>
+        <span class="eco-platform-url">assistiv.co</span>
+        <p class="eco-platform-desc">Early intervention for those below the acute threshold. Passive home monitoring, warm conversation, and care coordination — delivered on the person's terms before independence is lost.</p>
+        <span class="eco-platform-role" style="border-color: var(--green-deep); color: var(--green-deep); background: var(--green-pale);">You are here</span>
+      </a>
+
+    </div>
+
+    <div class="eco-outcomes fade-in">
+      <div class="eco-outcome">
+        <p class="eco-outcome-label">Acute pathway</p>
+        <p class="eco-outcome-title">Health and Social Care</p>
+        <p class="eco-outcome-body">People identified by Resilience as approaching or exceeding the acute threshold are referred directly into NHS or local authority care pathways — with the longitudinal data needed for rapid, accurate assessment.</p>
+      </div>
+      <div class="eco-outcome eco-outcome-highlight">
+        <p class="eco-outcome-label">Early intervention pathway</p>
+        <p class="eco-outcome-title">Assistiv Services</p>
+        <p class="eco-outcome-body">People below the acute threshold — managing, but at risk — are supported by Assistiv's platform. Proactive, non-intrusive, and designed to extend independence and defer the need for formal care.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ADVISORY -->
+<section class="section" id="advisors">
+  <div class="section-inner">
+    <p class="section-label fade-in">Advisory board</p>
+    <h2 class="section-title fade-in">The clinical and academic foundation.</h2>
+    <p class="section-body fade-in">Assistiv is grounded in validated frameworks and built with the guidance of leading academic and clinical voices in ageing, social care outcomes, data science, and public policy.</p>
+
+    <div class="advisory-grid fade-in">
+      <div class="advisor-card">
+        <h3 class="advisor-name">Prof. Ann Netten</h3>
+        <p class="advisor-role">Emeritus Professor, University of Kent · Creator of ASCOT · Former Director, PSSRU</p>
+        <p class="advisor-note">Creator of the Adult Social Care Outcomes Toolkit, now embedded in national policy and used across the UK and internationally. Her framework directly underpins the quality-of-life measurement architecture at the heart of Assistiv.</p>
+      </div>
+      <div class="advisor-card">
+        <h3 class="advisor-name">Mark Greenfield</h3>
+        <p class="advisor-role">Emeritus · Northumbria University · Ageing and Nursing</p>
+        <p class="advisor-note">Nursing and ageing expertise spanning academic and community dimensions of later life care. Validated Assistiv's three-state model of independence and introduced the concept of Positive Interdependence that sits at the heart of the platform's philosophy.</p>
+      </div>
+      <div class="advisor-card">
+        <h3 class="advisor-name">Prof. John Jerrim</h3>
+        <p class="advisor-role">Professor of Education and Social Statistics, UCL · Director, Quantitative Social Science Research Centre</p>
+        <p class="advisor-note">Winner of the inaugural ESRC Early Career Outstanding Impact Award. Brings rigorous large-scale data methodology and population-level research expertise to Assistiv's evidence base and future academic funding applications.</p>
+      </div>
+      <div class="advisor-card">
+        <h3 class="advisor-name">Prof. Tim Legrand</h3>
+        <p class="advisor-role">Professor of Politics, University of Adelaide · ARC Future Fellowship 2025–2029</p>
+        <p class="advisor-note">Expert in government policy, public administration, and policy transfer. Brings deep expertise in navigating NHS and local authority commissioning landscapes and in understanding how innovation enters public sector systems.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <span class="section-label fade-in">Get in touch</span>
+    <h2 class="contact-title fade-in">Conversations we welcome.</h2>
+    <p class="contact-body fade-in">
+      We are currently in conversation with ICBs, local authorities, and strategic technology partners interested in the early-intervention and ageing-in-place space. If you are working on commissioning, piloting, or funding in this area, we would be glad to speak.
+    </p>
+    <p class="contact-email fade-in">simon@assistiv.co</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="nav-brand" style="pointer-events:none;">
+    <div class="nav-logo-mark">
+      <div class="nav-logo-dot nav-logo-core"></div>
+      <div class="nav-logo-dot nav-logo-r1"></div>
+      <div class="nav-logo-dot nav-logo-r2"></div>
+    </div>
+    <div class="nav-wordmark">
+      <span class="nav-wordmark-name">Assistiv</span>
+      <span class="nav-wordmark-sub">Systems</span>
+    </div>
+  </div>
+  <span class="footer-note">Assistiv Systems Ltd · Confidential. For professional audiences only. June 2026. &nbsp;·&nbsp; <a href="https://www.assistiv.health" style="color:inherit;text-decoration:none;" target="_blank">assistiv.health</a> &nbsp;·&nbsp; <a href="https://www.resiliencetools.xyz" style="color:inherit;text-decoration:none;" target="_blank">resiliencetools.xyz</a></span>
+  <a class="footer-url" href="https://www.assistiv.co">www.assistiv.co</a>
+</footer>
+
+<script>
+  /* ---- Fade-in on scroll ---- */
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(function(el, i) {
+    el.style.transitionDelay = (i % 4 * 0.07) + 's';
+    observer.observe(el);
+  });
+
+  /* ---- Google Sites iframe height fix ----
+     Google Sites embeds pages in a fixed-height iframe. This script
+     continuously measures the full document height and posts it to the
+     parent frame, allowing Google Sites to expand the embed widget to
+     show the whole page without an internal scrollbar.
+
+     This is harmless when the page is loaded standalone (window === top)
+     and only activates when embedded in a cross-origin iframe. */
+  (function() {
+    function sendHeight() {
+      var height = document.documentElement.scrollHeight;
+      try {
+        /* Google Sites listens for this specific message format */
+        window.parent.postMessage({ type: 'setHeight', height: height }, '*');
+        /* Fallback format used by some embed widgets */
+        window.parent.postMessage(JSON.stringify({ frameHeight: height }), '*');
+      } catch(e) { /* Cross-origin: silently ignore */ }
+    }
+
+    /* Send on load */
+    window.addEventListener('load', sendHeight);
+
+    /* Send after images load (they affect height) */
+    window.addEventListener('load', function() {
+      setTimeout(sendHeight, 300);
+      setTimeout(sendHeight, 800);
+      setTimeout(sendHeight, 1500);
+    });
+
+    /* Send on resize (orientation change on mobile) */
+    window.addEventListener('resize', sendHeight);
+
+    /* ResizeObserver: most reliable method — fires when any element
+       changes size, including elements revealed by the fade-in animation */
+    if (window.ResizeObserver) {
+      var ro = new ResizeObserver(sendHeight);
+      ro.observe(document.body);
+    }
+  })();
+</script>
+
+
+<!-- MINI ECOSYSTEM ANIMATION -->
+<script>
+(function () {
+  const canvas = document.getElementById('mini-eco-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, DPR = 1, t = 0, stage = 0, raf, running = true, autoTimer;
+
+  const LABELS = [
+    'NHS data exhaust',
+    'FEP intelligence layer',
+    'Target populations',
+    'RESILIENCE screening',
+    'PCN Hub — acute pathway',
+    'Assistiv Platform',
+    'Feedback loop'
+  ];
+
+  const C = {
+    sage:'#3d7a56', sageL:'#7aab90',
+    blue:'#2a5880', amber:'#b07d2a',
+    red:'#c04040', forest:'#1a3a2a', forestL:'#2d5c42',
+    rose:'#8a3a4a', inkSoft:'#6b7d72', border:'#d8e0da', white:'#ffffff',
+  };
+
+  const SIGS = [
+    ['Falls 65+',C.sage],['Prescribing',C.blue],['Deprivation',C.amber],
+    ['Alone 75+',C.sage],['111 calls',C.blue],['Hip fractures',C.rose],
+    ['Winter Dx',C.amber],['Dementia',C.blue],['CQC gap',C.sage],
+  ];
+
+  const DISTRICTS = [
+    {n:'Thanet',s:82,r:'critical'},{n:'Folkestone',s:76,r:'high'},
+    {n:'Dover',s:73,r:'high'},{n:'Swale',s:68,r:'high'},
+    {n:'Medway',s:65,r:'high'},{n:'Gravesham',s:62,r:'high'},
+    {n:'Ashford',s:57,r:'moderate'},{n:'Canterbury',s:48,r:'moderate'},
+    {n:'Maidstone',s:46,r:'moderate'},{n:'Dartford',s:54,r:'moderate'},
+  ];
+
+  if (!CanvasRenderingContext2D.prototype.roundRect) {
+    CanvasRenderingContext2D.prototype.roundRect = function(x,y,w,h,r){
+      this.beginPath();
+      this.moveTo(x+r,y);this.lineTo(x+w-r,y);this.arcTo(x+w,y,x+w,y+r,r);
+      this.lineTo(x+w,y+h-r);this.arcTo(x+w,y+h,x+w-r,y+h,r);
+      this.lineTo(x+r,y+h);this.arcTo(x,y+h,x,y+h-r,r);
+      this.lineTo(x,y+r);this.arcTo(x,y,x+r,y,r);this.closePath();
+    };
+  }
+
+  /* ── DPR-aware resize: physical pixels = CSS pixels × DPR ── */
+  function resize() {
+    DPR = window.devicePixelRatio || 1;
+    const cssW = canvas.parentElement.getBoundingClientRect().width || 500;
+    const cssH = canvas.offsetHeight || 220;
+    /* Set the backing store to physical resolution */
+    canvas.width  = Math.round(cssW * DPR);
+    canvas.height = Math.round(cssH * DPR);
+    /* Keep CSS display size the same */
+    canvas.style.width  = cssW + 'px';
+    canvas.style.height = cssH + 'px';
+    /* Scale all drawing ops so coordinates stay in CSS-pixel space */
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    W = cssW;
+    H = cssH;
+  }
+
+  function eio(x){ return x<.5?2*x*x:-1+(4-2*x)*x; }
+
+  /* ── Drawing helpers ── */
+  function pill(x,y,w,h,col,lbl,a=1,fs=8) {
+    ctx.save(); ctx.globalAlpha=a;
+    ctx.fillStyle=col+'20'; ctx.strokeStyle=col; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.roundRect(x-w/2,y-h/2,w,h,h/2); ctx.fill(); ctx.stroke();
+    if(lbl){
+      ctx.fillStyle=col; ctx.font=`500 ${fs}px DM Mono,monospace`;
+      ctx.textAlign='center'; ctx.fillText(lbl,x,y+fs*.35);
+    }
+    ctx.restore();
+  }
+
+  function badge(x,y,w,h,col,lbl,sub=null,a=1) {
+    ctx.save(); ctx.globalAlpha=a;
+    ctx.fillStyle=col; ctx.shadowColor=col+'44'; ctx.shadowBlur=10;
+    ctx.beginPath(); ctx.roundRect(x-w/2,y-h/2,w,h,7); ctx.fill();
+    ctx.shadowBlur=0;
+    ctx.fillStyle='#fff'; ctx.textAlign='center';
+    ctx.font=`500 9px DM Mono,monospace`;
+    ctx.fillText(lbl,x,sub?y-2:y+3);
+    if(sub){ ctx.font=`400 7.5px DM Mono,monospace`; ctx.fillStyle='rgba(255,255,255,0.65)'; ctx.fillText(sub,x,y+10); }
+    ctx.restore();
+  }
+
+  function funnel(a=0.06) {
+    const cx=W/2, top=H*.03, bot=H*.50;
+    const tw=W*.82, bw=W*.20;
+    ctx.save(); ctx.globalAlpha=a;
+    ctx.fillStyle=C.sage;
+    ctx.beginPath();
+    ctx.moveTo(cx-tw/2,top); ctx.lineTo(cx+tw/2,top);
+    ctx.lineTo(cx+bw/2,bot); ctx.lineTo(cx-bw/2,bot);
+    ctx.closePath(); ctx.fill();
+    ctx.globalAlpha=a*2.2; ctx.strokeStyle=C.sage; ctx.lineWidth=1;
+    ctx.setLineDash([3,5]);
+    ctx.beginPath(); ctx.moveTo(cx-tw/2,top); ctx.lineTo(cx-bw/2,bot); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx+tw/2,top); ctx.lineTo(cx+bw/2,bot); ctx.stroke();
+    ctx.setLineDash([]); ctx.restore();
+  }
+
+  function person(x,y,col,a=0.8) {
+    ctx.save(); ctx.globalAlpha=a; ctx.fillStyle=col;
+    ctx.beginPath(); ctx.arc(x,y-3,3.5,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(x,y+5,5,Math.PI,Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
+
+  function curveTo(pts,col,a=0.4,dash=false) {
+    if(pts.length<2)return;
+    ctx.save(); ctx.globalAlpha=a; ctx.strokeStyle=col; ctx.lineWidth=1.5;
+    if(dash){ctx.setLineDash([4,6]); ctx.lineDashOffset=-(t*1.2)%10;}
+    ctx.beginPath(); ctx.moveTo(pts[0].x,pts[0].y);
+    for(let i=1;i<pts.length-1;i++){
+      const mx=(pts[i].x+pts[i+1].x)/2, my=(pts[i].y+pts[i+1].y)/2;
+      ctx.quadraticCurveTo(pts[i].x,pts[i].y,mx,my);
+    }
+    ctx.lineTo(pts[pts.length-1].x,pts[pts.length-1].y);
+    ctx.stroke(); ctx.setLineDash([]); ctx.restore();
+  }
+
+  /* ── Stage renderers ── */
+  function s0() {
+    funnel();
+    const top=H*.04, bot=H*.48;
+    SIGS.forEach(([lbl,col],i) => {
+      const seed=i*137.5;
+      const x=((seed*1.618)%1)*W*.78+W*.11 + Math.sin(t*.018+i*.7)*5;
+      const y=top+20+((seed*.618)%1)*(bot-top-40) + Math.cos(t*.014+i*.9)*4;
+      pill(x,y,lbl.length*5+14,18,col,lbl,.4+.2*Math.sin(t*.022+i));
+    });
+    ctx.save();
+    SIGS.forEach(([,c1],i)=>{ SIGS.forEach(([,c2],j)=>{
+      if(j<=i)return;
+      const s1=i*137.5,s2=j*137.5;
+      const x1=((s1*1.618)%1)*W*.78+W*.11+Math.sin(t*.018+i*.7)*5;
+      const y1=top+20+((s1*.618)%1)*(bot-top-40)+Math.cos(t*.014+i*.9)*4;
+      const x2=((s2*1.618)%1)*W*.78+W*.11+Math.sin(t*.018+j*.7)*5;
+      const y2=top+20+((s2*.618)%1)*(bot-top-40)+Math.cos(t*.014+j*.9)*4;
+      const d=Math.hypot(x2-x1,y2-y1);
+      if(d<80){ctx.globalAlpha=.12-.001*d; ctx.strokeStyle=c1; ctx.lineWidth=.5;
+        ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();}
+    });});
+    ctx.restore();
+  }
+
+  function s1() {
+    funnel();
+    const cx=W/2, cy=H*.26;
+    const pulse=.5+.5*Math.sin(t*.04);
+    ctx.save();
+    for(const[r,a]of[[44,.05+.03*pulse],[28,.1+.05*pulse],[16,.18+.07*pulse]]){
+      ctx.globalAlpha=a;ctx.strokeStyle=C.sage;ctx.lineWidth=1;
+      ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.stroke();
+    }
+    ctx.restore();
+    badge(cx,cy,90,36,C.forest,'ASSISTIV.HEALTH','FEP Engine',0.92);
+    SIGS.forEach(([lbl,col],i)=>{
+      const ang=(i/SIGS.length)*Math.PI*2-Math.PI/2;
+      const dist=Math.min(W,H)*.30;
+      const sx=cx+Math.cos(ang)*dist, sy=cy+Math.sin(ang)*dist;
+      const prog=Math.min(1,(t%100)/65);
+      const px=sx+(cx-sx)*(.55+.45*prog), py=sy+(cy-sy)*(.55+.45*prog);
+      const fade=Math.max(0,1-prog*1.2+.2);
+      ctx.save();
+      ctx.globalAlpha=.1+.25*prog; ctx.strokeStyle=col; ctx.lineWidth=.7;
+      ctx.setLineDash([3,5]); ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(cx,cy);ctx.stroke();
+      ctx.setLineDash([]); ctx.restore();
+      pill(px,py,lbl.length*5+12,16,col,lbl,fade*.9,8);
+    });
+  }
+
+  function s2() {
+    funnel();
+    const cols=5, gW=Math.min(W*.82,480), gH=Math.min(H*.52,160);
+    const cw=gW/cols, ch=gH/2, x0=(W-gW)/2, y0=H*.05;
+    ctx.save();
+    DISTRICTS.forEach((d,i)=>{
+      const col=i%cols, row=Math.floor(i/cols);
+      const dcx=x0+col*cw+cw/2, dcy=y0+row*ch+ch/2;
+      const w=cw-10, h=ch-8;
+      const rc=d.r==='critical'?C.red:d.r==='high'?C.amber:C.sage;
+      const delay=i*5, prog=Math.min(1,Math.max(0,(t-delay)/28));
+      if(!prog)return;
+      const pulse=d.r==='critical'?.5+.5*Math.sin(t*.06+i):1;
+      ctx.globalAlpha=(d.r==='critical'?.9:d.r==='high'?.7:.55)*prog*pulse;
+      ctx.fillStyle=rc+'18'; ctx.strokeStyle=rc; ctx.lineWidth=d.r==='critical'?1.5:1;
+      ctx.beginPath(); ctx.roundRect(dcx-w/2,dcy-h/2,w,h,4); ctx.fill(); ctx.stroke();
+      ctx.globalAlpha=prog;
+      ctx.fillStyle=rc; ctx.font='500 7.5px DM Mono,monospace'; ctx.textAlign='center';
+      ctx.fillText(d.n,dcx,dcy-5);
+      ctx.fillStyle='#0f1a14'; ctx.font='500 13px DM Sans,sans-serif';
+      ctx.fillText(d.s,dcx,dcy+5);
+      ctx.fillStyle=rc; ctx.font='400 6.5px DM Mono,monospace';
+      ctx.fillText(d.r.toUpperCase(),dcx,dcy+16);
+    });
+    ctx.restore();
+  }
+
+  function s3() {
+    funnel();
+    const cx=W/2, ry=H*.30;
+    const pulse=.5+.5*Math.sin(t*.04);
+    ctx.save();
+    for(const[r,a]of[[38,.05+.03*pulse],[24,.1+.05*pulse]]){
+      ctx.globalAlpha=a;ctx.strokeStyle=C.sageL;ctx.lineWidth=1;
+      ctx.beginPath();ctx.arc(cx,ry,r,0,Math.PI*2);ctx.stroke();
+    }
+    ctx.restore();
+    badge(cx,ry,110,36,C.forestL,'RESILIENCE','Community screen',0.92);
+    for(let i=0;i<10;i++){
+      const seed=i*83.7;
+      const xB=cx+Math.cos(seed)*(W*.32), yB=H*.04+(seed%1)*H*.08;
+      const prog=((t*.007+i/10)%1);
+      person(xB+(cx-xB)*prog, yB+(ry-yB)*prog, C.amber, Math.sin(prog*Math.PI)*.8);
+    }
+    badge(cx,H*.48,94,28,C.sage,'PRISMA-7 SCORED',null,Math.min(.9,t/80));
+  }
+
+  function s4s5(which) {
+    funnel();
+    const cx=W/2, splitY=H*.50;
+    const lx=W*.26, ly=H*.72, rx=W*.74, ry2=H*.72;
+    ctx.save();
+    ctx.globalAlpha=.18; ctx.strokeStyle=C.amber; ctx.lineWidth=1.5;
+    ctx.setLineDash([4,5]);
+    ctx.beginPath();ctx.moveTo(cx,splitY);ctx.lineTo(lx,ly-22);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(cx,splitY);ctx.lineTo(rx,ry2-22);ctx.stroke();
+    ctx.setLineDash([]); ctx.restore();
+    pill(cx,splitY-2,96,18,C.amber,'PRISMA-7 triage',.7,8);
+    const pulse=.5+.5*Math.sin(t*.05);
+    const lActive=which===4, rActive=which===5;
+    ctx.save();
+    if(lActive){ctx.globalAlpha=.09+.05*pulse;ctx.fillStyle=C.red;ctx.beginPath();ctx.arc(lx,ly,55,0,Math.PI*2);ctx.fill();}
+    if(rActive){ctx.globalAlpha=.09+.05*pulse;ctx.fillStyle=C.forest;ctx.beginPath();ctx.arc(rx,ry2,55,0,Math.PI*2);ctx.fill();}
+    ctx.restore();
+    badge(lx,ly,108,38,C.red,'PCN HUB','Acute pathway',lActive?.92:.25);
+    badge(rx,ry2,108,38,C.forest,'ASSISTIV','Prevention',rActive?.92:.25);
+    const fx=lActive?lx:rx, flowCol=lActive?C.red:C.sageL;
+    for(let i=0;i<5;i++){
+      const prog=((t*.008+i/5)%1);
+      person(cx+(fx-cx)*prog, splitY+(ly-splitY)*prog, flowCol, Math.sin(prog*Math.PI)*.8);
+    }
+    ctx.save(); ctx.globalAlpha=.45; ctx.font='400 7px DM Mono,monospace'; ctx.textAlign='center';
+    ctx.fillStyle=C.red;  ctx.fillText('ACUTE RISK', lx, ly-42);
+    ctx.fillStyle=C.sage; ctx.fillText('PREVENTION', rx, ry2-42);
+    ctx.restore();
+  }
+
+  function s6() {
+    funnel(.05);
+    const cx=W/2;
+    const intelY=H*.10, resY=H*.30, splitY=H*.48;
+    const lx=W*.26, ly=H*.67, rx=W*.74, ry2=H*.67;
+    badge(cx,intelY,100,34,C.forest,'ASSISTIV.HEALTH','Intelligence',0.88);
+    badge(cx,resY,96,30,C.forestL,'RESILIENCE','Screening',0.82);
+    pill(cx,splitY,90,18,C.amber,'PRISMA-7 triage',.65,7.5);
+    badge(lx,ly,100,34,C.red,'PCN HUB','Acute',0.88);
+    badge(rx,ry2,100,34,C.forest,'ASSISTIV','Prevention',0.88);
+    const fbL=[{x:lx-38,y:ly+14},{x:lx-70,y:H*.54},{x:cx-75,y:H*.32},{x:cx-45,y:intelY+16}];
+    const fbR=[{x:rx+38,y:ry2+14},{x:rx+70,y:H*.54},{x:cx+75,y:H*.32},{x:cx+45,y:intelY+16}];
+    curveTo(fbL,C.rose,.45,true);
+    curveTo(fbR,C.rose,.45,true);
+    const frac=(t%140)/140;
+    [fbL,fbR].forEach(pts=>{
+      const si=Math.floor(frac*(pts.length-1));
+      const sf=(frac*(pts.length-1))-si;
+      if(si>=pts.length-1)return;
+      ctx.save(); ctx.globalAlpha=Math.sin(frac*Math.PI)*.85; ctx.fillStyle=C.rose;
+      ctx.beginPath();
+      ctx.arc(pts[si].x+(pts[si+1].x-pts[si].x)*sf, pts[si].y+(pts[si+1].y-pts[si].y)*sf, 4,0,Math.PI*2);
+      ctx.fill(); ctx.restore();
+    });
+    [[lx,C.red],[rx,C.sageL]].forEach(([fx,col])=>{
+      for(let i=0;i<4;i++){
+        const prog=((t*.007+i/4)%1);
+        person(cx+(fx-cx)*prog, splitY+(ly-splitY)*prog, col, Math.sin(prog*Math.PI)*.7);
+      }
+    });
+    ctx.save(); ctx.globalAlpha=.4; ctx.fillStyle=C.rose;
+    ctx.font='400 7px DM Mono,monospace'; ctx.textAlign='center';
+    ctx.fillText('outcomes recalibrate the model',cx,H*.94);
+    ctx.restore();
+  }
+
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle=C.white; ctx.fillRect(0,0,W,H);
+    if(stage===0) s0();
+    else if(stage===1) s1();
+    else if(stage===2) s2();
+    else if(stage===3) s3();
+    else if(stage===4||stage===5) s4s5(stage);
+    else if(stage===6) s6();
+    t++;
+    if(running) raf=requestAnimationFrame(draw);
+  }
+
+  function setStage(s) {
+    stage=s; t=0;
+    document.getElementById('meco-label').textContent=LABELS[s];
+    document.querySelectorAll('.meco-dot').forEach((d,i)=>d.classList.toggle('active',i===s));
+    if(!running){running=true;raf=requestAnimationFrame(draw);}
+    clearInterval(autoTimer);
+    autoTimer=setInterval(()=>setStage((stage+1)%7),9000);
+  }
+
+  document.querySelectorAll('.meco-dot').forEach(d=>
+    d.addEventListener('click',()=>setStage(+d.dataset.s))
+  );
+
+  window.addEventListener('resize',()=>{
+    cancelAnimationFrame(raf); resize();
+    if(running) raf=requestAnimationFrame(draw);
+  });
+
+  requestAnimationFrame(()=>{
+    resize(); draw();
+    autoTimer=setInterval(()=>setStage((stage+1)%7),9000);
+  });
+})();
+</script>
+
+</body>
+</html>
