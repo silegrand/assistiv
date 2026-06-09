@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#1a3a2a">
+<meta name="theme-color" content="#0A5F44">
 <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAzElEQVR4nGOUstL6z0ABYKJE8xAwgJmJmWFCTRv5BtiZWTJ42rswyEhIkWeAtbE5w6wVCxkifIJIN4CHi5vh169fDGu2b2QI8wpgYGLCrhSnAV4Orgy7jh5gePjsCcOL1y8Z7M2ssKpjwWWAi5U9g5iwCIONsTnD2w/vGSJ9Qxj2nzhCnAFSYhIMdx7eY5iyeA4DAwMDgwAfP8OpdXsYBPj4GT58+ojfC6ysrAzdFU0MIkIicDEFGTkGRkZGhqrMIgZGRkYU9YyjeYEBAIjXLoTONa96AAAAAElFTkSuQmCC">
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABzUlEQVR4nO3W30uTURjA8a/vGeSdWbQoESsaDHchhoPe8EUWuglOx96VzohaF6E34V3/QF10k+RF0C6CpmKrxDEGxWiMaEQX/QmCmC6zlVtapGOzuhvEDN9NfUV4n8vznB8fznPO4dScvND8h30MaT8XNwAGwADsGBC8M4pil3cEMFU7sL7uME7FgRCC1If3VQOq3gGfqxeTMOFUHJwwH9cf4O9RuRd8gJAEV/v69QW0WG3k1r7zaOoJnzNfuNLnwySEfoDBXh+hSJjN35tMRJ9jPnqM7o5OfQC1h2pR2mTiqSQAT2PTFItFAuqgPgC3w0k8laRQKACQWfnGq7cJ5FY7llNn9h4w0ONlKjb9T1toJgzANa+/YkBNJR+SpoZGXodm+PhpsSx3tuk0+Xyecx4HvzbWNQMqeoj8bpW7D+8zHgmX5UYCw9y+eQvV5WYy+kLznJpLICTB5W4PiXdvtsxHEy+BysugGXBRVsiu5ljKLG+Zn08vMDs/h81ixWax7i5AkiRGAkOlq/e/yK7mAJBb7ZoB2x7CI3X1TI4GabHaSC8vsfbzB13X1bJ+z8Ye0952vgT5ml3BdeNS6bpWDdjrONgfEgNgAAzAbsRfoIyDAHc7CM8AAAAASUVORK5CYII=">
 <link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,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">
@@ -11,21 +11,24 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/brand.css">
 
 <style>
   :root {
-    --green-deep: #1a3a2a;
-    --green-mid: #2d5c42;
-    --green-accent: #3d7a56;
-    --green-pale: #e8f0eb;
-    --cream: #f9f7f4;
-    --ink: #0f1a14;
-    --ink-mid: #3a4a3f;
-    --ink-soft: #6b7d72;
-    --white: #ffffff;
-    --border: #d8e0da;
-    --serif: 'DM Serif Display', Georgia, serif;
-    --sans: 'DM Sans', system-ui, sans-serif;
+    /* Assistiv Systems — canonical brand green */
+    --green-deep:   #0A5F44;
+    --green-mid:    #0f7a57;
+    --green-accent: #12966a;
+    --green-pale:   #e8f0eb;
+    --cream:        #f9f7f4;
+    --ink:          #0f1a14;
+    --ink-mid:      #3a4a3f;
+    --ink-soft:     #6b7d72;
+    --white:        #ffffff;
+    --border:       #d8e0da;
+    --serif:        'DM Serif Display', Georgia, serif;
+    --sans:         'DM Sans', system-ui, sans-serif;
+    --mono:         'DM Mono', monospace;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -68,19 +71,19 @@
     display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
   .nav-logo-dot { border-radius: 50%; position: absolute; }
-  .nav-logo-core { width: 7px; height: 7px; background: #1a3a2a; z-index: 2; }
-  .nav-logo-r1   { width: 15px; height: 15px; border: 1.5px solid #1a3a2a; opacity: 0.5; background: none; }
-  .nav-logo-r2   { width: 24px; height: 24px; border: 1.5px solid #1a3a2a; opacity: 0.22; background: none; }
+  .nav-logo-core { width: 7px; height: 7px; background: #0A5F44; z-index: 2; }
+  .nav-logo-r1   { width: 15px; height: 15px; border: 1.5px solid #0A5F44; opacity: 0.5; background: none; }
+  .nav-logo-r2   { width: 24px; height: 24px; border: 1.5px solid #0A5F44; opacity: 0.22; background: none; }
   .nav-wordmark { display: flex; flex-direction: column; gap: 1px; }
   .nav-wordmark-name {
     font-family: 'Cabinet Grotesk', sans-serif;
     font-size: 1rem; font-weight: 700;
-    letter-spacing: -0.03em; line-height: 1.1; color: #0f2318;
+    letter-spacing: -0.03em; line-height: 1.1; color: #0A5F44;
   }
   .nav-wordmark-sub {
     font-family: 'DM Mono', monospace;
     font-size: 0.48rem; letter-spacing: 0.18em;
-    text-transform: uppercase; line-height: 1; color: #2d6b47; opacity: 0.75;
+    text-transform: uppercase; line-height: 1; color: #0A5F44; opacity: 0.75;
   }
 
   .nav-links {
