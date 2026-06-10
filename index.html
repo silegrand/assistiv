@@ -3,1393 +3,740 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0A5F44">
-<title>Assistiv: Infrastructure for Independent Living</title>
+<meta name="description" content="Assistiv Services — preventative care and support for older adults living independently. Proactive, dignified, and person-led. Before crisis. On your terms.">
+<title>Assistiv Services — Living Well at Home, on Your Terms</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/brand.css">
-
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --green-deep:   #0A5F44;
-    --green-mid:    #0f7a57;
-    --green-accent: #12966a;
-    --green-pale: #e8f0eb;
-    --cream: #f9f7f4;
-    --ink: #0f1a14;
-    --ink-mid: #3a4a3f;
-    --ink-soft: #6b7d72;
-    --white: #ffffff;
-    --border: #d8e0da;
-    --serif: 'DM Serif Display', Georgia, serif;
-    --sans: 'DM Sans', system-ui, sans-serif;
-  }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { font-size: 16px; scroll-behavior: smooth; }
-
-  body {
-    font-family: var(--sans);
-    background: var(--white);
-    color: var(--ink);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* ---- NAV ---- */
-  /* ── NAV ── */
-  #nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 1000;
-    background: rgba(249,247,244,0.95);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 2.5rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    height: 72px;
-  }
-  /* ── Logo ── */
-  .nav-brand {
-    display: flex; align-items: center; gap: 0.75rem; text-decoration: none;
-  }
-  .nav-logo-mark {
-    position: relative; width: 36px; height: 36px;
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  }
-  .nav-logo-dot { border-radius: 50%; position: absolute; }
-  .nav-logo-core { width: 9px;  height: 9px;  background: #0A5F44; z-index: 2; }
-  .nav-logo-r1   { width: 20px; height: 20px; border: 1.5px solid #0A5F44; opacity: 0.5;  background: none; }
-  .nav-logo-r2   { width: 33px; height: 33px; border: 1.5px solid #0A5F44; opacity: 0.22; background: none; }
-  .nav-wordmark  { display: flex; flex-direction: column; gap: 2px; }
-  .nav-wordmark-name {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 1.1rem; font-weight: 700;
-    letter-spacing: -0.03em; line-height: 1.1; color: #0A5F44;
-  }
-  .nav-wordmark-sub {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.5rem; letter-spacing: 0.18em;
-    text-transform: uppercase; line-height: 1; color: #0A5F44; opacity: 0.75;
-  }
-  /* ── Links ── */
-  .nav-links {
-    display: flex; align-items: center; gap: 1.8rem; list-style: none;
-  }
-  .nav-links a {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 0.82rem; font-weight: 500;
-    color: var(--ink-mid); text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--green-deep); }
-  /* ── Ecosystem dropdown ── */
-  .nav-dropdown { position: relative; }
-  .nav-dropdown > a { display: flex; align-items: center; gap: 0.3rem; }
-  .nav-dropdown > a::after {
-    content: '';
-    display: inline-block;
-    width: 0; height: 0;
-    border-left: 3.5px solid transparent;
-    border-right: 3.5px solid transparent;
-    border-top: 4px solid var(--ink-mid);
-    transition: transform 0.2s;
-    margin-top: 1px;
-  }
-  .nav-dropdown:hover > a::after { transform: rotate(180deg); border-top-color: var(--green-deep); }
-  .nav-dropdown-menu {
-    display: none;
-    position: absolute;
-    top: calc(100% + 10px);
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(10,95,68,0.08);
-    min-width: 170px;
-    padding: 0.45rem 0;
-    list-style: none;
-    z-index: 200;
-  }
-  .nav-dropdown:hover .nav-dropdown-menu { display: block; }
-  .nav-dropdown-menu li a {
-    display: block;
-    padding: 0.5rem 1.1rem;
-    font-size: 0.82rem; font-weight: 500;
-    color: var(--ink-mid);
-    white-space: nowrap;
-    transition: background 0.15s, color 0.15s;
-  }
-  .nav-dropdown-menu li a:hover { background: var(--green-pale); color: var(--green-deep); }
-  /* ── CTA button ── */
-  .nav-cta {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 0.82rem; font-weight: 600;
-    color: var(--white) !important;
-    background: var(--green-deep);
-    text-decoration: none;
-    padding: 0.55rem 1.3rem;
-    border-radius: 6px;
-    transition: background 0.2s;
-    white-space: nowrap;
-  }
-  .nav-cta:hover { background: #07422f; }
-  /* ── Hamburger ── */
-  .hamburger {
-    display: none; flex-direction: column; gap: 5px;
-    background: none; border: none; cursor: pointer; padding: 4px;
-  }
-  .hamburger span {
-    display: block; width: 22px; height: 2px;
-    background: var(--ink); border-radius: 2px; transition: all 0.3s;
-  }
-  .mobile-nav {
-    display: none; position: fixed; inset: 0;
-    background: var(--cream); z-index: 998;
-    flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
-  }
-  .mobile-nav.open { display: flex; }
-  .mobile-nav a {
-    font-family: 'DM Serif Display', Georgia, serif;
-    font-size: 1.8rem; font-weight: 300; color: var(--ink); transition: color 0.2s;
-  }
-  .mobile-nav a:hover { color: var(--green-deep); }
-  .m-close {
-    position: absolute; top: 1.4rem; right: 1.75rem;
-    font-size: 1.5rem; background: none; border: none; cursor: pointer; color: var(--ink);
-  }
-  @media (max-width: 820px) {
-    .nav-links, .nav-cta { display: none; }
-    .hamburger { display: flex; }
-    .nav-inner { padding: 1rem 1.5rem; }
-  }
-
-  /* ---- HERO ---- */
-  .hero {
-    padding: 13.5rem 3rem 7rem;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  .hero-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-    margin-bottom: 3.5rem;
-  }
-  .hero-text { display: flex; flex-direction: column; }
-  .hero-anim-col { display: flex; align-items: center; justify-content: center; }
-
-  .hero-eyebrow {
-    font-family: var(--sans);
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--green-accent);
-    margin-bottom: 1.75rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .hero-eyebrow::after {
-    content: '';
-    display: block;
-    width: 2.5rem;
-    height: 1px;
-    background: var(--green-accent);
-  }
-
-  .hero-title {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: clamp(2rem, 3.6vw, 3.8rem);
-    line-height: 1.1;
-    color: var(--green-deep);
-    letter-spacing: -0.02em;
-    margin-bottom: 2rem;
-  }
-
-  .hero-title em {
-    font-style: italic;
-    color: var(--green-accent);
-  }
-
-  .hero-sub {
-    font-size: 1rem;
-    font-weight: 300;
-    color: var(--ink-mid);
-    line-height: 1.65;
-    margin-bottom: 2rem;
-  }
-
-  .hero-divider {
-    width: 100%;
-    height: 1px;
-    background: var(--border);
-  }
-
-  /* ---- STAT STRIP ---- */
-  .stats {
-    background: var(--green-deep);
-    padding: 4rem 3rem;
-  }
-
-  .stats-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-  }
-
-  .stat {
-    border-left: 1px solid rgba(255,255,255,0.15);
-    padding-left: 2rem;
-  }
-
-  .stat:first-child { border-left: none; padding-left: 0; }
-
-  .stat-number {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 3.5vw, 3.25rem);
-    color: var(--white);
-    line-height: 1;
-    margin-bottom: 0.6rem;
-    letter-spacing: -0.02em;
-  }
-
-  .stat-label {
-    font-size: 0.825rem;
-    font-weight: 300;
-    color: rgba(255,255,255,0.6);
-    line-height: 1.45;
-    letter-spacing: 0.01em;
-  }
-
-  /* ---- SECTION SHARED ---- */
-  .section {
-    padding: 6rem 3rem;
-  }
-
-  .section-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .section-label {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--green-accent);
-    margin-bottom: 1rem;
-  }
-
-  .section-title {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: clamp(1.9rem, 3.5vw, 2.9rem);
-    line-height: 1.15;
-    color: var(--green-deep);
-    letter-spacing: -0.02em;
-    max-width: 640px;
-    margin-bottom: 1.5rem;
-  }
-
-  .section-body {
-    font-size: 1.05rem;
-    font-weight: 300;
-    color: var(--ink-mid);
-    max-width: 560px;
-    line-height: 1.7;
-  }
-
-  /* ---- PROBLEM ---- */
-  .problem { background: var(--cream); }
-
-  .problem-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: start;
-    margin-top: 3.5rem;
-  }
-
-  .problem-left .section-body { max-width: 100%; }
-
-  .problem-points {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .problem-point {
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
-  }
-
-  .problem-point:first-child { border-top: none; padding-top: 0; }
-
-  .pp-label {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    margin-bottom: 0.5rem;
-  }
-
-  .pp-text {
-    font-size: 1rem;
-    font-weight: 300;
-    color: var(--ink-mid);
-    line-height: 1.6;
-  }
-
-  /* ---- APPROACH ---- */
-  .approach-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    margin-top: 4rem;
-    border: 1px solid var(--border);
-  }
-
-  .approach-card {
-    padding: 2.5rem;
-    border-right: 1px solid var(--border);
-  }
-
-  .approach-card:last-child { border-right: none; }
-
-  .ac-number {
-    font-family: var(--serif);
-    font-size: 2.5rem;
-    color: var(--green-pale);
-    line-height: 1;
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.02em;
-  }
-
-  .ac-title {
-    font-size: 1.05rem;
-    font-weight: 500;
-    color: var(--green-deep);
-    margin-bottom: 0.75rem;
-    letter-spacing: -0.01em;
-  }
-
-  .ac-body {
-    font-size: 0.9rem;
-    font-weight: 300;
-    color: var(--ink-soft);
-    line-height: 1.65;
-  }
-
-  /* ---- PRINCIPLES ---- */
-  .principles { background: var(--cream); }
-
-  .principles-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    margin-bottom: 4rem;
-  }
-
-  .principles-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-  }
-
-  .principle {
-    background: var(--cream);
-    padding: 2.25rem;
-  }
-
-  .principle-title {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--green-deep);
-    margin-bottom: 0.6rem;
-    letter-spacing: -0.01em;
-  }
-
-  .principle-body {
-    font-size: 0.875rem;
-    font-weight: 300;
-    color: var(--ink-soft);
-    line-height: 1.6;
-  }
-
-  /* ---- OUTCOMES ---- */
-  .outcomes-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    margin-bottom: 4rem;
-    align-items: end;
-  }
-
-  .outcomes-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-
-  .outcome-card {
-    padding: 2rem;
-    background: var(--cream);
-  }
-
-  .oc-group {
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--green-accent);
-    margin-bottom: 1rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .oc-items {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-
-  .oc-items li {
-    font-size: 0.875rem;
-    font-weight: 300;
-    color: var(--ink-mid);
-    padding-left: 1rem;
-    position: relative;
-    line-height: 1.45;
-  }
-
-  .oc-items li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.55em;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: var(--green-accent);
-  }
-
-  /* ---- WHO WE WORK WITH ---- */
-  .partners { background: var(--green-deep); }
-
-  .partners .section-label { color: rgba(255,255,255,0.4); }
-  .partners .section-title { color: var(--white); }
-  .partners .section-body { color: rgba(255,255,255,0.55); }
-
-  .partners-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.08);
-    margin-top: 4rem;
-  }
-
-  .partner-card {
-    background: var(--green-deep);
-    padding: 2.25rem 2rem;
-  }
-
-  .partner-icon {
-    width: 36px;
-    height: 36px;
-    margin-bottom: 1.25rem;
-    opacity: 0.5;
-  }
-
-  .partner-title {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--white);
-    margin-bottom: 0.5rem;
-  }
-
-  .partner-body {
-    font-size: 0.825rem;
-    font-weight: 300;
-    color: rgba(255,255,255,0.45);
-    line-height: 1.55;
-  }
-
-  /* ---- ADVISORY ---- */
-  .advisory-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    margin-top: 4rem;
-  }
-
-  .advisor-card {
-    padding: 2rem;
-    border: 1px solid var(--border);
-  }
-
-  .advisor-name {
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--green-deep);
-    margin-bottom: 0.25rem;
-  }
-
-  .advisor-role {
-    font-size: 0.8rem;
-    color: var(--ink-soft);
-    margin-bottom: 1rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .advisor-note {
-    font-size: 0.875rem;
-    font-weight: 300;
-    color: var(--ink-mid);
-    line-height: 1.6;
-  }
-
-  /* ---- CONTACT ---- */
-  .contact {
-    background: var(--cream);
-    padding: 6rem 3rem;
-    text-align: center;
-  }
-
-  .contact-inner {
-    max-width: 580px;
-    margin: 0 auto;
-  }
-
-  .contact .section-label {
-    display: block;
-    margin-bottom: 1.5rem;
-    text-align: center;
-  }
-
-  .contact-title {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: clamp(2rem, 4vw, 3.25rem);
-    color: var(--green-deep);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-bottom: 1.5rem;
-  }
-
-  .contact-body {
-    font-size: 1rem;
-    font-weight: 300;
-    color: var(--ink-mid);
-    line-height: 1.7;
-    margin-bottom: 2.5rem;
-  }
-
-  .contact-email {
-    display: inline-block;
-    font-size: 1.05rem;
-    font-weight: 500;
-    color: var(--green-deep);
-    padding: 0.85rem 2.25rem;
-    border: 1.5px solid var(--border);
-    border-radius: 2px;
-    letter-spacing: 0.02em;
-    background: var(--white);
-    user-select: all;
-    cursor: text;
-  }
-
-  /* ---- FOOTER ---- */
-  footer {
-    background: var(--white);
-    border-top: 1px solid var(--border);
-    padding: 4rem 0 2.25rem;
-  }
-  .footer-container { max-width: 1100px; margin: 0 auto; padding: 0 3rem; }
-  .footer-top {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: 4rem;
-    padding-bottom: 3rem;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 2rem;
-  }
-  .f-brand-tagline {
-    font-size: 0.82rem;
-    color: var(--ink-soft);
-    line-height: 1.75;
-    max-width: 220px;
-    margin-top: 0.75rem;
-  }
-  .f-powered {
-    display: block;
-    font-size: 0.72rem;
-    color: var(--ink-soft);
-    opacity: 0.55;
-    margin-top: 1.4rem;
-  }
-  .f-nav {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-  }
-  .f-nav-col h5 {
-    font-family: var(--sans);
-    font-size: 0.66rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--green-accent);
-    margin-bottom: 1rem;
-  }
-  .f-nav-col a {
-    display: block;
-    font-family: var(--sans);
-    font-size: 0.82rem;
-    color: var(--ink-mid);
-    margin-bottom: 0.55rem;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .f-nav-col a:hover { color: var(--green-deep); }
-  .footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-  .f-copy { font-size: 0.75rem; color: var(--ink-soft); opacity: 0.6; }
-  .f-links { display: flex; gap: 1.5rem; }
-  .f-links a {
-    font-size: 0.75rem;
-    color: var(--ink-soft);
-    opacity: 0.6;
-    text-decoration: none;
-    transition: opacity 0.2s, color 0.2s;
-  }
-  .f-links a:hover { opacity: 1; color: var(--green-deep); }
-  @media (max-width: 860px) {
-    .footer-top { grid-template-columns: 1fr; gap: 2rem; }
-    .f-nav { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 600px) {
-    .f-nav { grid-template-columns: 1fr; }
-    .footer-bottom { flex-direction: column; text-align: center; }
-    .footer-container { padding: 0 1.5rem; }
-  }
-
-  /* ---- PLATFORM ECOSYSTEM ---- */
-  .ecosystem {
-    background: var(--cream);
-    padding: 5rem 3rem;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .ecosystem-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .ecosystem-pathway {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr auto 1fr;
-    gap: 0;
-    align-items: stretch;
-    margin-top: 3.5rem;
-  }
-
-  .eco-arrow {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4rem;
-    padding: 0 1.5rem;
-    align-self: center;
-  }
-
-  .eco-platform {
-    border: 1px solid var(--border);
-    padding: 2rem 1.75rem;
-    background: var(--white);
-    transition: border-color 0.2s, box-shadow 0.2s;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-
-  .eco-platform:hover {
-    border-color: var(--green-accent);
-    box-shadow: 0 4px 24px rgba(26,58,42,0.07);
-  }
-
-  .eco-platform-label {
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--green-accent);
-    margin-bottom: 0.6rem;
-  }
-
-  .eco-platform-name {
-    font-family: var(--serif);
-    font-size: 1.25rem;
-    color: var(--green-deep);
-    letter-spacing: -0.01em;
-    margin-bottom: 0.4rem;
-  }
-
-  .eco-platform-url {
-    font-size: 0.75rem;
-    color: var(--ink-soft);
-    margin-bottom: 1rem;
-    display: block;
-  }
-
-  .eco-platform-desc {
-    font-size: 0.875rem;
-    font-weight: 300;
-    color: var(--ink-mid);
-    line-height: 1.55;
-  }
-
-  .eco-platform-role {
-    display: inline-block;
-    margin-top: auto;
-    padding-top: 1.25rem;
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--green-accent);
-    padding: 0.3rem 0.75rem;
-    border: 1px solid var(--border);
-    border-radius: 1px;
-    background: var(--cream);
-    align-self: flex-start;
-    margin-top: 1.5rem;
-  }
-
-  .eco-arrow-line {
-    width: 48px;
-    height: 1px;
-    background: var(--border);
-    position: relative;
-  }
-
-  .eco-arrow-line::after {
-    content: '';
-    position: absolute;
-    right: -1px;
-    top: -3px;
-    width: 7px;
-    height: 7px;
-    border-right: 1px solid var(--ink-soft);
-    border-bottom: 1px solid var(--ink-soft);
-    transform: rotate(-45deg);
-  }
-
-  .eco-arrow-label {
-    font-size: 0.6rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-  }
-
-  .eco-outcomes {
-    margin-top: 3rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    padding-top: 2.5rem;
-    border-top: 1px solid var(--border);
-  }
-
-  .eco-outcome {
-    padding: 1.5rem;
-    border: 1px solid var(--border);
-    background: var(--white);
-  }
-
-  .eco-outcome-label {
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    margin-bottom: 0.5rem;
-  }
-
-  .eco-outcome-title {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--green-deep);
-    margin-bottom: 0.4rem;
-  }
-
-  .eco-outcome-body {
-    font-size: 0.825rem;
-    font-weight: 300;
-    color: var(--ink-mid);
-    line-height: 1.55;
-  }
-
-  .eco-outcome-highlight {
-    border-color: var(--green-deep);
-  }
-
-  .eco-outcome-highlight .eco-outcome-label {
-    color: var(--green-accent);
-  }
-
-  .eco-outcome-highlight .eco-outcome-title {
-    color: var(--green-deep);
-  }
-
-  @media (max-width: 860px) {
-    .ecosystem-pathway {
-      grid-template-columns: 1fr;
-    }
-    .eco-arrow {
-      padding: 1rem 0;
-      flex-direction: row;
-      justify-content: center;
-    }
-    .eco-arrow-line {
-      width: 32px;
-    }
-    .eco-outcomes {
-      grid-template-columns: 1fr;
-    }
-  }
-  .fade-in {
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.65s ease, transform 0.65s ease;
-  }
-
-  .fade-in.visible {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* ---- RESPONSIVE ---- */
-  @media (max-width: 1024px) {
-    nav { padding: 1.1rem 2rem; }
-    .hero { padding: 10rem 2rem 5rem; }
-    .hero-inner { gap: 2.5rem; }
-    .section { padding: 5rem 2rem; }
-    .stats { padding: 3.5rem 2rem; }
-    .contact { padding: 5rem 2rem; }
-  }
-
-  @media (max-width: 860px) {
-    /* Nav */
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-
-    /* Hero */
-    .hero { padding: 8rem 1.5rem 4.5rem; }
-    .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
-    .hero-anim-col { order: -1; }
-    #mini-eco-canvas { height: 180px; }
-    .hero-sub { font-size: 1rem; }
-
-    /* Stats */
-    .stats { padding: 3rem 1.5rem; }
-    .stats-inner {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem 1.5rem;
-    }
-    .stat:nth-child(3) { border-left: none; padding-left: 0; }
-    .stat-number { font-size: 2.25rem; }
-
-    /* Sections */
-    .section { padding: 4rem 1.5rem; }
-    .section-title { font-size: clamp(1.65rem, 4.5vw, 2.4rem); }
-
-    /* Problem */
-    .problem-grid {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
-
-    /* Approach */
-    .approach-grid { grid-template-columns: 1fr; }
-    .approach-card {
-      border-right: none;
-      border-bottom: 1px solid var(--border);
-    }
-    .approach-card:last-child { border-bottom: none; }
-
-    /* Principles */
-    .principles-header {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      margin-bottom: 2.5rem;
-    }
-    .principles-grid { grid-template-columns: 1fr; }
-
-    /* Outcomes */
-    .outcomes-header {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-      margin-bottom: 2.5rem;
-    }
-    .outcomes-grid { grid-template-columns: 1fr; }
-
-    /* Partners */
-    .partners-grid { grid-template-columns: 1fr; }
-    .partner-card {
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    .partner-card:last-child { border-bottom: none; }
-
-    /* Advisory */
-    .advisory-grid { grid-template-columns: 1fr; }
-
-    /* Contact */
-    .contact { padding: 4rem 1.5rem; }
-
-    /* Footer */
-  }
-
-  @media (max-width: 480px) {
-    /* Nav */
-    nav { padding: 0.9rem 1.25rem; }
-    .nav-wordmark-name { font-size: 1rem; }
-    .nav-cta { padding: 0.45rem 1rem; font-size: 0.8rem; }
-
-    /* Hero */
-    .hero { padding: 7.5rem 1.25rem 4rem; }
-    .hero-eyebrow { font-size: 0.65rem; }
-    .hero-sub { font-size: 1rem; margin-bottom: 2.5rem; }
-
-    /* Stats: single column on very small screens */
-    .stats-inner { grid-template-columns: 1fr; gap: 1.75rem; }
-    .stat {
-      border-left: none;
-      padding-left: 0;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      padding-top: 1.5rem;
-    }
-    .stat:first-child { border-top: none; padding-top: 0; }
-
-    /* Sections */
-    .section { padding: 3.5rem 1.25rem; }
-    .section-body { font-size: 0.95rem; }
-
-    /* Approach cards get slightly less padding */
-    .approach-card { padding: 2rem 1.5rem; }
-    .ac-number { font-size: 2rem; }
-
-    /* Principles and outcomes tighter */
-    .principle { padding: 1.75rem; }
-    .outcome-card { padding: 1.5rem; }
-
-    /* Partner cards */
-    .partner-card { padding: 1.75rem 1.5rem; }
-
-    /* Advisory cards */
-    .advisor-card { padding: 1.5rem; }
-
-    /* Contact */
-    .contact { padding: 3.5rem 1.25rem; }
-    .contact-title { font-size: clamp(1.75rem, 6vw, 2.5rem); }
-    .contact-email {
-      padding: 0.85rem 1.25rem;
-      font-size: 0.95rem;
-    }
-
-    /* Footer */
-  }
-
-  /* ---- MINI ECOSYSTEM ANIMATION ---- */
-  .mini-eco-wrap {
-    width: 100%;
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 28px rgba(26,58,42,0.10);
-  }
-  .mini-eco-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.58rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    padding: 0.45rem 0.9rem 0;
-  }
-  #mini-eco-canvas {
-    display: block;
-    width: 100%;
-    height: 220px;
-  }
-  .mini-eco-footer {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.35rem 0.9rem 0.45rem;
-    border-top: 1px solid var(--border);
-  }
-  .mini-eco-stage {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    color: var(--green-accent);
-    font-weight: 500;
-    flex: 1;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .mini-eco-dots { display: flex; gap: 4px; flex-shrink: 0; }
-  .meco-dot {
-    width: 5px; height: 5px; border-radius: 50%;
-    background: var(--border);
-    cursor: pointer; transition: background 0.2s;
-  }
-  .meco-dot.active { background: var(--green-accent); }
-  .mini-eco-link {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.06em;
-    color: var(--green-accent);
-    text-decoration: none;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .mini-eco-link:hover { text-decoration: underline; }
-
+/* ── TOKENS ─────────────────────────────────────────────────── */
+:root {
+  --ink:        #0f1a14;
+  --ink-mid:    #3a4a3f;
+  --ink-soft:   #6b7d72;
+  --ink-faint:  #9aaa9e;
+  --white:      #ffffff;
+  --cream:      #f4f7f5;
+  --border:     #cfddd5;
+
+  /* Services brand — forest green */
+  --s:          #1a3a2a;
+  --s-mid:      #2d5c42;
+  --s-accent:   #3d7a56;
+  --s-pale:     #e4ede8;
+  --s-ghost:    rgba(45,92,66,0.07);
+
+  /* Ecosystem siblings */
+  --cloud:      #365EBF;
+  --tools:      #C4702A;
+
+  --serif:  'Cormorant Garamond', Georgia, serif;
+  --sans:   'DM Sans', system-ui, sans-serif;
+  --mono:   'DM Mono', monospace;
+  --ease:   0.22s ease;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--white);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── NAV ─────────────────────────────────────────────────────── */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: 66px;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center;
+}
+.nav-inner {
+  width: 100%; max-width: 1160px; margin: 0 auto;
+  padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+}
+.nav-brand { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
+.nav-mark { position: relative; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; }
+.nav-dot { border-radius: 50%; position: absolute; }
+.nav-core { width: 8px; height: 8px; background: var(--s); z-index: 2; }
+.nav-r1   { width: 17px; height: 17px; border: 1.5px solid var(--s); opacity: 0.45; background: none; }
+.nav-r2   { width: 28px; height: 28px; border: 1.5px solid var(--s); opacity: 0.18; background: none; }
+.nav-words { display: flex; flex-direction: column; gap: 1px; }
+.nav-name { font-family: var(--sans); font-size: 1rem; font-weight: 700; letter-spacing: -0.03em; color: var(--s); line-height: 1; }
+.nav-sub  { font-family: var(--mono); font-size: 0.44rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--s-mid); opacity: 0.7; }
+.nav-links { display: flex; align-items: center; gap: 1.8rem; list-style: none; }
+.nav-links a { font-size: 0.82rem; font-weight: 500; color: var(--ink-mid); text-decoration: none; transition: color var(--ease); }
+.nav-links a:hover { color: var(--s); }
+.nav-eco {
+  font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em;
+  color: var(--ink-soft); text-decoration: none; border: 1px solid var(--border);
+  padding: 0.35rem 0.75rem; border-radius: 4px; transition: all var(--ease);
+  white-space: nowrap;
+}
+.nav-eco:hover { border-color: var(--s-accent); color: var(--s); }
+.nav-cta {
+  font-size: 0.82rem; font-weight: 600; color: var(--white);
+  background: var(--s); padding: 0.5rem 1.2rem; border-radius: 5px;
+  text-decoration: none; transition: background var(--ease); white-space: nowrap;
+}
+.nav-cta:hover { background: var(--s-mid); }
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
+.mobile-nav {
+  display: none; position: fixed; inset: 0; background: var(--cream);
+  z-index: 998; flex-direction: column; align-items: center; justify-content: center; gap: 1.75rem;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a { font-family: var(--serif); font-size: 1.8rem; font-weight: 300; color: var(--ink); text-decoration: none; }
+.mobile-nav a:hover { color: var(--s); }
+.m-close { position: absolute; top: 1.4rem; right: 1.75rem; font-size: 1.4rem; background: none; border: none; cursor: pointer; color: var(--ink); }
+@media (max-width: 860px) { .nav-links, .nav-eco, .nav-cta { display: none; } .hamburger { display: flex; } }
+
+/* ── ECOSYSTEM BREADCRUMB STRIP ─────────────────────────────── */
+.eco-strip {
+  position: fixed; top: 66px; left: 0; right: 0; z-index: 999;
+  background: var(--s-pale); border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  gap: 0.5rem; padding: 0.4rem 1.5rem;
+  font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-soft);
+  flex-wrap: wrap;
+}
+.eco-strip a { color: var(--s-mid); text-decoration: none; font-weight: 500; transition: color var(--ease); }
+.eco-strip a:hover { color: var(--s); text-decoration: underline; }
+.eco-strip-sep { opacity: 0.35; }
+.eco-strip-here { color: var(--s); font-weight: 600; }
+@media (max-width: 600px) { .eco-strip { font-size: 0.56rem; top: 60px; gap: 0.3rem; } }
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero {
+  padding: 136px 2rem 0;
+  max-width: 1160px; margin: 0 auto;
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.hero-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: center; padding-bottom: 5rem;
+}
+.hero-eyebrow {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--s-accent); margin-bottom: 1.75rem;
+  display: flex; align-items: center; gap: 0.65rem;
+}
+.hero-eyebrow::before { content: ''; display: block; width: 22px; height: 1px; background: var(--s-accent); }
+.hero-h1 {
+  font-family: var(--serif); font-size: clamp(2.4rem, 4vw, 3.9rem);
+  font-weight: 300; line-height: 1.08; letter-spacing: -0.02em;
+  color: var(--ink); margin-bottom: 1.5rem;
+}
+.hero-h1 em { font-style: italic; color: var(--s-mid); }
+.hero-body { font-size: 1rem; font-weight: 300; color: var(--ink-mid); line-height: 1.75; margin-bottom: 2.25rem; max-width: 480px; }
+.hero-actions { display: flex; gap: 0.9rem; flex-wrap: wrap; }
+.btn-primary { font-size: 0.875rem; font-weight: 600; color: var(--white); background: var(--s); padding: 0.7rem 1.6rem; border-radius: 5px; text-decoration: none; transition: background var(--ease); }
+.btn-primary:hover { background: var(--s-mid); }
+.btn-ghost { font-size: 0.875rem; font-weight: 500; color: var(--ink-mid); border: 1px solid var(--border); padding: 0.7rem 1.4rem; border-radius: 5px; text-decoration: none; transition: border-color var(--ease), color var(--ease); }
+.btn-ghost:hover { border-color: var(--s-accent); color: var(--s); }
+
+/* Hero right — person cards */
+.hero-persona-stack {
+  display: flex; flex-direction: column; gap: 1rem;
+}
+.persona-card {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.4rem 1.5rem;
+  position: relative; overflow: hidden;
+  transition: box-shadow var(--ease);
+}
+.persona-card::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px; background: var(--s-mid); border-radius: 3px 0 0 3px;
+}
+.persona-card:first-child::before { background: var(--s-mid); }
+.persona-card:nth-child(2)::before { background: var(--tools); }
+.persona-card:last-child::before  { background: var(--cloud); }
+.persona-card:hover { box-shadow: 0 6px 24px rgba(26,58,42,0.1); }
+.persona-who {
+  font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.14em;
+  text-transform: uppercase; margin-bottom: 0.4rem; font-weight: 500;
+}
+.persona-card:first-child .persona-who   { color: var(--s-mid); }
+.persona-card:nth-child(2) .persona-who  { color: var(--tools); }
+.persona-card:last-child .persona-who    { color: var(--cloud); }
+.persona-text { font-size: 0.88rem; font-weight: 300; color: var(--ink-mid); line-height: 1.55; }
+.persona-text strong { font-weight: 600; color: var(--ink); }
+
+@media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; gap: 3rem; padding-bottom: 4rem; } }
+
+/* ── QUOTE BREAK ────────────────────────────────────────────── */
+.quote-break {
+  background: var(--s);
+  padding: 4rem 2rem;
+  text-align: center;
+}
+.quote-break blockquote {
+  font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 300; font-style: italic; color: var(--white);
+  line-height: 1.25; max-width: 800px; margin: 0 auto 1rem;
+  letter-spacing: -0.01em;
+}
+.quote-break cite {
+  font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(255,255,255,0.45); font-style: normal;
+}
+
+/* ── SHARED SECTION STYLES ────────────────────────────────────── */
+.section { padding: 6rem 2rem; }
+.section-inner { max-width: 1160px; margin: 0 auto; }
+.eyebrow {
+  font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--s-accent); margin-bottom: 0.85rem; display: block;
+}
+.section-h2 {
+  font-family: var(--serif); font-size: clamp(1.9rem, 3.5vw, 3rem);
+  font-weight: 300; line-height: 1.12; letter-spacing: -0.02em;
+  color: var(--ink); margin-bottom: 1.25rem;
+}
+.section-h2 em { font-style: italic; color: var(--s-mid); }
+.section-body { font-size: 1rem; font-weight: 300; color: var(--ink-mid); line-height: 1.72; max-width: 560px; }
+
+/* ── HOW IT WORKS — PLATFORM SERVICES ──────────────────────── */
+.services { background: var(--cream); }
+.services-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-bottom: 4rem; align-items: start; }
+@media (max-width: 860px) { .services-intro { grid-template-columns: 1fr; gap: 2rem; } }
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.service-card {
+  background: var(--white);
+  padding: 2rem;
+  display: flex; flex-direction: column;
+  transition: background var(--ease);
+}
+.service-card:hover { background: var(--s-pale); }
+.service-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: var(--s-ghost); display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; margin-bottom: 1rem; flex-shrink: 0;
+}
+.service-title { font-size: 0.92rem; font-weight: 600; color: var(--ink); margin-bottom: 0.4rem; line-height: 1.35; }
+.service-body  { font-size: 0.8rem; font-weight: 300; color: var(--ink-soft); line-height: 1.62; flex: 1; }
+@media (max-width: 600px) { .service-grid { grid-template-columns: 1fr; } }
+
+/* ── DESIGN YOUR LIFE — onboarding highlight ──────────────────── */
+.dyl { background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.dyl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.dyl-visual {
+  background: var(--s);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  display: flex; flex-direction: column; gap: 0;
+}
+.dyl-step {
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.dyl-step:last-child { border-bottom: none; padding-bottom: 0; }
+.dyl-step:first-child { padding-top: 0; }
+.dyl-num {
+  font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.35); flex-shrink: 0; padding-top: 3px; width: 22px;
+}
+.dyl-step-body {}
+.dyl-step-title { font-size: 0.875rem; font-weight: 600; color: var(--white); margin-bottom: 0.2rem; line-height: 1.3; }
+.dyl-step-desc  { font-size: 0.78rem; font-weight: 300; color: rgba(255,255,255,0.55); line-height: 1.5; }
+@media (max-width: 860px) { .dyl-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+/* ── PRINCIPLES ───────────────────────────────────────────────── */
+.principles { background: var(--cream); }
+.principles-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+  margin-top: 3rem;
+}
+.principle-card { background: var(--cream); padding: 2.25rem; }
+.principle-card:hover { background: var(--white); }
+.principle-title { font-size: 0.92rem; font-weight: 600; color: var(--s); margin-bottom: 0.5rem; line-height: 1.3; }
+.principle-body  { font-size: 0.875rem; font-weight: 300; color: var(--ink-soft); line-height: 1.65; }
+@media (max-width: 600px) { .principles-grid { grid-template-columns: 1fr; } }
+
+/* ── INNER CIRCLE ──────────────────────────────────────────────── */
+.inner-circle { background: var(--white); }
+.ic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.ic-features { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; }
+.ic-feature { display: flex; gap: 1rem; align-items: flex-start; }
+.ic-feature-icon {
+  width: 38px; height: 38px; border-radius: 9px; flex-shrink: 0;
+  background: var(--s-ghost); display: flex; align-items: center; justify-content: center; font-size: 1rem;
+}
+.ic-feature-title { font-size: 0.9rem; font-weight: 600; color: var(--ink); margin-bottom: 0.25rem; line-height: 1.3; }
+.ic-feature-desc  { font-size: 0.82rem; font-weight: 300; color: var(--ink-soft); line-height: 1.58; }
+.ic-visual {
+  background: var(--cream);
+  border: 1px solid var(--border); border-radius: 16px;
+  padding: 2rem;
+}
+.ic-member { display: flex; align-items: center; gap: 0.85rem; padding: 0.85rem 0; border-bottom: 1px solid var(--border); }
+.ic-member:last-child { border-bottom: none; padding-bottom: 0; }
+.ic-member:first-child { padding-top: 0; }
+.ic-avatar {
+  width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; font-weight: 700;
+}
+.ic-member-info { flex: 1; }
+.ic-member-name { font-size: 0.82rem; font-weight: 600; color: var(--ink); line-height: 1.2; }
+.ic-member-role { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.08em; color: var(--ink-faint); text-transform: uppercase; }
+.ic-member-status {
+  font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.06em;
+  padding: 0.2rem 0.5rem; border-radius: 3px; white-space: nowrap;
+}
+.status-active   { background: #dcf0e3; color: #1a6335; }
+.status-notified { background: #fdf3e3; color: #8a4012; }
+.status-joined   { background: #eef2fb; color: #1e3a7a; }
+.ic-visual-label {
+  font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-faint); text-align: center; padding-top: 1.25rem; margin-top: 0.5rem;
+  border-top: 1px solid var(--border);
+}
+@media (max-width: 860px) { .ic-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+/* ── OUTCOMES ─────────────────────────────────────────────────── */
+.outcomes { background: var(--cream); }
+.outcomes-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3.5rem; }
+.outcome-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1.75rem; }
+.oc-who { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+.oc-title { font-size: 0.92rem; font-weight: 600; color: var(--ink); margin-bottom: 0.6rem; line-height: 1.35; }
+.oc-list { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+.oc-list li { font-size: 0.82rem; font-weight: 300; color: var(--ink-mid); padding-left: 1rem; position: relative; line-height: 1.45; }
+.oc-list li::before { content: ''; position: absolute; left: 0; top: 0.56em; width: 4px; height: 4px; border-radius: 50%; background: var(--s-accent); }
+@media (max-width: 820px) { .outcomes-grid { grid-template-columns: 1fr; } }
+
+/* ── ADVISORS ─────────────────────────────────────────────────── */
+.advisors { background: var(--white); }
+.advisor-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem; margin-top: 3.5rem; }
+.advisor-card { padding: 1.75rem; border: 1px solid var(--border); border-radius: 10px; transition: box-shadow var(--ease); }
+.advisor-card:hover { box-shadow: 0 6px 24px rgba(26,58,42,0.08); }
+.advisor-name { font-size: 1rem; font-weight: 600; color: var(--s); margin-bottom: 0.2rem; line-height: 1.3; }
+.advisor-role { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.04em; color: var(--ink-soft); margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); line-height: 1.5; }
+.advisor-note { font-size: 0.875rem; font-weight: 300; color: var(--ink-mid); line-height: 1.65; }
+@media (max-width: 820px) { .advisor-grid { grid-template-columns: 1fr; } }
+
+/* ── ECOSYSTEM POSITION ───────────────────────────────────────── */
+.position { background: var(--s); padding: 5rem 2rem; }
+.position-inner { max-width: 1160px; margin: 0 auto; }
+.position .eyebrow { color: rgba(255,255,255,0.4); }
+.position-h2 { font-family: var(--serif); font-size: clamp(1.9rem,3.5vw,3rem); font-weight: 300; line-height: 1.12; letter-spacing: -0.02em; color: var(--white); margin-bottom: 1.25rem; }
+.position-h2 em { font-style: italic; color: rgba(255,255,255,0.6); }
+.position-body { font-size: 1rem; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.72; max-width: 560px; margin-bottom: 3.5rem; }
+.position-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden; }
+.position-card { padding: 2rem; background: var(--s); transition: background var(--ease); text-decoration: none; display: flex; flex-direction: column; }
+.position-card:hover { background: var(--s-mid); }
+.position-card.current { background: rgba(255,255,255,0.06); cursor: default; }
+.pos-tag { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.75rem; font-weight: 500; }
+.position-card:nth-child(1) .pos-tag { color: rgba(54,94,191,0.85); }
+.position-card:nth-child(2) .pos-tag { color: rgba(196,112,42,0.85); }
+.position-card:nth-child(3) .pos-tag { color: rgba(255,255,255,0.45); }
+.pos-domain { font-family: var(--mono); font-size: 0.78rem; font-weight: 500; color: rgba(255,255,255,0.75); margin-bottom: 0.3rem; }
+.pos-title { font-size: 0.9rem; font-weight: 600; color: var(--white); margin-bottom: 0.5rem; line-height: 1.3; }
+.pos-desc { font-size: 0.8rem; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.55; flex: 1; }
+.pos-link { margin-top: 1.25rem; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.06em; color: rgba(255,255,255,0.5); display: flex; align-items: center; gap: 0.4rem; transition: color var(--ease), gap var(--ease); }
+.position-card:hover .pos-link { color: rgba(255,255,255,0.85); gap: 0.65rem; }
+.pos-you { margin-top: 1.25rem; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+@media (max-width: 820px) { .position-cards { grid-template-columns: 1fr; } .position-card { border-bottom: 1px solid rgba(255,255,255,0.1); } }
+
+/* ── CONTACT ─────────────────────────────────────────────────── */
+.contact { background: var(--cream); padding: 6rem 2rem; text-align: center; }
+.contact-inner { max-width: 560px; margin: 0 auto; }
+.contact-h2 { font-family: var(--serif); font-size: clamp(2rem,4vw,3.2rem); font-weight: 300; letter-spacing: -0.02em; color: var(--ink); line-height: 1.1; margin-bottom: 1.25rem; }
+.contact-h2 em { font-style: italic; color: var(--s-mid); }
+.contact-body { font-size: 1rem; font-weight: 300; color: var(--ink-mid); line-height: 1.7; margin-bottom: 2rem; }
+.contact-email { display: inline-block; font-family: var(--mono); font-size: 0.95rem; font-weight: 500; color: var(--s); padding: 0.85rem 2rem; border: 1.5px solid var(--border); border-radius: 4px; background: var(--white); user-select: all; cursor: text; letter-spacing: 0.01em; }
+
+/* ── FOOTER ───────────────────────────────────────────────────── */
+footer { background: var(--white); border-top: 1px solid var(--border); padding: 4rem 0 2.25rem; }
+.footer-inner { max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
+.footer-top { display: grid; grid-template-columns: 220px 1fr; gap: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+.footer-brand { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.75rem; }
+.footer-tagline { font-size: 0.8rem; font-weight: 300; color: var(--ink-soft); line-height: 1.7; max-width: 200px; }
+.footer-nav { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+.footer-nav h5 { font-family: var(--mono); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--s-accent); margin-bottom: 1rem; }
+.footer-nav a { display: block; font-size: 0.82rem; color: var(--ink-mid); margin-bottom: 0.5rem; text-decoration: none; transition: color var(--ease); }
+.footer-nav a:hover { color: var(--s); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.footer-copy { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint); }
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a { font-size: 0.72rem; color: var(--ink-faint); text-decoration: none; transition: color var(--ease); }
+.footer-links a:hover { color: var(--s); }
+@media (max-width: 820px) { .footer-top { grid-template-columns: 1fr; gap: 2rem; } .footer-nav { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 480px) { .footer-nav { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; text-align: center; } }
+
+/* ── SCROLL REVEAL ────────────────────────────────────────────── */
+.fade-up { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-up.visible { opacity: 1; transform: none; }
+.d1 { transition-delay: 0.08s; } .d2 { transition-delay: 0.16s; } .d3 { transition-delay: 0.24s; } .d4 { transition-delay: 0.32s; }
+
+@media (max-width: 820px) { .section { padding: 4.5rem 1.5rem; } }
+@media (max-width: 480px) { .section { padding: 3.5rem 1.25rem; } }
 </style>
-  <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@500;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
 <!-- NAV -->
-<nav id="nav" role="navigation" aria-label="Main navigation">
+<nav id="nav">
   <div class="nav-inner">
     <a class="nav-brand" href="#">
-      <div class="nav-logo-mark">
-        <div class="nav-logo-dot nav-logo-core"></div>
-        <div class="nav-logo-dot nav-logo-r1"></div>
-        <div class="nav-logo-dot nav-logo-r2"></div>
+      <div class="nav-mark">
+        <div class="nav-dot nav-core"></div>
+        <div class="nav-dot nav-r1"></div>
+        <div class="nav-dot nav-r2"></div>
       </div>
-      <div class="nav-wordmark">
-        <span class="nav-wordmark-name">Assistiv</span>
-        <span class="nav-wordmark-sub">Systems</span>
+      <div class="nav-words">
+        <span class="nav-name">Assistiv</span>
+        <span class="nav-sub">Services</span>
       </div>
     </a>
     <ul class="nav-links">
-      <li><a href="#challenge">The Challenge</a></li>
-      <li><a href="#approach">Our Approach</a></li>
+      <li><a href="#services">How It Works</a></li>
+      <li><a href="#principles">Our Principles</a></li>
       <li><a href="#outcomes">Outcomes</a></li>
-      <li><a href="#ecosystem">Our Platform</a></li>
-      <li class="nav-dropdown">
-        <a href="#ecosystem">Ecosystem</a>
-        <ul class="nav-dropdown-menu">
-          <li><a href="https://www.assistiv.cloud" target="_blank" rel="noopener">assistiv.cloud</a></li>
-          <li><a href="https://www.assistiv.tools" target="_blank" rel="noopener">assistiv.tools</a></li>
-        </ul>
-      </li>
+      <li><a href="#advisors">Advisory Board</a></li>
     </ul>
+    <a class="nav-eco" href="https://www.assistiv.co">← assistiv.co</a>
     <a class="nav-cta" href="#contact">Get in touch</a>
-    <button class="hamburger" id="hbg" aria-label="Open navigation menu">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="hamburger" id="hbg" aria-label="Open menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
-<!-- ECOSYSTEM BANNER -->
-<style>
-  .eco-banner {
-    position: fixed;
-    top: 72px;
-    left: 0; right: 0;
-    z-index: 999;
-    background: var(--green-pale);
-    border-bottom: 1px solid rgba(10,95,68,0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.45rem 1.5rem;
-    font-family: var(--sans);
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--green-deep);
-    white-space: nowrap;
-    flex-wrap: wrap;
-  }
-  .eco-banner-label { opacity: 0.65; }
-  .eco-banner-role { font-weight: 700; }
-  .eco-banner-sep { opacity: 0.35; margin: 0 0.25rem; }
-  .eco-banner a {
-    color: var(--green-accent);
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.15s;
-  }
-  .eco-banner a:hover { color: var(--green-deep); text-decoration: underline; }
-  @media (max-width: 600px) {
-    .eco-banner { font-size: 0.6rem; top: 60px; }
-  }
-</style>
-<div class="eco-banner">
-  <span class="eco-banner-label">Assistiv Ecosystem</span>
-  <span class="eco-banner-sep">·</span>
-  <span class="eco-banner-role">Early Intervention</span>
-  <span class="eco-banner-sep">·</span>
-  <a href="https://www.assistiv.cloud" target="_blank" rel="noopener">assistiv.cloud</a>
-  <span class="eco-banner-sep">·</span>
-  <a href="https://www.assistiv.tools" target="_blank" rel="noopener">assistiv.tools</a>
+<!-- ECOSYSTEM STRIP -->
+<div class="eco-strip">
+  <span>Assistiv Ecosystem</span>
+  <span class="eco-strip-sep">·</span>
+  <a href="https://www.assistiv.cloud">assistiv.cloud</a>
+  <span class="eco-strip-sep">→</span>
+  <a href="https://www.assistiv.tools">assistiv.tools</a>
+  <span class="eco-strip-sep">→</span>
+  <span class="eco-strip-here">assistiv.services</span>
 </div>
 
 <!-- MOBILE NAV -->
 <div class="mobile-nav" id="mob-nav">
   <button class="m-close" id="mob-close">✕</button>
-  <a href="#challenge" onclick="document.getElementById('mob-nav').classList.remove('open')">The Challenge</a>
-  <a href="#approach"  onclick="document.getElementById('mob-nav').classList.remove('open')">Our Approach</a>
-  <a href="#outcomes"  onclick="document.getElementById('mob-nav').classList.remove('open')">Outcomes</a>
-  <a href="#ecosystem" onclick="document.getElementById('mob-nav').classList.remove('open')">Our Platform</a>
-  <a href="#ecosystem" onclick="document.getElementById('mob-nav').classList.remove('open')">Ecosystem</a>
-  <a href="https://www.assistiv.cloud" target="_blank" rel="noopener" onclick="document.getElementById('mob-nav').classList.remove('open')" style="font-size:1.3rem;opacity:0.6;">↳ assistiv.cloud</a>
-  <a href="https://www.assistiv.tools" target="_blank" rel="noopener" onclick="document.getElementById('mob-nav').classList.remove('open')" style="font-size:1.3rem;opacity:0.6;">↳ assistiv.tools</a>
-  <a href="#contact"   onclick="document.getElementById('mob-nav').classList.remove('open')">Get in touch</a>
+  <a href="#services"   onclick="document.getElementById('mob-nav').classList.remove('open')">How It Works</a>
+  <a href="#principles" onclick="document.getElementById('mob-nav').classList.remove('open')">Our Principles</a>
+  <a href="#outcomes"   onclick="document.getElementById('mob-nav').classList.remove('open')">Outcomes</a>
+  <a href="#advisors"   onclick="document.getElementById('mob-nav').classList.remove('open')">Advisory Board</a>
+  <a href="#contact"    onclick="document.getElementById('mob-nav').classList.remove('open')">Get in Touch</a>
+  <a href="https://www.assistiv.co" style="font-size:1.1rem;opacity:0.5;">← assistiv.co</a>
 </div>
-
-<script>
-  document.getElementById('hbg').addEventListener('click',()=>document.getElementById('mob-nav').classList.add('open'));
-  document.getElementById('mob-close').addEventListener('click',()=>document.getElementById('mob-nav').classList.remove('open'));
-</script>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-inner">
+  <div class="hero-grid">
 
-    <!-- LEFT: text -->
-    <div class="hero-text">
-      <p class="hero-eyebrow fade-in">Infrastructure for independent living</p>
-      <h1 class="hero-title fade-in">
-        Supporting people to live well at home.<br>
-        <em>Before crisis. On their terms.</em>
+    <div>
+      <p class="hero-eyebrow fade-up">Preventative care platform</p>
+      <h1 class="hero-h1 fade-up d1">
+        Living well at home.<br>
+        On your terms.<br>
+        <em>Before anything goes wrong.</em>
       </h1>
-      <p class="hero-sub fade-in">
-        Assistiv is a platform designed for the people who fall between existing services. Independent enough to manage, vulnerable enough to be at risk. We build infrastructure for this population that existing care systems were never designed to reach.
+      <p class="hero-body fade-up d2">
+        Assistiv Services is for the people who fall between existing services. Managing independently, but one event from crisis. We provide the support, tools, and connections that help people stay in control — chosen by them, at their pace, centred on what they actually want.
       </p>
+      <div class="hero-actions fade-up d3">
+        <a href="#services" class="btn-primary">See what we offer</a>
+        <a href="#contact" class="btn-ghost">Talk to us</a>
+      </div>
     </div>
 
-    <!-- RIGHT: mini ecosystem animation -->
-    <div class="hero-anim-col fade-in">
-      <div class="mini-eco-wrap">
-        <div class="mini-eco-label">How the ecosystem works</div>
-        <canvas id="mini-eco-canvas" aria-label="Assistiv ecosystem overview"></canvas>
-        <div class="mini-eco-footer">
-          <span class="mini-eco-stage" id="meco-label">NHS data exhaust</span>
-          <div class="mini-eco-dots">
-            <span class="meco-dot active" data-s="0"></span>
-            <span class="meco-dot" data-s="1"></span>
-            <span class="meco-dot" data-s="2"></span>
-            <span class="meco-dot" data-s="3"></span>
-            <span class="meco-dot" data-s="4"></span>
-            <span class="meco-dot" data-s="5"></span>
-            <span class="meco-dot" data-s="6"></span>
+    <!-- Three audience perspectives -->
+    <div class="hero-persona-stack fade-up d2">
+      <div class="persona-card">
+        <div class="persona-who">For the person at home</div>
+        <p class="persona-text">
+          <strong>Margaret, 78, Faversham.</strong> Lives alone. Manages well most days. Worries about the nights. Her daughter worries more. No one has suggested anything helpful until now.
+        </p>
+      </div>
+      <div class="persona-card">
+        <div class="persona-who">For the family</div>
+        <p class="persona-text">
+          <strong>David, carer, lives 60 miles away.</strong> Calls every evening. Cannot always tell if she is really fine or being reassuring. Would give anything for visibility without intrusion.
+        </p>
+      </div>
+      <div class="persona-card">
+        <div class="persona-who">For the referral partner</div>
+        <p class="persona-text">
+          <strong>PCN Social Prescribing Link Worker.</strong> Sees people who need support before they need services. Needs somewhere safe and dignified to refer them that isn't a waiting list.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- QUOTE BREAK -->
+<div class="quote-break fade-up">
+  <blockquote>"The goal is not to remove dependency. It is to make it chosen."</blockquote>
+  <cite>Positive Interdependence — Assistiv design philosophy</cite>
+</div>
+
+<!-- SERVICES / HOW IT WORKS -->
+<section class="section services" id="services">
+  <div class="section-inner">
+    <div class="services-intro">
+      <div class="fade-up">
+        <span class="eyebrow">What we deliver</span>
+        <h2 class="section-h2">Technology that serves the person. <em>Not the system.</em></h2>
+      </div>
+      <div class="fade-up d1">
+        <p class="section-body">Every Assistiv service begins with a conversation — not a form, not an assessment, not a risk matrix. The person says what matters to them. Technology, if any, is introduced only in response to what they have named. Nothing is activated without explicit agreement. Everything is reversible.</p>
+      </div>
+    </div>
+
+    <div class="service-grid fade-up d1">
+      <div class="service-card">
+        <div class="service-icon">🎙️</div>
+        <div class="service-title">Conversational Check-ins</div>
+        <div class="service-body">A warm, unhurried monthly conversation across six quality-of-life domains. Adaptive, non-clinical, designed to surface what matters without pressure or clinical framing. The person speaks freely, in their own words.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏠</div>
+        <div class="service-title">Passive Home Safety</div>
+        <div class="service-body">Discreet mmWave radar and acoustic monitoring detects falls, changes in movement patterns, and nocturnal risk — without cameras, without wearables, without anything to remember or charge. Invisible in operation.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">👨‍👩‍👧</div>
+        <div class="service-title">Inner Circle</div>
+        <div class="service-body">A private family platform connecting the person to the people they trust. Photos, voice notes, shared moments, and — with consent — gentle visibility into how things really are at home. No surveillance. No alarm bells. Just connection.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📋</div>
+        <div class="service-title">Care Coordination</div>
+        <div class="service-body">A digital care wallet holding the person's preferences, history, and care information — accessible to whoever they choose. Structured referrals when needed. A single coherent picture in place of fragmented records.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔗</div>
+        <div class="service-title">Community Connections</div>
+        <div class="service-body">Social prescribing links, local voluntary sector connections, and community resources matched to what the person has said they want — not what the system decides they need. Meaningful activity, not managed decline.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📊</div>
+        <div class="service-title">Household Intelligence</div>
+        <div class="service-body">At-a-glance home environment monitoring — temperature, appliance safety, security status — surfaced to the person and, with their consent, to family. A quiet reassurance, not a control mechanism.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN YOUR LIFE ONBOARDING -->
+<section class="section dyl">
+  <div class="section-inner">
+    <div class="dyl-grid">
+      <div class="fade-up">
+        <span class="eyebrow">How it begins</span>
+        <h2 class="section-h2">Design Your Life.<br><em>Not a care plan.</em></h2>
+        <p class="section-body" style="margin-bottom:1.5rem;">The onboarding conversation is not an assessment. It is an invitation. The person sets the agenda. They name what independence means to them, what they want to protect, and what they are open to. Everything Assistiv does flows from that.</p>
+        <p class="section-body">Sensors and technology are only ever introduced in direct response to something the person has said they want. Not a package. Not a default. A response to a named need, at a pace that feels right.</p>
+      </div>
+      <div class="dyl-visual fade-up d2">
+        <div class="dyl-step">
+          <div class="dyl-num">01</div>
+          <div class="dyl-step-body">
+            <div class="dyl-step-title">A warm conversation about everyday life</div>
+            <div class="dyl-step-desc">What matters to you? What does a good day look like? No clinical framing, no assessment language. Just listening.</div>
           </div>
-          <a href="ecosystem-animation.html" class="mini-eco-link">Full walkthrough →</a>
         </div>
-      </div>
-    </div>
-
-  </div>
-  <div class="hero-divider fade-in"></div>
-</section>
-
-<!-- STAT STRIP -->
-<section class="stats">
-  <div class="stats-inner">
-    <div class="stat fade-in">
-      <div class="stat-number">3.5m</div>
-      <div class="stat-label">People in the UK's Missing Middle. Managing, but one event from crisis</div>
-    </div>
-    <div class="stat fade-in">
-      <div class="stat-number">£2.3bn</div>
-      <div class="stat-label">NHS annual cost of falls in England. 79% of which happen at home</div>
-    </div>
-    <div class="stat fade-in">
-      <div class="stat-number">40%</div>
-      <div class="stat-label">Of dementia cases could be prevented or delayed with earlier intervention</div>
-    </div>
-    <div class="stat fade-in">
-      <div class="stat-number">14:1</div>
-      <div class="stat-label">Estimated return on investment for commissioning bodies at pilot scale</div>
-    </div>
-  </div>
-</section>
-
-<!-- PROBLEM -->
-<section class="section problem" id="challenge">
-  <div class="section-inner">
-    <p class="section-label fade-in">The challenge</p>
-    <div class="problem-grid">
-      <div class="problem-left fade-in">
-        <h2 class="section-title">The system was not designed for the people who need it most.</h2>
-        <p class="section-body">
-          Three and a half million older adults in the UK live independently but sit outside the reach of formal health and social care. They are not ill enough to qualify. Not yet dependent enough to be flagged. Invisible to existing systems until something goes wrong.
-        </p>
-        <p class="section-body" style="margin-top: 1.25rem;">
-          When people in this group try to access support, they encounter a fragmented landscape that demands navigation skills many no longer have. By the time they reach anyone who can help, the opportunity for early intervention has often passed.
-        </p>
-      </div>
-      <div class="problem-points fade-in">
-        <div class="problem-point">
-          <p class="pp-label">For the individual</p>
-          <p class="pp-text">Living with uncertainty. Managing risk alone. One fall, one health event, one confused night and independence is gone. Not gradually, but suddenly.</p>
+        <div class="dyl-step">
+          <div class="dyl-num">02</div>
+          <div class="dyl-step-body">
+            <div class="dyl-step-title">You name what you want to protect</div>
+            <div class="dyl-step-desc">Your morning routine. Your garden. Your independence in the kitchen. The things that make home, home.</div>
+          </div>
         </div>
-        <div class="problem-point">
-          <p class="pp-label">For families and carers</p>
-          <p class="pp-text">Caught between constant worry and helplessness. Unable to monitor from a distance, uncertain when to act, carrying an invisible burden the system does not acknowledge.</p>
+        <div class="dyl-step">
+          <div class="dyl-num">03</div>
+          <div class="dyl-step-body">
+            <div class="dyl-step-title">Assistiv responds to what you've said</div>
+            <div class="dyl-step-desc">If you mentioned the nights, we might suggest the movement sensor. Only then. Only because you named it.</div>
+          </div>
         </div>
-        <div class="problem-point">
-          <p class="pp-label">For services</p>
-          <p class="pp-text">Avoidable crisis admissions. Delayed discharge. Residential placements that could have been prevented months earlier. The longer the system waits, the more expensive and complex the intervention becomes.</p>
+        <div class="dyl-step">
+          <div class="dyl-num">04</div>
+          <div class="dyl-step-body">
+            <div class="dyl-step-title">Everything is reversible, always</div>
+            <div class="dyl-step-desc">Change your mind. Remove a sensor. Leave Inner Circle. The system follows you — not the other way around.</div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- APPROACH -->
-<section class="section" id="approach">
-  <div class="section-inner">
-    <p class="section-label fade-in">Our approach</p>
-    <h2 class="section-title fade-in">Built around the person. Not the system's convenience.</h2>
-    <p class="section-body fade-in">Assistiv brings novel approaches and technologies to a population that conventional platforms have not been designed to reach. Every design decision is grounded in one principle: the person is always the author of what happens next.</p>
-
-    <div class="approach-grid fade-in">
-      <div class="approach-card">
-        <div class="ac-number">01</div>
-        <h3 class="ac-title">A conversation, not an assessment</h3>
-        <p class="ac-body">Assistiv begins with listening. A warm, unhurried conversation that surfaces what matters to the person, on their terms, in their language, without clinical framing. The technology is introduced only in direct response to what the person says they want.</p>
-      </div>
-      <div class="approach-card">
-        <div class="ac-number">02</div>
-        <h3 class="ac-title">Three independent perspectives</h3>
-        <p class="ac-body">Assistiv synthesises what the person reports, what those close to them observe, and what the home environment signals. It brings these together monthly across multiple quality-of-life domains. Where the three perspectives diverge is where the signal that matters lives.</p>
-      </div>
-      <div class="approach-card">
-        <div class="ac-number">03</div>
-        <h3 class="ac-title">Connected to the care system</h3>
-        <p class="ac-body">The platform is designed from the ground up to integrate with the NHS infrastructure that is coming, including the Single Patient Record and the shift toward neighbourhood-based, preventive care. The person holds the keys to what is shared and with whom.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- PRINCIPLES -->
-<section class="section principles">
+<section class="section principles" id="principles">
   <div class="section-inner">
-    <div class="principles-header">
-      <div class="fade-in">
-        <p class="section-label">Design principles</p>
-        <h2 class="section-title">Privacy and dignity are not features. They are the architecture.</h2>
+    <span class="eyebrow fade-up">Design principles</span>
+    <h2 class="section-h2 fade-up d1">Privacy and dignity are <em>not features.</em><br>They are the architecture.</h2>
+    <p class="section-body fade-up d2">Every technology choice is filtered through one question: does this serve the person's independence, or does it quietly undermine it? Assistiv is not surveillance. It is infrastructure that people choose, on their own terms, for their own reasons.</p>
+    <div class="principles-grid fade-up d2">
+      <div class="principle-card">
+        <div class="principle-title">The person is always the author</div>
+        <div class="principle-body">Nothing is activated without explicit agreement. Nothing is shared without consent. The person controls what is monitored and who can see it. Assistiv follows where they lead.</div>
       </div>
-      <div class="fade-in">
-        <p class="section-body">Every technology choice we make is filtered through a single question: does this serve the person's independence, or does it quietly undermine it? Assistiv is not surveillance. It is infrastructure that people choose, on their own terms, for their own reasons.</p>
-        <p class="section-body" style="margin-top: 1.25rem;">The platform is designed to be graduated. A person can begin with a conversation and nothing else. Technology, if any, is introduced incrementally, chosen by them, for reasons they have named, always reversible.</p>
+      <div class="principle-card">
+        <div class="principle-title">No cameras. No wearables. No burden.</div>
+        <div class="principle-body">Assistiv is invisible in operation. Nothing to remember, nothing to charge, nothing that broadcasts vulnerability. Passive by default, intrusive never.</div>
+      </div>
+      <div class="principle-card">
+        <div class="principle-title">Saying no is a valid outcome</div>
+        <div class="principle-body">A person who declines is not a failed engagement. They are exercising agency. The platform honours this at every step, without pressure or reframing.</div>
+      </div>
+      <div class="principle-card">
+        <div class="principle-title">Data processed at home, owned by the person</div>
+        <div class="principle-body">Derived signals, not raw data, are the only things that travel. The Iron Curtain architecture keeps home data and wellness data strictly separated. The person holds the keys.</div>
+      </div>
+      <div class="principle-card">
+        <div class="principle-title">Positive interdependence</div>
+        <div class="principle-body">Voluntarily releasing small autonomies to trusted carers and services as life evolves is healthy, not a failure. Assistiv gives people informed choice over how and when to accept help — on their own terms.</div>
+      </div>
+      <div class="principle-card">
+        <div class="principle-title">Graduated by design</div>
+        <div class="principle-body">A person can begin with a conversation and nothing else. Technology is introduced incrementally, chosen by them, for reasons they have named. Always reversible. Never imposed.</div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="principles-grid fade-in">
-      <div class="principle">
-        <h3 class="principle-title">The person is always the author</h3>
-        <p class="principle-body">Nothing is activated without explicit agreement. Nothing is shared without consent. The person controls what is monitored and who can see it. Assistiv follows where they lead.</p>
+<!-- INNER CIRCLE -->
+<section class="section inner-circle">
+  <div class="section-inner">
+    <div class="ic-grid">
+      <div>
+        <span class="eyebrow fade-up">Inner Circle</span>
+        <h2 class="section-h2 fade-up d1">The people who matter,<br><em>connected with care.</em></h2>
+        <p class="section-body fade-up d2" style="margin-bottom:1.5rem;">Inner Circle is the private family layer of the Assistiv platform. A dedicated space for the people the person trusts — not a monitoring dashboard, not a notification feed, but a place where family can stay genuinely connected.</p>
+        <div class="ic-features fade-up d2">
+          <div class="ic-feature">
+            <div class="ic-feature-icon">📷</div>
+            <div>
+              <div class="ic-feature-title">Shared moments, not alerts</div>
+              <div class="ic-feature-desc">Photos, voice notes, and messages in a private family space — the texture of daily life, shared on the person's terms.</div>
+            </div>
+          </div>
+          <div class="ic-feature">
+            <div class="ic-feature-icon">👶</div>
+            <div>
+              <div class="ic-feature-title">Grandchildren included</div>
+              <div class="ic-feature-desc">Child-friendly access means the youngest family members can be part of the circle — not just the worried adults.</div>
+            </div>
+          </div>
+          <div class="ic-feature">
+            <div class="ic-feature-icon">📖</div>
+            <div>
+              <div class="ic-feature-title">Memories</div>
+              <div class="ic-feature-desc">A structured digital life record, family-contributed, connected to reminiscence and memory support where needed.</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="principle">
-        <h3 class="principle-title">No cameras. No wearables. No burden.</h3>
-        <p class="principle-body">Assistiv is designed to be invisible in operation. Nothing to remember. Nothing to charge. Nothing that says "you are being watched." Passive by default, intrusive never.</p>
-      </div>
-      <div class="principle">
-        <h3 class="principle-title">Saying no is a valid outcome</h3>
-        <p class="principle-body">A person who declines is not a failed engagement. They are a person exercising agency. The platform is designed to honour this at every step, without pressure or re-framing.</p>
-      </div>
-      <div class="principle">
-        <h3 class="principle-title">Data owned by the person</h3>
-        <p class="principle-body">All processing happens within the home. Derived insights, not raw data, are the only thing that travels. The person holds the keys. Assistiv provides the infrastructure.</p>
+
+      <!-- Inner Circle mock -->
+      <div class="ic-visual fade-up d3">
+        <div class="ic-member">
+          <div class="ic-avatar" style="background:#e4ede8;color:#2d5c42;">M</div>
+          <div class="ic-member-info">
+            <div class="ic-member-name">Margaret</div>
+            <div class="ic-member-role">Inner Circle member</div>
+          </div>
+          <div class="ic-member-status status-active">Active</div>
+        </div>
+        <div class="ic-member">
+          <div class="ic-avatar" style="background:#fdf3e3;color:#8a4012;">D</div>
+          <div class="ic-member-info">
+            <div class="ic-member-name">David (son)</div>
+            <div class="ic-member-role">Family · London</div>
+          </div>
+          <div class="ic-member-status status-notified">Notified</div>
+        </div>
+        <div class="ic-member">
+          <div class="ic-avatar" style="background:#eef2fb;color:#1e3a7a;">S</div>
+          <div class="ic-member-info">
+            <div class="ic-member-name">Sarah (daughter)</div>
+            <div class="ic-member-role">Family · Maidstone</div>
+          </div>
+          <div class="ic-member-status status-active">Active</div>
+        </div>
+        <div class="ic-member">
+          <div class="ic-avatar" style="background:#f4f7f5;color:#3d7a56;">E</div>
+          <div class="ic-member-info">
+            <div class="ic-member-name">Emily (granddaughter)</div>
+            <div class="ic-member-role">Child access · Age 9</div>
+          </div>
+          <div class="ic-member-status status-joined">Joined</div>
+        </div>
+        <div class="ic-visual-label">Inner Circle — private to this family</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- OUTCOMES -->
-<section class="section" id="outcomes">
+<section class="section outcomes" id="outcomes">
   <div class="section-inner">
-    <div class="outcomes-header">
-      <div class="fade-in">
-        <p class="section-label">Outcomes</p>
-        <h2 class="section-title">Earlier support. Measurable impact. Across the whole system.</h2>
-      </div>
-      <div class="fade-in">
-        <p class="section-body">Assistiv produces measurable outcomes at the level of the individual, their family, and the commissioning system. The Kent ICB pilot projection models £1.2m in system savings against £88k commissioning cost in the first quarter alone.</p>
-      </div>
-    </div>
-
-    <div class="outcomes-grid fade-in">
-      <div class="outcome-card">
-        <p class="oc-group">For the person</p>
-        <ul class="oc-items">
-          <li>Lives longer at home, on their own terms</li>
+    <span class="eyebrow fade-up">What the platform delivers</span>
+    <h2 class="section-h2 fade-up d1">Earlier support. <em>Measurable impact.</em> Across the whole system.</h2>
+    <p class="section-body fade-up d2">Assistiv produces measurable outcomes at the level of the individual, their family, and the commissioning system. The Kent ICB pilot projection models £1.2m in system savings against £88k commissioning cost in the first quarter alone.</p>
+    <div class="outcomes-grid">
+      <div class="outcome-card fade-up d1">
+        <div class="oc-who">For the person</div>
+        <div class="oc-title">Independence preserved, on their terms</div>
+        <ul class="oc-list">
+          <li>Lives longer at home with confidence</li>
           <li>Earlier cognitive and physical support</li>
-          <li>Dignity and autonomy maintained</li>
+          <li>Dignity and autonomy throughout</li>
           <li>Meaningful activity sustained</li>
           <li>Freedom from fear of falling undetected</li>
-          <li>Connection to family and community</li>
+          <li>Real connection to family and community</li>
         </ul>
       </div>
-      <div class="outcome-card">
-        <p class="oc-group">For carers and families</p>
-        <ul class="oc-items">
+      <div class="outcome-card fade-up d2">
+        <div class="oc-who">For carers and families</div>
+        <div class="oc-title">Awareness without intrusion</div>
+        <ul class="oc-list">
           <li>Real-time awareness replaces constant worry</li>
-          <li>Family visits restored. No longer arriving as crisis managers</li>
+          <li>Family visits restored — not crisis management</li>
           <li>Carer wellbeing monitored and protected</li>
-          <li>Objective data for difficult family conversations</li>
+          <li>Objective data for difficult conversations</li>
           <li>Reduced time spent on care coordination</li>
         </ul>
       </div>
-      <div class="outcome-card">
-        <p class="oc-group">For health and social care</p>
-        <ul class="oc-items">
+      <div class="outcome-card fade-up d3">
+        <div class="oc-who">For NHS &amp; commissioners</div>
+        <div class="oc-title">Prevention, not reaction</div>
+        <ul class="oc-list">
           <li>Avoidable crisis admissions prevented</li>
           <li>Safe rapid home discharge enabled</li>
           <li>Residential transition deferred months or years</li>
-          <li>Evidence for Care Act and GP reviews</li>
-          <li>Population-level longitudinal data at scale</li>
+          <li>Evidence base for Care Act and GP reviews</li>
           <li>14:1 return on investment at pilot scale</li>
         </ul>
       </div>
@@ -1397,137 +744,64 @@
   </div>
 </section>
 
-<!-- WHO WE WORK WITH -->
-<section class="section partners">
+<!-- ADVISORY BOARD -->
+<section class="section advisors" id="advisors">
   <div class="section-inner">
-    <p class="section-label fade-in">Who we work with</p>
-    <h2 class="section-title fade-in">Designed for the NHS that is coming.</h2>
-    <p class="section-body fade-in">Assistiv is not being retrofitted to the NHS agenda. It is designed for it. Every major shift in care delivery, including neighbourhood health, integrated teams, virtual wards, and prevention at scale, requires a passive home intelligence layer. Assistiv is that layer.</p>
-
-    <div class="partners-grid fade-in">
-      <div class="partner-card">
-        <svg class="partner-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="8" width="28" height="20" rx="1" stroke="white" stroke-width="1.5"/>
-          <path d="M4 14h28" stroke="white" stroke-width="1.5"/>
-          <path d="M12 8V6M24 8V6" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <h3 class="partner-title">Integrated Care Boards</h3>
-        <p class="partner-body">A commissioned prevention platform that fills the gap the eFI cannot reach. Continuous frailty intelligence between clinical contacts.</p>
+    <span class="eyebrow fade-up">Advisory Board</span>
+    <h2 class="section-h2 fade-up d1">The clinical and academic <em>foundation.</em></h2>
+    <p class="section-body fade-up d2">Assistiv Services is grounded in validated frameworks and built with the guidance of leading academic and clinical voices in ageing, social care outcomes, data science, and public policy.</p>
+    <div class="advisor-grid">
+      <div class="advisor-card fade-up d1">
+        <div class="advisor-name">Prof. Ann Netten</div>
+        <div class="advisor-role">Emeritus Professor, University of Kent · Creator of ASCOT · Former Director, PSSRU</div>
+        <div class="advisor-note">Creator of the Adult Social Care Outcomes Toolkit, now embedded in national policy across the UK and internationally. Her framework directly underpins the quality-of-life measurement architecture at the heart of Assistiv.</div>
       </div>
-      <div class="partner-card">
-        <svg class="partner-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="18" cy="12" r="5" stroke="white" stroke-width="1.5"/>
-          <path d="M8 28c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <h3 class="partner-title">Local Authorities</h3>
-        <p class="partner-body">Evidence-based care planning, Care Act support, and adult safeguarding infrastructure that generates the longitudinal data statutory assessment demands.</p>
+      <div class="advisor-card fade-up d2">
+        <div class="advisor-name">Mark Greenfield</div>
+        <div class="advisor-role">Emeritus, Northumbria University · Ageing and Nursing</div>
+        <div class="advisor-note">Validated Assistiv's three-state model of independence and introduced the concept of Positive Interdependence that sits at the heart of the platform's philosophy. Nursing and ageing expertise spanning academic and community dimensions of later life.</div>
       </div>
-      <div class="partner-card">
-        <svg class="partner-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M6 10h24M6 18h16M6 26h20" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <h3 class="partner-title">Charities and VCS</h3>
-        <p class="partner-body">A platform that reaches the people charities care about before crisis, with the longitudinal quality-of-life data to evidence impact and commission services.</p>
+      <div class="advisor-card fade-up d1">
+        <div class="advisor-name">Prof. John Jerrim</div>
+        <div class="advisor-role">Professor of Education and Social Statistics, UCL · Director, Quantitative Social Science Research Centre</div>
+        <div class="advisor-note">Winner of the inaugural ESRC Early Career Outstanding Impact Award. Brings rigorous large-scale data methodology and population-level research expertise to Assistiv's evidence base and future academic funding pathways.</div>
       </div>
-      <div class="partner-card">
-        <svg class="partner-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M18 4L32 12v8c0 7.18-5.82 12.36-14 14C9.82 32.36 4 27.18 4 20v-8L18 4z" stroke="white" stroke-width="1.5"/>
-        </svg>
-        <h3 class="partner-title">Technology Partners</h3>
-        <p class="partner-body">Strategic hardware and monitoring partnerships that extend the platform's capability at the edge, without compromising the privacy principles at the core.</p>
+      <div class="advisor-card fade-up d2">
+        <div class="advisor-name">Prof. Tim Legrand</div>
+        <div class="advisor-role">Professor of Politics, University of Adelaide · ARC Future Fellowship 2025–2029</div>
+        <div class="advisor-note">Expert in government policy, public administration, and policy transfer. Brings deep expertise in navigating NHS and local authority commissioning landscapes and in understanding how innovation enters public sector systems.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PLATFORM ECOSYSTEM -->
-<section class="ecosystem" id="ecosystem">
-  <div class="ecosystem-inner">
-    <p class="section-label fade-in">Our platform</p>
-    <h2 class="section-title fade-in">Three connected tools. One system of care.</h2>
-    <p class="section-body fade-in">Assistiv operates across three integrated platforms. Each addresses a distinct stage of the journey from invisibility to appropriate support — finding people, understanding their needs, and delivering the right response.</p>
-
-    <div class="ecosystem-pathway fade-in">
-
-      <a class="eco-platform" href="https://www.assistiv.cloud" target="_blank" rel="noopener">
-        <p class="eco-platform-label">01</p>
-        <p class="eco-platform-name">Identify</p>
-        <span class="eco-platform-url">assistiv.cloud</span>
-        <p class="eco-platform-desc">Population-level frailty intelligence. Finds older adults in the Missing Middle before they reach crisis — using open NHS data, geographic signals, and longitudinal risk modelling.</p>
-        <span class="eco-platform-role">Intelligence layer</span>
+<!-- ECOSYSTEM POSITION -->
+<section class="position" id="ecosystem">
+  <div class="position-inner">
+    <span class="eyebrow fade-up">Part of the Assistiv Ecosystem</span>
+    <h2 class="position-h2 fade-up d1">Where you are in <em>the system.</em></h2>
+    <p class="position-body fade-up d2">Assistiv Services is the third stage of a closed-loop ecosystem. Intelligence identifies where people are at risk. Screening finds them. Services supports them. Every outcome feeds back to sharpen the whole.</p>
+    <div class="position-cards fade-up d2">
+      <a href="https://www.assistiv.cloud" target="_blank" rel="noopener" class="position-card">
+        <div class="pos-tag">Intelligence Layer</div>
+        <div class="pos-domain">assistiv.cloud</div>
+        <div class="pos-title">Frailty Emergence Probability Engine</div>
+        <div class="pos-desc">21 NHS signals. District-level risk scoring. Daily updates. Tells commissioners exactly where to deploy screening.</div>
+        <div class="pos-link">Visit assistiv.cloud →</div>
       </a>
-
-      <div class="eco-arrow">
-        <div class="eco-arrow-line"></div>
-        <p class="eco-arrow-label">Refer</p>
-      </div>
-
-      <a class="eco-platform" href="https://www.assistiv.tools" target="_blank" rel="noopener">
-        <p class="eco-platform-label">02</p>
-        <p class="eco-platform-name">Screen</p>
-        <span class="eco-platform-url">assistiv.tools</span>
-        <p class="eco-platform-desc">Community screening for identified populations. Determines the level and urgency of need through structured, validated assessment — sorting those who need acute pathways from those suited to early intervention.</p>
-        <span class="eco-platform-role">Screening layer</span>
+      <a href="https://www.assistiv.tools" target="_blank" rel="noopener" class="position-card">
+        <div class="pos-tag">Screening Layer</div>
+        <div class="pos-domain">assistiv.tools</div>
+        <div class="pos-title">Community Frailty Screening</div>
+        <div class="pos-desc">Voice-first, 12-domain community screening deployed into high-risk districts. Identifies the Missing Middle at scale.</div>
+        <div class="pos-link">Visit assistiv.tools →</div>
       </a>
-
-      <div class="eco-arrow">
-        <div class="eco-arrow-line"></div>
-        <p class="eco-arrow-label">Route</p>
-      </div>
-
-      <a class="eco-platform eco-platform-highlight" href="#" style="border-color: var(--green-deep);">
-        <p class="eco-platform-label" style="color: var(--green-deep);">03</p>
-        <p class="eco-platform-name" style="color: var(--green-deep);">Intervene</p>
-        <span class="eco-platform-url">assistiv.co</span>
-        <p class="eco-platform-desc">Early intervention for those below the acute threshold. Passive home monitoring, warm conversation, and care coordination — delivered on the person's terms before independence is lost.</p>
-        <span class="eco-platform-role" style="border-color: var(--green-deep); color: var(--green-deep); background: var(--green-pale);">You are here</span>
-      </a>
-
-    </div>
-
-    <div class="eco-outcomes fade-in">
-      <div class="eco-outcome">
-        <p class="eco-outcome-label">Acute pathway</p>
-        <p class="eco-outcome-title">Health and Social Care</p>
-        <p class="eco-outcome-body">People identified by Resilience as approaching or exceeding the acute threshold are referred directly into NHS or local authority care pathways — with the longitudinal data needed for rapid, accurate assessment.</p>
-      </div>
-      <div class="eco-outcome eco-outcome-highlight">
-        <p class="eco-outcome-label">Early intervention pathway</p>
-        <p class="eco-outcome-title">Assistiv Services</p>
-        <p class="eco-outcome-body">People below the acute threshold — managing, but at risk — are supported by Assistiv's platform. Proactive, non-intrusive, and designed to extend independence and defer the need for formal care.</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ADVISORY -->
-<section class="section" id="advisors">
-  <div class="section-inner">
-    <p class="section-label fade-in">Advisory board</p>
-    <h2 class="section-title fade-in">The clinical and academic foundation.</h2>
-    <p class="section-body fade-in">Assistiv is grounded in validated frameworks and built with the guidance of leading academic and clinical voices in ageing, social care outcomes, data science, and public policy.</p>
-
-    <div class="advisory-grid fade-in">
-      <div class="advisor-card">
-        <h3 class="advisor-name">Prof. Ann Netten</h3>
-        <p class="advisor-role">Emeritus Professor, University of Kent · Creator of ASCOT · Former Director, PSSRU</p>
-        <p class="advisor-note">Creator of the Adult Social Care Outcomes Toolkit, now embedded in national policy and used across the UK and internationally. Her framework directly underpins the quality-of-life measurement architecture at the heart of Assistiv.</p>
-      </div>
-      <div class="advisor-card">
-        <h3 class="advisor-name">Mark Greenfield</h3>
-        <p class="advisor-role">Emeritus · Northumbria University · Ageing and Nursing</p>
-        <p class="advisor-note">Nursing and ageing expertise spanning academic and community dimensions of later life care. Validated Assistiv's three-state model of independence and introduced the concept of Positive Interdependence that sits at the heart of the platform's philosophy.</p>
-      </div>
-      <div class="advisor-card">
-        <h3 class="advisor-name">Prof. John Jerrim</h3>
-        <p class="advisor-role">Professor of Education and Social Statistics, UCL · Director, Quantitative Social Science Research Centre</p>
-        <p class="advisor-note">Winner of the inaugural ESRC Early Career Outstanding Impact Award. Brings rigorous large-scale data methodology and population-level research expertise to Assistiv's evidence base and future academic funding applications.</p>
-      </div>
-      <div class="advisor-card">
-        <h3 class="advisor-name">Prof. Tim Legrand</h3>
-        <p class="advisor-role">Professor of Politics, University of Adelaide · ARC Future Fellowship 2025–2029</p>
-        <p class="advisor-note">Expert in government policy, public administration, and policy transfer. Brings deep expertise in navigating NHS and local authority commissioning landscapes and in understanding how innovation enters public sector systems.</p>
+      <div class="position-card current">
+        <div class="pos-tag">Care Platform</div>
+        <div class="pos-domain">assistiv.services</div>
+        <div class="pos-title">Preventative Care at Scale</div>
+        <div class="pos-desc">For everyone below the acute threshold. Passive safety, Inner Circle, care coordination, community connections.</div>
+        <div class="pos-you">You are here</div>
       </div>
     </div>
   </div>
@@ -1536,463 +810,73 @@
 <!-- CONTACT -->
 <section class="contact" id="contact">
   <div class="contact-inner">
-    <span class="section-label fade-in">Get in touch</span>
-    <h2 class="contact-title fade-in">Conversations we welcome.</h2>
-    <p class="contact-body fade-in">
-      We are currently in conversation with ICBs, local authorities, and strategic technology partners interested in the early-intervention and ageing-in-place space. If you are working on commissioning, piloting, or funding in this area, we would be glad to speak.
-    </p>
-    <p class="contact-email fade-in">simon@assistiv.co</p>
+    <span class="eyebrow fade-up" style="display:block;text-align:center;margin-bottom:1.25rem;">Get in touch</span>
+    <h2 class="contact-h2 fade-up d1">Start the <em>right conversation.</em></h2>
+    <p class="contact-body fade-up d2">We are in active conversation with NHS commissioners, ICBs, PCNs, housing providers, and technology partners. If you are working in early intervention, ageing-in-place, or community care — we would be glad to speak.</p>
+    <div class="contact-email fade-up d3">hello@assistiv.services</div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-container">
+  <div class="footer-inner">
     <div class="footer-top">
       <div>
-        <div class="nav-brand" style="pointer-events:none;">
-          <div class="nav-logo-mark">
-            <div class="nav-logo-dot nav-logo-core"></div>
-            <div class="nav-logo-dot nav-logo-r1"></div>
-            <div class="nav-logo-dot nav-logo-r2"></div>
+        <div class="footer-brand">
+          <div class="nav-mark" style="width:26px;height:26px;">
+            <div class="nav-dot nav-core" style="width:6px;height:6px;"></div>
+            <div class="nav-dot nav-r1"   style="width:14px;height:14px;"></div>
+            <div class="nav-dot nav-r2"   style="width:24px;height:24px;"></div>
           </div>
-          <div class="nav-wordmark">
-            <span class="nav-wordmark-name">Assistiv</span>
-            <span class="nav-wordmark-sub">Systems</span>
+          <div class="nav-words">
+            <span class="nav-name" style="font-size:0.9rem;">Assistiv</span>
+            <span class="nav-sub">Services</span>
           </div>
         </div>
-        <p class="f-brand-tagline">Infrastructure for independent living. Delivering proactive, person-centred care before crisis.</p>
-        <span class="f-powered">Powered by Claude Sonnet, Anthropic</span>
+        <p class="footer-tagline">Preventative care and support for independent living. Before crisis. On your terms.</p>
       </div>
-      <div class="f-nav" aria-label="Footer navigation">
-        <div class="f-nav-col">
+      <div class="footer-nav">
+        <div>
           <h5>The Platform</h5>
-          <a href="#challenge">The Challenge</a>
-          <a href="#approach">Our Approach</a>
+          <a href="#services">How It Works</a>
+          <a href="#principles">Our Principles</a>
           <a href="#outcomes">Outcomes</a>
-          <a href="#ecosystem">Our Platform</a>
-        </div>
-        <div class="f-nav-col">
-          <h5>Ecosystem</h5>
-          <a href="https://www.assistiv.cloud" target="_blank" rel="noopener">assistiv.cloud</a>
-          <a href="https://www.assistiv.tools" target="_blank" rel="noopener">assistiv.tools</a>
           <a href="#advisors">Advisory Board</a>
         </div>
-        <div class="f-nav-col">
-          <h5>Connect</h5>
-          <a href="#contact">Get in touch</a>
-          <a href="mailto:simon@assistiv.co">simon@assistiv.co</a>
+        <div>
+          <h5>Ecosystem</h5>
+          <a href="https://www.assistiv.co">assistiv.co</a>
+          <a href="https://www.assistiv.cloud">assistiv.cloud</a>
+          <a href="https://www.assistiv.tools">assistiv.tools</a>
+        </div>
+        <div>
+          <h5>Contact</h5>
+          <a href="mailto:hello@assistiv.services">hello@assistiv.services</a>
+          <a href="#contact">Get in Touch</a>
+          <a href="https://www.assistiv.co">Back to assistiv.co</a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="f-copy">© 2026 Assistiv Systems Limited. All rights reserved.</p>
-      <div class="f-links">
-        <a href="#">Privacy Notice</a>
+      <p class="footer-copy">© <span id="yr"></span> Assistiv Systems Limited. Faversham, Kent.</p>
+      <div class="footer-links">
+        <a href="#">Privacy</a>
         <a href="#">Accessibility</a>
+        <a href="https://www.assistiv.co">assistiv.co</a>
       </div>
     </div>
   </div>
 </footer>
 
 <script>
-  /* ---- Fade-in on scroll ---- */
-  const observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.getElementById('yr').textContent = new Date().getFullYear();
+document.getElementById('hbg').addEventListener('click', () => document.getElementById('mob-nav').classList.add('open'));
+document.getElementById('mob-close').addEventListener('click', () => document.getElementById('mob-nav').classList.remove('open'));
 
-  document.querySelectorAll('.fade-in').forEach(function(el, i) {
-    el.style.transitionDelay = (i % 4 * 0.07) + 's';
-    observer.observe(el);
-  });
-
-  /* ---- Google Sites iframe height fix ----
-     Google Sites embeds pages in a fixed-height iframe. This script
-     continuously measures the full document height and posts it to the
-     parent frame, allowing Google Sites to expand the embed widget to
-     show the whole page without an internal scrollbar.
-
-     This is harmless when the page is loaded standalone (window === top)
-     and only activates when embedded in a cross-origin iframe. */
-  (function() {
-    function sendHeight() {
-      var height = document.documentElement.scrollHeight;
-      try {
-        /* Google Sites listens for this specific message format */
-        window.parent.postMessage({ type: 'setHeight', height: height }, '*');
-        /* Fallback format used by some embed widgets */
-        window.parent.postMessage(JSON.stringify({ frameHeight: height }), '*');
-      } catch(e) { /* Cross-origin: silently ignore */ }
-    }
-
-    /* Send on load */
-    window.addEventListener('load', sendHeight);
-
-    /* Send after images load (they affect height) */
-    window.addEventListener('load', function() {
-      setTimeout(sendHeight, 300);
-      setTimeout(sendHeight, 800);
-      setTimeout(sendHeight, 1500);
-    });
-
-    /* Send on resize (orientation change on mobile) */
-    window.addEventListener('resize', sendHeight);
-
-    /* ResizeObserver: most reliable method — fires when any element
-       changes size, including elements revealed by the fade-in animation */
-    if (window.ResizeObserver) {
-      var ro = new ResizeObserver(sendHeight);
-      ro.observe(document.body);
-    }
-  })();
-</script>
-
-
-<!-- MINI ECOSYSTEM ANIMATION -->
-<script>
-(function () {
-  const canvas = document.getElementById('mini-eco-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let W, H, DPR = 1, t = 0, stage = 0, raf, running = true, autoTimer;
-
-  const LABELS = [
-    'NHS data exhaust',
-    'FEP intelligence layer',
-    'Target populations',
-    'ASSISTIV.TOOLS screening',
-    'PCN Hub — acute pathway',
-    'Assistiv Platform',
-    'Feedback loop'
-  ];
-
-  const C = {
-    sage:'#3d7a56', sageL:'#7aab90',
-    blue:'#2a5880', amber:'#b07d2a',
-    red:'#c04040', forest:'#1a3a2a', forestL:'#2d5c42',
-    rose:'#8a3a4a', inkSoft:'#6b7d72', border:'#d8e0da', white:'#ffffff',
-  };
-
-  const SIGS = [
-    ['Falls 65+',C.sage],['Prescribing',C.blue],['Deprivation',C.amber],
-    ['Alone 75+',C.sage],['111 calls',C.blue],['Hip fractures',C.rose],
-    ['Winter Dx',C.amber],['Dementia',C.blue],['CQC gap',C.sage],
-  ];
-
-  const DISTRICTS = [
-    {n:'Thanet',s:82,r:'critical'},{n:'Folkestone',s:76,r:'high'},
-    {n:'Dover',s:73,r:'high'},{n:'Swale',s:68,r:'high'},
-    {n:'Medway',s:65,r:'high'},{n:'Gravesham',s:62,r:'high'},
-    {n:'Ashford',s:57,r:'moderate'},{n:'Canterbury',s:48,r:'moderate'},
-    {n:'Maidstone',s:46,r:'moderate'},{n:'Dartford',s:54,r:'moderate'},
-  ];
-
-  if (!CanvasRenderingContext2D.prototype.roundRect) {
-    CanvasRenderingContext2D.prototype.roundRect = function(x,y,w,h,r){
-      this.beginPath();
-      this.moveTo(x+r,y);this.lineTo(x+w-r,y);this.arcTo(x+w,y,x+w,y+r,r);
-      this.lineTo(x+w,y+h-r);this.arcTo(x+w,y+h,x+w-r,y+h,r);
-      this.lineTo(x+r,y+h);this.arcTo(x,y+h,x,y+h-r,r);
-      this.lineTo(x,y+r);this.arcTo(x,y,x+r,y,r);this.closePath();
-    };
-  }
-
-  /* ── DPR-aware resize: physical pixels = CSS pixels × DPR ── */
-  function resize() {
-    DPR = window.devicePixelRatio || 1;
-    const cssW = canvas.parentElement.getBoundingClientRect().width || 500;
-    const cssH = canvas.offsetHeight || 220;
-    /* Set the backing store to physical resolution */
-    canvas.width  = Math.round(cssW * DPR);
-    canvas.height = Math.round(cssH * DPR);
-    /* Keep CSS display size the same */
-    canvas.style.width  = cssW + 'px';
-    canvas.style.height = cssH + 'px';
-    /* Scale all drawing ops so coordinates stay in CSS-pixel space */
-    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    W = cssW;
-    H = cssH;
-  }
-
-  function eio(x){ return x<.5?2*x*x:-1+(4-2*x)*x; }
-
-  /* ── Drawing helpers ── */
-  function pill(x,y,w,h,col,lbl,a=1,fs=8) {
-    ctx.save(); ctx.globalAlpha=a;
-    ctx.fillStyle=col+'20'; ctx.strokeStyle=col; ctx.lineWidth=1;
-    ctx.beginPath(); ctx.roundRect(x-w/2,y-h/2,w,h,h/2); ctx.fill(); ctx.stroke();
-    if(lbl){
-      ctx.fillStyle=col; ctx.textAlign='center';
-      const maxW=w-8;
-      let f=fs;
-      ctx.font=`500 ${f}px DM Mono,monospace`;
-      while(ctx.measureText(lbl).width>maxW&&f>5){f-=0.5;ctx.font=`500 ${f}px DM Mono,monospace`;}
-      ctx.fillText(lbl,x,y+f*.35);
-    }
-    ctx.restore();
-  }
-
-  function badge(x,y,w,h,col,lbl,sub=null,a=1) {
-    ctx.save(); ctx.globalAlpha=a;
-    ctx.fillStyle=col; ctx.shadowColor=col+'44'; ctx.shadowBlur=10;
-    ctx.beginPath(); ctx.roundRect(x-w/2,y-h/2,w,h,7); ctx.fill();
-    ctx.shadowBlur=0;
-    ctx.fillStyle='#fff'; ctx.textAlign='center';
-    const maxW=w-10;
-    let f=9;
-    ctx.font=`500 ${f}px DM Mono,monospace`;
-    while(ctx.measureText(lbl).width>maxW&&f>5){f-=0.5;ctx.font=`500 ${f}px DM Mono,monospace`;}
-    ctx.fillText(lbl,x,sub?y-2:y+f*.4);
-    if(sub){
-      let sf=7.5;
-      ctx.font=`400 ${sf}px DM Mono,monospace`;
-      while(ctx.measureText(sub).width>maxW&&sf>5){sf-=0.5;ctx.font=`400 ${sf}px DM Mono,monospace`;}
-      ctx.fillStyle='rgba(255,255,255,0.65)'; ctx.fillText(sub,x,y+10);
-    }
-    ctx.restore();
-  }
-
-  function funnel(a=0.06) {
-    const cx=W/2, top=H*.03, bot=H*.50;
-    const tw=W*.82, bw=W*.20;
-    ctx.save(); ctx.globalAlpha=a;
-    ctx.fillStyle=C.sage;
-    ctx.beginPath();
-    ctx.moveTo(cx-tw/2,top); ctx.lineTo(cx+tw/2,top);
-    ctx.lineTo(cx+bw/2,bot); ctx.lineTo(cx-bw/2,bot);
-    ctx.closePath(); ctx.fill();
-    ctx.globalAlpha=a*2.2; ctx.strokeStyle=C.sage; ctx.lineWidth=1;
-    ctx.setLineDash([3,5]);
-    ctx.beginPath(); ctx.moveTo(cx-tw/2,top); ctx.lineTo(cx-bw/2,bot); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(cx+tw/2,top); ctx.lineTo(cx+bw/2,bot); ctx.stroke();
-    ctx.setLineDash([]); ctx.restore();
-  }
-
-  function person(x,y,col,a=0.8) {
-    ctx.save(); ctx.globalAlpha=a; ctx.fillStyle=col;
-    ctx.beginPath(); ctx.arc(x,y-3,3.5,0,Math.PI*2); ctx.fill();
-    ctx.beginPath(); ctx.arc(x,y+5,5,Math.PI,Math.PI*2); ctx.fill();
-    ctx.restore();
-  }
-
-  function curveTo(pts,col,a=0.4,dash=false) {
-    if(pts.length<2)return;
-    ctx.save(); ctx.globalAlpha=a; ctx.strokeStyle=col; ctx.lineWidth=1.5;
-    if(dash){ctx.setLineDash([4,6]); ctx.lineDashOffset=-(t*1.2)%10;}
-    ctx.beginPath(); ctx.moveTo(pts[0].x,pts[0].y);
-    for(let i=1;i<pts.length-1;i++){
-      const mx=(pts[i].x+pts[i+1].x)/2, my=(pts[i].y+pts[i+1].y)/2;
-      ctx.quadraticCurveTo(pts[i].x,pts[i].y,mx,my);
-    }
-    ctx.lineTo(pts[pts.length-1].x,pts[pts.length-1].y);
-    ctx.stroke(); ctx.setLineDash([]); ctx.restore();
-  }
-
-  /* ── Stage renderers ── */
-  function s0() {
-    funnel();
-    const top=H*.04, bot=H*.48;
-    SIGS.forEach(([lbl,col],i) => {
-      const seed=i*137.5;
-      const x=((seed*1.618)%1)*W*.78+W*.11 + Math.sin(t*.018+i*.7)*5;
-      const y=top+20+((seed*.618)%1)*(bot-top-40) + Math.cos(t*.014+i*.9)*4;
-      pill(x,y,lbl.length*5+14,18,col,lbl,.4+.2*Math.sin(t*.022+i));
-    });
-    ctx.save();
-    SIGS.forEach(([,c1],i)=>{ SIGS.forEach(([,c2],j)=>{
-      if(j<=i)return;
-      const s1=i*137.5,s2=j*137.5;
-      const x1=((s1*1.618)%1)*W*.78+W*.11+Math.sin(t*.018+i*.7)*5;
-      const y1=top+20+((s1*.618)%1)*(bot-top-40)+Math.cos(t*.014+i*.9)*4;
-      const x2=((s2*1.618)%1)*W*.78+W*.11+Math.sin(t*.018+j*.7)*5;
-      const y2=top+20+((s2*.618)%1)*(bot-top-40)+Math.cos(t*.014+j*.9)*4;
-      const d=Math.hypot(x2-x1,y2-y1);
-      if(d<80){ctx.globalAlpha=.12-.001*d; ctx.strokeStyle=c1; ctx.lineWidth=.5;
-        ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();}
-    });});
-    ctx.restore();
-  }
-
-  function s1() {
-    funnel();
-    const cx=W/2, cy=H*.26;
-    const pulse=.5+.5*Math.sin(t*.04);
-    ctx.save();
-    for(const[r,a]of[[44,.05+.03*pulse],[28,.1+.05*pulse],[16,.18+.07*pulse]]){
-      ctx.globalAlpha=a;ctx.strokeStyle=C.sage;ctx.lineWidth=1;
-      ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.stroke();
-    }
-    ctx.restore();
-    badge(cx,cy,90,36,C.forest,'ASSISTIV.CLOUD','FEP Engine',0.92);
-    SIGS.forEach(([lbl,col],i)=>{
-      const ang=(i/SIGS.length)*Math.PI*2-Math.PI/2;
-      const dist=Math.min(W,H)*.30;
-      const sx=cx+Math.cos(ang)*dist, sy=cy+Math.sin(ang)*dist;
-      const prog=Math.min(1,(t%100)/65);
-      const px=sx+(cx-sx)*(.55+.45*prog), py=sy+(cy-sy)*(.55+.45*prog);
-      const fade=Math.max(0,1-prog*1.2+.2);
-      ctx.save();
-      ctx.globalAlpha=.1+.25*prog; ctx.strokeStyle=col; ctx.lineWidth=.7;
-      ctx.setLineDash([3,5]); ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(cx,cy);ctx.stroke();
-      ctx.setLineDash([]); ctx.restore();
-      pill(px,py,lbl.length*5+12,16,col,lbl,fade*.9,8);
-    });
-  }
-
-  function s2() {
-    funnel();
-    const cols=5, gW=Math.min(W*.82,480), gH=Math.min(H*.52,160);
-    const cw=gW/cols, ch=gH/2, x0=(W-gW)/2, y0=H*.05;
-    ctx.save();
-    DISTRICTS.forEach((d,i)=>{
-      const col=i%cols, row=Math.floor(i/cols);
-      const dcx=x0+col*cw+cw/2, dcy=y0+row*ch+ch/2;
-      const w=cw-10, h=ch-8;
-      const rc=d.r==='critical'?C.red:d.r==='high'?C.amber:C.sage;
-      const delay=i*5, prog=Math.min(1,Math.max(0,(t-delay)/28));
-      if(!prog)return;
-      const pulse=d.r==='critical'?.5+.5*Math.sin(t*.06+i):1;
-      ctx.globalAlpha=(d.r==='critical'?.9:d.r==='high'?.7:.55)*prog*pulse;
-      ctx.fillStyle=rc+'18'; ctx.strokeStyle=rc; ctx.lineWidth=d.r==='critical'?1.5:1;
-      ctx.beginPath(); ctx.roundRect(dcx-w/2,dcy-h/2,w,h,4); ctx.fill(); ctx.stroke();
-      ctx.globalAlpha=prog;
-      ctx.fillStyle=rc; ctx.font='500 7.5px DM Mono,monospace'; ctx.textAlign='center';
-      ctx.fillText(d.n,dcx,dcy-5);
-      ctx.fillStyle='#0f1a14'; ctx.font='500 13px DM Sans,sans-serif';
-      ctx.fillText(d.s,dcx,dcy+5);
-      ctx.fillStyle=rc; ctx.font='400 6.5px DM Mono,monospace';
-      ctx.fillText(d.r.toUpperCase(),dcx,dcy+16);
-    });
-    ctx.restore();
-  }
-
-  function s3() {
-    funnel();
-    const cx=W/2, ry=H*.30;
-    const pulse=.5+.5*Math.sin(t*.04);
-    ctx.save();
-    for(const[r,a]of[[38,.05+.03*pulse],[24,.1+.05*pulse]]){
-      ctx.globalAlpha=a;ctx.strokeStyle=C.sageL;ctx.lineWidth=1;
-      ctx.beginPath();ctx.arc(cx,ry,r,0,Math.PI*2);ctx.stroke();
-    }
-    ctx.restore();
-    badge(cx,ry,110,36,C.forestL,'ASSISTIV.TOOLS','Community screen',0.92);
-    for(let i=0;i<10;i++){
-      const seed=i*83.7;
-      const xB=cx+Math.cos(seed)*(W*.32), yB=H*.04+(seed%1)*H*.08;
-      const prog=((t*.007+i/10)%1);
-      person(xB+(cx-xB)*prog, yB+(ry-yB)*prog, C.amber, Math.sin(prog*Math.PI)*.8);
-    }
-    badge(cx,H*.48,120,28,C.sage,'ASSISTIV Screening Tool Score',null,Math.min(.9,t/80));
-  }
-
-  function s4s5(which) {
-    funnel();
-    const cx=W/2, splitY=H*.50;
-    const lx=W*.26, ly=H*.72, rx=W*.74, ry2=H*.72;
-    ctx.save();
-    ctx.globalAlpha=.18; ctx.strokeStyle=C.amber; ctx.lineWidth=1.5;
-    ctx.setLineDash([4,5]);
-    ctx.beginPath();ctx.moveTo(cx,splitY);ctx.lineTo(lx,ly-22);ctx.stroke();
-    ctx.beginPath();ctx.moveTo(cx,splitY);ctx.lineTo(rx,ry2-22);ctx.stroke();
-    ctx.setLineDash([]); ctx.restore();
-    pill(cx,splitY-2,170,18,C.amber,'ASSISTIV Screening Tool Score',.7,8);
-    const pulse=.5+.5*Math.sin(t*.05);
-    const lActive=which===4, rActive=which===5;
-    ctx.save();
-    if(lActive){ctx.globalAlpha=.09+.05*pulse;ctx.fillStyle=C.red;ctx.beginPath();ctx.arc(lx,ly,55,0,Math.PI*2);ctx.fill();}
-    if(rActive){ctx.globalAlpha=.09+.05*pulse;ctx.fillStyle=C.forest;ctx.beginPath();ctx.arc(rx,ry2,55,0,Math.PI*2);ctx.fill();}
-    ctx.restore();
-    badge(lx,ly,130,38,C.red,'PCN Hub Support Pathway',null,lActive?.92:.25);
-    badge(rx,ry2,108,38,C.forest,'ASSISTIV','Prevention',rActive?.92:.25);
-    const fx=lActive?lx:rx, flowCol=lActive?C.red:C.sageL;
-    for(let i=0;i<5;i++){
-      const prog=((t*.008+i/5)%1);
-      person(cx+(fx-cx)*prog, splitY+(ly-splitY)*prog, flowCol, Math.sin(prog*Math.PI)*.8);
-    }
-    ctx.save(); ctx.globalAlpha=.45; ctx.font='400 7px DM Mono,monospace'; ctx.textAlign='center';
-    ctx.fillStyle=C.red;  ctx.fillText('ACUTE RISK', lx, ly-42);
-    ctx.fillStyle=C.sage; ctx.fillText('PREVENTION', rx, ry2-42);
-    ctx.restore();
-  }
-
-  function s6() {
-    funnel(.05);
-    const cx=W/2;
-    const intelY=H*.10, resY=H*.30, splitY=H*.48;
-    const lx=W*.26, ly=H*.67, rx=W*.74, ry2=H*.67;
-    badge(cx,intelY,120,34,C.forest,'ASSISTIV.CLOUD Intelligence Layer',null,0.88);
-    badge(cx,resY,110,30,C.forestL,'ASSISTIV.TOOLS Screening',null,0.82);
-    pill(cx,splitY,160,18,C.amber,'ASSISTIV Screening Tool Score',.65,7.5);
-    badge(lx,ly,130,34,C.red,'PCN Hub Support Pathway',null,0.88);
-    badge(rx,ry2,100,34,C.forest,'ASSISTIV','Prevention',0.88);
-    const fbL=[{x:lx-38,y:ly+14},{x:lx-70,y:H*.54},{x:cx-75,y:H*.32},{x:cx-45,y:intelY+16}];
-    const fbR=[{x:rx+38,y:ry2+14},{x:rx+70,y:H*.54},{x:cx+75,y:H*.32},{x:cx+45,y:intelY+16}];
-    curveTo(fbL,C.rose,.45,true);
-    curveTo(fbR,C.rose,.45,true);
-    const frac=(t%140)/140;
-    [fbL,fbR].forEach(pts=>{
-      const si=Math.floor(frac*(pts.length-1));
-      const sf=(frac*(pts.length-1))-si;
-      if(si>=pts.length-1)return;
-      ctx.save(); ctx.globalAlpha=Math.sin(frac*Math.PI)*.85; ctx.fillStyle=C.rose;
-      ctx.beginPath();
-      ctx.arc(pts[si].x+(pts[si+1].x-pts[si].x)*sf, pts[si].y+(pts[si+1].y-pts[si].y)*sf, 4,0,Math.PI*2);
-      ctx.fill(); ctx.restore();
-    });
-    [[lx,C.red],[rx,C.sageL]].forEach(([fx,col])=>{
-      for(let i=0;i<4;i++){
-        const prog=((t*.007+i/4)%1);
-        person(cx+(fx-cx)*prog, splitY+(ly-splitY)*prog, col, Math.sin(prog*Math.PI)*.7);
-      }
-    });
-    ctx.save(); ctx.globalAlpha=.4; ctx.fillStyle=C.rose;
-    ctx.font='400 7px DM Mono,monospace'; ctx.textAlign='center';
-    ctx.fillText('outcomes recalibrate the model',cx,H*.94);
-    ctx.restore();
-  }
-
-  function draw() {
-    ctx.clearRect(0,0,W,H);
-    ctx.fillStyle=C.white; ctx.fillRect(0,0,W,H);
-    if(stage===0) s0();
-    else if(stage===1) s1();
-    else if(stage===2) s2();
-    else if(stage===3) s3();
-    else if(stage===4||stage===5) s4s5(stage);
-    else if(stage===6) s6();
-    t++;
-    if(running) raf=requestAnimationFrame(draw);
-  }
-
-  function setStage(s) {
-    stage=s; t=0;
-    document.getElementById('meco-label').textContent=LABELS[s];
-    document.querySelectorAll('.meco-dot').forEach((d,i)=>d.classList.toggle('active',i===s));
-    if(!running){running=true;raf=requestAnimationFrame(draw);}
-    clearInterval(autoTimer);
-    autoTimer=setInterval(()=>setStage((stage+1)%7),9000);
-  }
-
-  document.querySelectorAll('.meco-dot').forEach(d=>
-    d.addEventListener('click',()=>setStage(+d.dataset.s))
-  );
-
-  window.addEventListener('resize',()=>{
-    cancelAnimationFrame(raf); resize();
-    if(running) raf=requestAnimationFrame(draw);
-  });
-
-  requestAnimationFrame(()=>{
-    resize(); draw();
-    autoTimer=setInterval(()=>setStage((stage+1)%7),9000);
-  });
-})();
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 </script>
 
 </body>
