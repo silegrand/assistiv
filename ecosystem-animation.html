@@ -288,7 +288,7 @@ nav {
     <div class="legend-item"><div class="legend-dot" style="background:#3d7a56"></div>NHS / Open Data</div>
     <div class="legend-item"><div class="legend-dot" style="background:#2a5880"></div>Intelligence signals</div>
     <div class="legend-item"><div class="legend-dot" style="background:#b07d2a"></div>At-risk population</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#7aab90"></div>RESILIENCE screening</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#7aab90"></div>ASSISTIV.TOOLS screening</div>
     <div class="legend-item"><div class="legend-dot" style="background:#c04040"></div>PCN Hub — acute pathway</div>
     <div class="legend-item"><div class="legend-dot" style="background:#1a3a2a"></div>Assistiv Platform</div>
     <div class="legend-item"><div class="legend-dot" style="background:#8a3a4a"></div>Feedback to intelligence</div>
@@ -302,9 +302,9 @@ const ctx     = canvas.getContext('2d');
 
 const CAPTIONS = [
   '<strong>NHS Data Exhaust</strong> — Millions of data points across prescribing records, falls admissions, deprivation indices, 111 demand, and census signals. Individually noise. Together, a signal.',
-  '<strong>Intelligence Layer</strong> — The Assistiv.Health FEP engine weighs 21 signals to produce a Frailty Emergence Probability score for every district in Kent & Medway. Updated daily from open NHS data.',
+  '<strong>Intelligence Layer</strong> — The Assistiv.Cloud FEP engine weighs 21 signals to produce a Frailty Emergence Probability score for every district in Kent & Medway. Updated daily from open NHS data.',
   '<strong>Target Populations & Locations</strong> — High-FEP districts are ranked and mapped. The intelligence layer pinpoints which communities — and which people within them — carry the highest unmet need.',
-  '<strong>Community Screening via RESILIENCE</strong> — Deployed into priority zones: 12 conversational questions, PRISMA-7 scored in real time. No clinical training required. Identifies the Missing Middle at scale.',
+  '<strong>Community Screening via ASSISTIV.TOOLS</strong> — Deployed into priority zones: 12 conversational questions, scored in real time using the ASSISTIV Screening Tool Score. No clinical training required. Identifies the Missing Middle at scale.',
   '<strong>PCN Hub — Primary & Acute Pathway</strong> — People on the verge of acute care are immediately referred to Primary Care Network Hubs for urgent clinical review, preventing avoidable hospital admission.',
   '<strong>Assistiv Platform</strong> — For everyone else: preventative care, digital support, community connections, and coordinated services delivered through the Assistiv platform. Prevention at scale.',
   '<strong>Feedback Loop</strong> — Every outcome — who was referred, what happened, what worked — feeds back into the intelligence layer. The FEP model recalibrates. The system learns and gets sharper over time.',
@@ -390,9 +390,15 @@ function pill(x, y, w, h, col, label, alpha = 1, fontSize = 9) {
   ctx.fill(); ctx.stroke();
   if (label) {
     ctx.fillStyle = col;
-    ctx.font = `500 ${fontSize}px DM Mono, monospace`;
     ctx.textAlign = 'center';
-    ctx.fillText(label, x, y + fontSize * 0.35);
+    const maxW = w - 10;
+    let fs = fontSize;
+    ctx.font = `500 ${fs}px DM Mono, monospace`;
+    while (ctx.measureText(label).width > maxW && fs > 5) {
+      fs -= 0.5;
+      ctx.font = `500 ${fs}px DM Mono, monospace`;
+    }
+    ctx.fillText(label, x, y + fs * 0.35);
   }
   ctx.restore();
 }
@@ -409,11 +415,22 @@ function badge(x, y, w, h, col, label, sublabel = null, alpha = 1) {
   ctx.fill();
   ctx.shadowBlur = 0;
   ctx.fillStyle = '#fff';
-  ctx.font = `500 11px DM Mono, monospace`;
   ctx.textAlign = 'center';
-  ctx.fillText(label, x, sublabel ? y - 3 : y + 4);
+  const maxW = w - 12;
+  let fs = 11;
+  ctx.font = `500 ${fs}px DM Mono, monospace`;
+  while (ctx.measureText(label).width > maxW && fs > 5) {
+    fs -= 0.5;
+    ctx.font = `500 ${fs}px DM Mono, monospace`;
+  }
+  ctx.fillText(label, x, sublabel ? y - 3 : y + fs * 0.4);
   if (sublabel) {
-    ctx.font = `400 8.5px DM Mono, monospace`;
+    let sfs = 8.5;
+    ctx.font = `400 ${sfs}px DM Mono, monospace`;
+    while (ctx.measureText(sublabel).width > maxW && sfs > 5) {
+      sfs -= 0.5;
+      ctx.font = `400 ${sfs}px DM Mono, monospace`;
+    }
     ctx.fillStyle = 'rgba(255,255,255,0.7)';
     ctx.fillText(sublabel, x, y + 12);
   }
@@ -591,7 +608,7 @@ function drawS1() {
   }
   ctx.restore();
 
-  badge(cx, cy, 88, 42, C.forest, 'ASSISTIV.HEALTH', 'FEP Engine', 0.92);
+  badge(cx, cy, 88, 42, C.forest, 'ASSISTIV.CLOUD', 'FEP Engine', 0.92);
 
   // 8 signals converging in
   const RING_SIGS = [
@@ -697,7 +714,7 @@ function drawS3() {
     ctx.beginPath(); ctx.arc(cx, ry, r, 0, Math.PI*2); ctx.stroke();
   }
   ctx.restore();
-  badge(cx, ry, 130, 42, C.green_mid ?? '#2d5c42', 'RESILIENCE', 'Community screen', 0.95);
+  badge(cx, ry, 130, 42, C.green_mid ?? '#2d5c42', 'ASSISTIV.TOOLS', 'Community screen', 0.95);
 
   // Animated people dots flowing down into screen
   const N = 15;
@@ -731,7 +748,7 @@ function drawS3() {
   // Score output flowing down
   const scoreY = H * 0.46;
   const scoreAlpha = Math.min(0.9, t / 80);
-  badge(cx, scoreY, 110, 36, C.sage, 'PRISMA-7 SCORED', null, scoreAlpha);
+  badge(cx, scoreY, 160, 36, C.sage, 'ASSISTIV Screening Tool Score', null, scoreAlpha);
 }
 
 /* S4 — Split: PCN Hub */
@@ -745,7 +762,7 @@ function drawS4() {
   ctx.fillStyle = C.red;
   ctx.beginPath(); ctx.arc(lx, ly, 70, 0, Math.PI*2); ctx.fill();
   ctx.restore();
-  badge(lx, ly, 120, 46, C.red, 'PCN HUB', 'Primary / Acute care', 0.95);
+  badge(lx, ly, 140, 46, C.red, 'PCN Hub Support Pathway', null, 0.95);
 
   // People flowing left
   const N = 6;
@@ -767,8 +784,6 @@ function drawS4() {
   const [rx, ry2] = [W * 0.72, H * 0.68];
   badge(rx, ry2, 120, 46, C.inkSoft, 'ASSISTIV', 'Preventative platform', 0.3);
 
-  // Label at split
-  pill(W/2, H*0.52, 110, 22, C.amber, 'PRISMA-7 triage', 0.7, 9);
 }
 
 /* S5 — Split: Assistiv Platform */
@@ -786,7 +801,7 @@ function drawS5() {
   ctx.restore();
 
   // Left greyed
-  badge(lx, ly, 120, 46, C.red, 'PCN HUB', 'Primary / Acute care', 0.3);
+  badge(lx, ly, 140, 46, C.red, 'PCN Hub Support Pathway', null, 0.3);
 
   // Right active
   badge(rx, ry2, 120, 46, C.forest, 'ASSISTIV', 'Preventative platform', 0.95);
@@ -817,7 +832,6 @@ function drawS5() {
     ctx.restore();
   }
 
-  pill(W/2, H*0.52, 110, 22, C.amber, 'PRISMA-7 triage', 0.7, 9);
 }
 
 /* S6 — Full ecosystem + feedback loop */
@@ -831,23 +845,23 @@ function drawS6() {
   const intelY    = H * 0.12;
 
   // Intelligence hub
-  badge(cx, intelY, 120, 40, C.forest, 'ASSISTIV.HEALTH', 'Intelligence layer', 0.9);
+  badge(cx, intelY, 160, 40, C.forest, 'ASSISTIV.CLOUD Intelligence Layer', null, 0.9);
 
-  // RESILIENCE
-  badge(cx, H*0.44, 110, 36, '#2d5c42', 'RESILIENCE', 'Screening', 0.85);
+  // ASSISTIV.TOOLS Screening
+  badge(cx, H*0.44, 130, 36, '#2d5c42', 'ASSISTIV.TOOLS Screening', null, 0.85);
 
   // Split triage
-  pill(cx, H*0.55, 100, 20, C.amber, 'PRISMA-7 triage', 0.7, 8);
+  pill(cx, H*0.55, 190, 20, C.amber, 'ASSISTIV Screening Tool Score', 0.7, 8);
 
   // PCN
-  badge(lx, ly, 114, 42, C.red, 'PCN HUB', 'Acute pathway', 0.9);
+  badge(lx, ly, 140, 42, C.red, 'PCN Hub Support Pathway', null, 0.9);
 
   // Assistiv Platform
   badge(rx, ry2, 114, 42, C.forest, 'ASSISTIV', 'Prevention', 0.9);
 
   // Outcome boxes bottom
   const outY = H * 0.88;
-  pill(lx, outY, 120, 22, C.red,    '↓ Hospital admission', 0.65, 7.5);
+  pill(lx, outY, 120, 22, C.red,    '↓ NHS Support', 0.65, 7.5);
   pill(rx, outY, 120, 22, C.sageL,  '↑ Independence', 0.65, 7.5);
 
   // Feedback arrows: both branches arc back up to intelligence
@@ -957,8 +971,8 @@ function drawFunnelSplit() {
   ctx.restore();
 
   // RESILIENCE badge at top of split
-  badge(cx, H*0.38, 100, 32, '#2d5c42', 'RESILIENCE', null, 0.75);
-  pill(cx, H * 0.48, 100, 20, C.amber, 'PRISMA-7 triage', 0.6, 8);
+  badge(cx, H*0.38, 130, 32, '#2d5c42', 'ASSISTIV.TOOLS', null, 0.75);
+  pill(cx, H * 0.48, 180, 20, C.amber, 'ASSISTIV Screening Tool Score', 0.6, 8);
 }
 
 // ── RESIZE ──────────────────────────────────────────────────────────
