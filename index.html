@@ -1665,7 +1665,7 @@
     'NHS data exhaust',
     'FEP intelligence layer',
     'Target populations',
-    'RESILIENCE screening',
+    'ASSISTIV.TOOLS screening',
     'PCN Hub — acute pathway',
     'Assistiv Platform',
     'Feedback loop'
@@ -1727,8 +1727,12 @@
     ctx.fillStyle=col+'20'; ctx.strokeStyle=col; ctx.lineWidth=1;
     ctx.beginPath(); ctx.roundRect(x-w/2,y-h/2,w,h,h/2); ctx.fill(); ctx.stroke();
     if(lbl){
-      ctx.fillStyle=col; ctx.font=`500 ${fs}px DM Mono,monospace`;
-      ctx.textAlign='center'; ctx.fillText(lbl,x,y+fs*.35);
+      ctx.fillStyle=col; ctx.textAlign='center';
+      const maxW=w-8;
+      let f=fs;
+      ctx.font=`500 ${f}px DM Mono,monospace`;
+      while(ctx.measureText(lbl).width>maxW&&f>5){f-=0.5;ctx.font=`500 ${f}px DM Mono,monospace`;}
+      ctx.fillText(lbl,x,y+f*.35);
     }
     ctx.restore();
   }
@@ -1739,9 +1743,17 @@
     ctx.beginPath(); ctx.roundRect(x-w/2,y-h/2,w,h,7); ctx.fill();
     ctx.shadowBlur=0;
     ctx.fillStyle='#fff'; ctx.textAlign='center';
-    ctx.font=`500 9px DM Mono,monospace`;
-    ctx.fillText(lbl,x,sub?y-2:y+3);
-    if(sub){ ctx.font=`400 7.5px DM Mono,monospace`; ctx.fillStyle='rgba(255,255,255,0.65)'; ctx.fillText(sub,x,y+10); }
+    const maxW=w-10;
+    let f=9;
+    ctx.font=`500 ${f}px DM Mono,monospace`;
+    while(ctx.measureText(lbl).width>maxW&&f>5){f-=0.5;ctx.font=`500 ${f}px DM Mono,monospace`;}
+    ctx.fillText(lbl,x,sub?y-2:y+f*.4);
+    if(sub){
+      let sf=7.5;
+      ctx.font=`400 ${sf}px DM Mono,monospace`;
+      while(ctx.measureText(sub).width>maxW&&sf>5){sf-=0.5;ctx.font=`400 ${sf}px DM Mono,monospace`;}
+      ctx.fillStyle='rgba(255,255,255,0.65)'; ctx.fillText(sub,x,y+10);
+    }
     ctx.restore();
   }
 
@@ -1816,7 +1828,7 @@
       ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.stroke();
     }
     ctx.restore();
-    badge(cx,cy,90,36,C.forest,'ASSISTIV.HEALTH','FEP Engine',0.92);
+    badge(cx,cy,90,36,C.forest,'ASSISTIV.CLOUD','FEP Engine',0.92);
     SIGS.forEach(([lbl,col],i)=>{
       const ang=(i/SIGS.length)*Math.PI*2-Math.PI/2;
       const dist=Math.min(W,H)*.30;
@@ -1869,14 +1881,14 @@
       ctx.beginPath();ctx.arc(cx,ry,r,0,Math.PI*2);ctx.stroke();
     }
     ctx.restore();
-    badge(cx,ry,110,36,C.forestL,'RESILIENCE','Community screen',0.92);
+    badge(cx,ry,110,36,C.forestL,'ASSISTIV.TOOLS','Community screen',0.92);
     for(let i=0;i<10;i++){
       const seed=i*83.7;
       const xB=cx+Math.cos(seed)*(W*.32), yB=H*.04+(seed%1)*H*.08;
       const prog=((t*.007+i/10)%1);
       person(xB+(cx-xB)*prog, yB+(ry-yB)*prog, C.amber, Math.sin(prog*Math.PI)*.8);
     }
-    badge(cx,H*.48,94,28,C.sage,'PRISMA-7 SCORED',null,Math.min(.9,t/80));
+    badge(cx,H*.48,120,28,C.sage,'ASSISTIV Screening Tool Score',null,Math.min(.9,t/80));
   }
 
   function s4s5(which) {
@@ -1889,14 +1901,14 @@
     ctx.beginPath();ctx.moveTo(cx,splitY);ctx.lineTo(lx,ly-22);ctx.stroke();
     ctx.beginPath();ctx.moveTo(cx,splitY);ctx.lineTo(rx,ry2-22);ctx.stroke();
     ctx.setLineDash([]); ctx.restore();
-    pill(cx,splitY-2,96,18,C.amber,'PRISMA-7 triage',.7,8);
+    pill(cx,splitY-2,170,18,C.amber,'ASSISTIV Screening Tool Score',.7,8);
     const pulse=.5+.5*Math.sin(t*.05);
     const lActive=which===4, rActive=which===5;
     ctx.save();
     if(lActive){ctx.globalAlpha=.09+.05*pulse;ctx.fillStyle=C.red;ctx.beginPath();ctx.arc(lx,ly,55,0,Math.PI*2);ctx.fill();}
     if(rActive){ctx.globalAlpha=.09+.05*pulse;ctx.fillStyle=C.forest;ctx.beginPath();ctx.arc(rx,ry2,55,0,Math.PI*2);ctx.fill();}
     ctx.restore();
-    badge(lx,ly,108,38,C.red,'PCN HUB','Acute pathway',lActive?.92:.25);
+    badge(lx,ly,130,38,C.red,'PCN Hub Support Pathway',null,lActive?.92:.25);
     badge(rx,ry2,108,38,C.forest,'ASSISTIV','Prevention',rActive?.92:.25);
     const fx=lActive?lx:rx, flowCol=lActive?C.red:C.sageL;
     for(let i=0;i<5;i++){
@@ -1914,10 +1926,10 @@
     const cx=W/2;
     const intelY=H*.10, resY=H*.30, splitY=H*.48;
     const lx=W*.26, ly=H*.67, rx=W*.74, ry2=H*.67;
-    badge(cx,intelY,100,34,C.forest,'ASSISTIV.HEALTH','Intelligence',0.88);
-    badge(cx,resY,96,30,C.forestL,'RESILIENCE','Screening',0.82);
-    pill(cx,splitY,90,18,C.amber,'PRISMA-7 triage',.65,7.5);
-    badge(lx,ly,100,34,C.red,'PCN HUB','Acute',0.88);
+    badge(cx,intelY,120,34,C.forest,'ASSISTIV.CLOUD Intelligence Layer',null,0.88);
+    badge(cx,resY,110,30,C.forestL,'ASSISTIV.TOOLS Screening',null,0.82);
+    pill(cx,splitY,160,18,C.amber,'ASSISTIV Screening Tool Score',.65,7.5);
+    badge(lx,ly,130,34,C.red,'PCN Hub Support Pathway',null,0.88);
     badge(rx,ry2,100,34,C.forest,'ASSISTIV','Prevention',0.88);
     const fbL=[{x:lx-38,y:ly+14},{x:lx-70,y:H*.54},{x:cx-75,y:H*.32},{x:cx-45,y:intelY+16}];
     const fbR=[{x:rx+38,y:ry2+14},{x:rx+70,y:H*.54},{x:cx+75,y:H*.32},{x:cx+45,y:intelY+16}];
